@@ -1,4 +1,4 @@
-var canvas = document.getElementById("myCanvas");
+var canvas = document.getElementsByTagName("canvas");
 var drawer = canvas.getContext("2d");
 
 drawer.moveTo(0,0);
