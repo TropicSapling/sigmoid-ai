@@ -1,5 +1,9 @@
 $(function() {
 	var canvas = document.getElementsByTagName("canvas")[0];
+	
+	canvas.setAttribute("width", window.innerWidth);
+	canvas.setAttribute("height", window.innerHeight);
+	
 	var drawer = canvas.getContext("2d");
 	
 	drawer.moveTo(0,0);
