@@ -3,5 +3,5 @@ var functions = ["Math.pow[2]", "Math.sqrt[1]", "Math.sin[1]", "Math.cos[1]", "M
 
 var AIs = [];
 function AI(input, output_count, actions) = {
-	this.actions = actions ? actions : genRandActions(output_count);
+	this.actions = actions ? actions : genRandActions(input, output_count);
 }
