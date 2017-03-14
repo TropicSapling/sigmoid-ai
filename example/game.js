@@ -1,4 +1,6 @@
-function drawBg(drawer, line_count) {
+function drawBg(drawer, line_count, colour) {
+	drawer.fillStyle = colour;
+	
 	for(var i = 0; i < line_count; i++) {
 		drawer.moveTo(i * (window.innerWidth / line_count), 0);
 		drawer.lineTo(i * (window.innerWidth / line_count), window.innerHeight);
@@ -10,6 +12,8 @@ function drawBg(drawer, line_count) {
 		drawer.lineTo(window.innerWidth, i * (window.innerWidth / line_count));
 		drawer.stroke();
 	}
+	
+	drawer.fillStyle = "black";
 }
 
 $(function() {
@@ -20,5 +24,5 @@ $(function() {
 	
 	var drawer = canvas.getContext("2d");
 	
-	drawBg(drawer, 10);
+	drawBg(drawer, 10, "#eee");
 });
