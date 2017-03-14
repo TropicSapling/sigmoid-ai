@@ -25,5 +25,5 @@ $(function() {
 	
 	var drawer = canvas.getContext("2d");
 	
-	drawBg(drawer, 50, "#eee", "#ccc");
+	drawBg(drawer, 80, "#ddd", "#ccc");
 });
