@@ -34,4 +34,8 @@ $(function() {
 	var drawer = canvas.getContext("2d");
 	
 	drawBg(drawer, 80, "#d5d5d5", "#ccc");
+	
+	setInterval(function() {
+		drawFood(drawer, Math.floor(Math.random() * window.innerWidth), Math.floor(Math.random() * window.innerHeight), Math.floor(Math.random() * 25));
+	}, 10);
 });
