@@ -1,5 +1,5 @@
 function drawBg(drawer, line_count, colour) {
-	drawer.fillStyle = colour;
+	drawer.strokeStyle = colour;
 	
 	for(var i = 0; i < line_count; i++) {
 		drawer.moveTo(i * (window.innerWidth / line_count), 0);
@@ -12,8 +12,6 @@ function drawBg(drawer, line_count, colour) {
 		drawer.lineTo(window.innerWidth, i * (window.innerWidth / line_count));
 		drawer.stroke();
 	}
-	
-	drawer.fillStyle = "black";
 }
 
 $(function() {
