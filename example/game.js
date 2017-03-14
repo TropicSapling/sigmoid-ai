@@ -1,5 +1,8 @@
-function drawBg(drawer, line_count, colour) {
-	drawer.strokeStyle = colour;
+function drawBg(drawer, line_count, bg_colour, line_colour) {
+	drawer.fillStyle = bg_colour;
+	drawer.fillRect(0, 0, window.innerWidth, window.innerHeight);
+	
+	drawer.strokeStyle = line_colour;
 	
 	for(var i = 0; i < line_count; i++) {
 		drawer.moveTo(i * (window.innerWidth / line_count), 0);
@@ -22,5 +25,5 @@ $(function() {
 	
 	var drawer = canvas.getContext("2d");
 	
-	drawBg(drawer, 10, "#eeeeee");
+	drawBg(drawer, 10, "#eee", "#ccc");
 });
