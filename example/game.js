@@ -18,8 +18,10 @@ function drawBg(drawer, line_count, bg_colour, line_colour) {
 }
 
 function drawFood(drawer, x, y, size) {
+	drawer.strokeStyle = "rgb(" + Math.floor(Math.random() * 256) + "," + Math.floor(Math.random() * 256) + "," + Math.floor(Math.random() * 256) + ")";
+	
 	drawer.beginPath();
-	drawer.arc(x, y, size, 0, 2*Math.PI);
+	drawer.arc(x, y, size, 0, 2 * Math.PI);
 	drawer.stroke();
 }
 
