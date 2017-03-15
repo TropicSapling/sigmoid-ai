@@ -58,7 +58,9 @@ function drawFood(drawer, food_id) {
 }
 
 function drawAllFood(drawer) {
-	
+	for(var i = 0; i < food.length; i++) {
+		drawFood(drawer, i);
+	}
 }
 
 $(function() {
