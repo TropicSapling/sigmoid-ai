@@ -1,3 +1,14 @@
+var food = [];
+
+function food(x, y, radius, r, g, b) {
+	this.x = x;
+	this.y = y;
+	this.radius = radius;
+	this.r = r;
+	this.g = g;
+	this.b = b;
+}
+
 function randomBetween(min, max) {
 	return Math.floor(Math.random()*(max-min+1)+min);
 }
@@ -43,6 +54,10 @@ function drawFood(drawer, x, y, radius) {
 	drawer.stroke();
 }
 
+function drawAllFood(drawer) {
+	
+}
+
 $(function() {
 	var canvas = document.getElementsByTagName("canvas")[0];
 	
@@ -56,6 +71,7 @@ $(function() {
 	setInterval(function() {
 		clearScreen(drawer);
 		drawBg(drawer, 80, "#d5d5d5", "#ccc");
+		drawAllFood(drawer);
 		
 //		drawFood(drawer, Math.floor(Math.random() * window.innerWidth), Math.floor(Math.random() * window.innerHeight), randomBetween(3, 9));
 	}, 40);
