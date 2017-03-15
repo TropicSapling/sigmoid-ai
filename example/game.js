@@ -27,11 +27,20 @@ function drawBg(drawer, line_count, bg_colour, line_colour) {
 }
 
 function drawFood(drawer, x, y, radius) {
-	drawer.fillStyle = "rgb(" + randomBetween(24, 256) + "," + randomBetween(24, 256) + "," + randomBetween(24, 256) + ")";
+	var r = randomBetween(24, 256);
+	var g = randomBetween(24, 256);
+	var b = randomBetween(24, 256);
+	
+	drawer.fillStyle = "rgb(" + r + "," + g + "," + b + ")";
+	drawer.strokeStyle = "rgb(" r - 25 + "," + g - 25 + "," + b - 25 + ")";
 	
 	drawer.beginPath();
 	drawer.arc(x, y, radius, 0, 2 * Math.PI);
 	drawer.fill();
+	
+	drawer.beginPath();
+	drawer.arc(x, y, radius, 0, 2 * Math.PI);
+	drawer.stroke();
 }
 
 $(function() {
