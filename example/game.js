@@ -17,11 +17,11 @@ function drawBg(drawer, line_count, bg_colour, line_colour) {
 	}
 }
 
-function drawFood(drawer, x, y, size) {
+function drawFood(drawer, x, y, radius) {
 	drawer.fillStyle = "rgb(" + Math.floor(Math.random() * 256) + "," + Math.floor(Math.random() * 256) + "," + Math.floor(Math.random() * 256) + ")";
 	
 	drawer.beginPath();
-	drawer.arc(x, y, size, 0, 2 * Math.PI);
+	drawer.arc(x, y, radius, 0, 2 * Math.PI);
 	drawer.fill();
 }
 
@@ -36,6 +36,6 @@ $(function() {
 	drawBg(drawer, 80, "#d5d5d5", "#ccc");
 	
 	setInterval(function() {
-		drawFood(drawer, Math.floor(Math.random() * window.innerWidth), Math.floor(Math.random() * window.innerHeight), Math.floor(Math.random() * 25));
+		drawFood(drawer, Math.floor(Math.random() * window.innerWidth), Math.floor(Math.random() * window.innerHeight), Math.floor(Math.random() * 10));
 	}, 800);
 });
