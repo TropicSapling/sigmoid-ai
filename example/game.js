@@ -42,6 +42,8 @@ $(function() {
 	
 	var drawer = canvas.getContext("2d");
 	
+	drawBg(drawer, 80, "#d5d5d5", "#ccc"); // To prevent (40 ms) flickering
+	
 	setInterval(function() {
 		clearScreen(drawer);
 		drawBg(drawer, 80, "#d5d5d5", "#ccc");
