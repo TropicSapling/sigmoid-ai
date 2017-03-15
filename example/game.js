@@ -46,7 +46,7 @@ function drawFood(drawer, food_id) {
 	var b = food[food_id.b];
 	
 	drawer.fillStyle = "rgb(" + r + "," + g + "," + b + ")";
-	drawer.strokeStyle = "rgb(" r - 25 + "," + g - 25 + "," + b - 25 + ")";
+	drawer.strokeStyle = "rgb(" + r - 25 + "," + g - 25 + "," + b - 25 + ")";
 	
 	drawer.beginPath();
 	drawer.arc(x, y, radius, 0, 2 * Math.PI);
