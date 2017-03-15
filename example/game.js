@@ -1,6 +1,6 @@
 var food = [];
 
-function food(x, y, radius, r, g, b) {
+function Food(x, y, radius, r, g, b) {
 	this.x = x;
 	this.y = y;
 	this.radius = radius;
@@ -73,6 +73,8 @@ $(function() {
 		drawBg(drawer, 80, "#d5d5d5", "#ccc");
 		drawAllFood(drawer);
 		
-//		drawFood(drawer, Math.floor(Math.random() * window.innerWidth), Math.floor(Math.random() * window.innerHeight), randomBetween(3, 9));
+		if(Math.floor(Math.random() * 25) == 1) {
+			food.push(new Food(Math.floor(Math.random() * window.innerWidth), Math.floor(Math.random() * window.innerHeight), randomBetween(3, 9), randomBetween(24, 256), randomBetween(24, 256), randomBetween(24, 256)));
+		}
 	}, 40);
 });
