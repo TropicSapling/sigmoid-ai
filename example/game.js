@@ -38,12 +38,12 @@ function drawBg(drawer, line_count, bg_colour, line_colour) {
 }
 
 function drawFood(drawer, food_id) {
-	var x = food[food_id.x];
-	var y = food[food_id.y];
-	var radius = food[food_id.radius];
-	var r = food[food_id.r];
-	var g = food[food_id.g];
-	var b = food[food_id.b];
+	var x = food[food_id].x;
+	var y = food[food_id].y;
+	var radius = food[food_id].radius;
+	var r = food[food_id].y;
+	var g = food[food_id].g;
+	var b = food[food_id].b;
 	
 	drawer.fillStyle = "rgb(" + r + "," + g + "," + b + ")";
 	drawer.strokeStyle = "rgb(" + r - 25 + "," + g - 25 + "," + b - 25 + ")";
