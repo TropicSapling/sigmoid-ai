@@ -2,6 +2,11 @@ function randomBetween(min, max) {
 	return Math.floor(Math.random()*(max-min+1)+min);
 }
 
+function clearScreen(drawer) {
+	drawer.fillStyle = "#fff";
+	drawer.fillRect(0, 0, window.innerWidth, window.innerHeight);
+}
+
 function drawBg(drawer, line_count, bg_colour, line_colour) {
 	drawer.fillStyle = bg_colour;
 	drawer.fillRect(0, 0, window.innerWidth, window.innerHeight);
@@ -40,6 +45,9 @@ $(function() {
 	drawBg(drawer, 80, "#d5d5d5", "#ccc");
 	
 	setInterval(function() {
-		drawFood(drawer, Math.floor(Math.random() * window.innerWidth), Math.floor(Math.random() * window.innerHeight), randomBetween(3, 9));
-	}, 800);
+		clearScreen(drawer);
+		drawBg(drawer, 80, "#d5d5d5", "#ccc");
+		
+//		drawFood(drawer, Math.floor(Math.random() * window.innerWidth), Math.floor(Math.random() * window.innerHeight), randomBetween(3, 9));
+	}, 40);
 });
