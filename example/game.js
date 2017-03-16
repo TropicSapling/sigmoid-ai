@@ -111,5 +111,5 @@ $(function() {
 	
 	setTimeout(function() {
 		runGame(drawer);
-	}, 1000);
+	}, 0); // This seems to fix a lag spike in the beginning of the game for some reason
 });
