@@ -40,11 +40,6 @@ function randomBetween(min, max) {
 	return Math.floor(Math.random()*(max-min+1)+min);
 }
 
-function clearScreen(drawer) {
-	drawer.fillStyle = "#fff";
-	drawer.fillRect(0, 0, window.innerWidth, window.innerHeight);
-}
-
 function drawBg(drawer, square_size, bg_colour, line_colour) {
 	drawer.fillStyle = bg_colour;
 	drawer.fillRect(0, 0, window.innerWidth, window.innerHeight);
@@ -97,7 +92,6 @@ function runGame(drawer) {
 		ff_time = performance.now();
 	}
 	
-	clearScreen(drawer);
 	drawBg(drawer, 25, "#d5d5d5", "#ccc");
 	typeFPS(drawer);
 	drawAllFood(drawer);
