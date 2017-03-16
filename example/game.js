@@ -1,5 +1,7 @@
 var food = [];
 var fps = 30;
+var frames = 0;
+var ff_time;
 
 function Food(x, y, radius, r, g, b) {
 	this.x = x;
@@ -65,6 +67,10 @@ function drawAllFood(drawer) {
 }
 
 function runGame(drawer) {
+	if(performance.now() > ff_time + 1000) {
+		ff_time = performance.now();
+	}
+	
 	clearScreen(drawer);
 	drawBg(drawer, 80, "#d5d5d5", "#ccc");
 	typeFPS(drawer);
@@ -94,6 +100,8 @@ $(function() {
 	var drawer = canvas.getContext("2d");
 	
 	drawBg(drawer, 80, "#d5d5d5", "#ccc"); // To prevent flickering
+	
+	ff_time = performance.now();
 	
 	runGame(drawer);
 });
