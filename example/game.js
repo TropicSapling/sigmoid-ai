@@ -1,4 +1,5 @@
 var food = [];
+var fps = 30;
 
 function Food(x, y, radius, r, g, b) {
 	this.x = x;
@@ -66,6 +67,7 @@ function drawAllFood(drawer) {
 function runGame(drawer) {
 	clearScreen(drawer);
 	drawBg(drawer, 80, "#d5d5d5", "#ccc");
+	typeFPS(drawer);
 	drawAllFood(drawer);
 	
 	if(Math.floor(Math.random() * 25) == 1) {
@@ -77,7 +79,7 @@ function runGame(drawer) {
 	}, 0);
 }
 
-function typeFPS(drawer, fps) {
+function typeFPS(drawer) {
 	drawer.font = "12px Arial";
 	drawer.fillStyle = "#000";
 	drawer.fillText("FPS: " + fps, 10, 22);
