@@ -45,21 +45,21 @@ function clearScreen(drawer) {
 	drawer.fillRect(0, 0, window.innerWidth, window.innerHeight);
 }
 
-function drawBg(drawer, line_count, bg_colour, line_colour) {
+function drawBg(drawer, square_size, bg_colour, line_colour) {
 	drawer.fillStyle = bg_colour;
 	drawer.fillRect(0, 0, window.innerWidth, window.innerHeight);
 	
 	drawer.strokeStyle = line_colour;
 	
-	for(var i = 0; i < line_count; i++) {
-		drawer.moveTo(i * (window.innerWidth / line_count), 0);
-		drawer.lineTo(i * (window.innerWidth / line_count), window.innerHeight);
+	for(var i = 0; i < window.innerWidth; i += square_size) {
+		drawer.moveTo(i, 0);
+		drawer.lineTo(i, window.innerHeight);
 		drawer.stroke();
 	}
 	
-	for(var i = 0; i < line_count; i++) {
-		drawer.moveTo(0, i * (window.innerWidth / line_count));
-		drawer.lineTo(window.innerWidth, i * (window.innerWidth / line_count));
+	for(var i = 0; i < window.innerHeight; i += square_size) {
+		drawer.moveTo(0, i);
+		drawer.lineTo(window.innerWidth, i);
 		drawer.stroke();
 	}
 }
