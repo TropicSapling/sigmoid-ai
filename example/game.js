@@ -129,7 +129,7 @@ $(function() {
 	
 	var drawer = canvas.getContext("2d");
 	
-	drawBg(drawer, 80, "#d5d5d5", "#ccc"); // To prevent flickering
+	drawBg(drawer, 50, "#d5d5d5", "#ccc"); // To prevent flickering
 	
 	defZeroDelayTimeout();
 	
