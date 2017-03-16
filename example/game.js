@@ -109,5 +109,7 @@ $(function() {
 	
 	ff_time = performance.now();
 	
-	runGame(drawer);
+	setTimeout(function() {
+		runGame(drawer);
+	}, 1000);
 });
