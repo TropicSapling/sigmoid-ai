@@ -92,7 +92,7 @@ function runGame(drawer) {
 function typeFPS(drawer) {
 	drawer.font = "12px Arial";
 	drawer.fillStyle = "#000";
-	drawer.fillText("FPS: " + fps, 10, 22);
+	drawer.fillText("FPS: " + fps, 10, 20);
 }
 
 $(function() {
