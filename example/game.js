@@ -1,5 +1,5 @@
 var food = [];
-var fps = 30;
+var fps = "N/A";
 var frames = 0;
 var ff_time;
 
@@ -88,9 +88,11 @@ async function runGame(drawer) {
 }
 
 function typeFPS(drawer) {
-	drawer.font = "12px Arial";
-	drawer.fillStyle = "#000";
-	drawer.fillText("FPS: " + fps, 10, 20);
+	if(fps != "N/A") {
+		drawer.font = "12px Arial";
+		drawer.fillStyle = "#000";
+		drawer.fillText("FPS: " + fps, 10, 20);
+	}
 }
 
 $(function() {
