@@ -63,6 +63,20 @@ function drawAllFood(drawer) {
 	}
 }
 
+function runGame(drawer) {
+	clearScreen(drawer);
+	drawBg(drawer, 80, "#d5d5d5", "#ccc");
+	drawAllFood(drawer);
+	
+	if(Math.floor(Math.random() * 25) == 1) {
+		food.push(new Food(Math.floor(Math.random() * window.innerWidth), Math.floor(Math.random() * window.innerHeight), randomBetween(3, 9), randomBetween(24, 256), randomBetween(24, 256), randomBetween(24, 256)));
+	}
+	
+	setTimeout(function() {
+		runGame(drawer);
+	}, 0);
+}
+
 $(function() {
 	var canvas = document.getElementsByTagName("canvas")[0];
 	
@@ -73,13 +87,5 @@ $(function() {
 	
 	drawBg(drawer, 80, "#d5d5d5", "#ccc"); // To prevent (40 ms) flickering
 	
-	setInterval(function() {
-		clearScreen(drawer);
-		drawBg(drawer, 80, "#d5d5d5", "#ccc");
-		drawAllFood(drawer);
-		
-		if(Math.floor(Math.random() * 25) == 1) {
-			food.push(new Food(Math.floor(Math.random() * window.innerWidth), Math.floor(Math.random() * window.innerHeight), randomBetween(3, 9), randomBetween(24, 256), randomBetween(24, 256), randomBetween(24, 256)));
-		}
-	}, 40);
+	runGame(drawer);
 });
