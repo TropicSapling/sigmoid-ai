@@ -66,25 +66,27 @@ function drawAllFood(drawer) {
 	}
 }
 
-async function runGame(drawer) {
-	while(true) {
-		if(performance.now() - ff_time >= 1000) {
-			fps = frames;
-			frames = 0;
-			ff_time = performance.now();
-		}
-		
-		clearScreen(drawer);
-		drawBg(drawer, 80, "#d5d5d5", "#ccc");
-		typeFPS(drawer);
-		drawAllFood(drawer);
-		
-		if(Math.floor(Math.random() * 25) == 1) {
-			food.push(new Food(Math.floor(Math.random() * window.innerWidth), Math.floor(Math.random() * window.innerHeight), randomBetween(3, 9), randomBetween(24, 256), randomBetween(24, 256), randomBetween(24, 256)));
-		}
-		
-		frames++;
+function runGame(drawer) {
+	if(performance.now() - ff_time >= 1000) {
+		fps = frames;
+		frames = 0;
+		ff_time = performance.now();
 	}
+	
+	clearScreen(drawer);
+	drawBg(drawer, 80, "#d5d5d5", "#ccc");
+	typeFPS(drawer);
+	drawAllFood(drawer);
+	
+	if(Math.floor(Math.random() * 25) == 1) {
+		food.push(new Food(Math.floor(Math.random() * window.innerWidth), Math.floor(Math.random() * window.innerHeight), randomBetween(3, 9), randomBetween(24, 256), randomBetween(24, 256), randomBetween(24, 256)));
+	}
+	
+	frames++;
+	
+	setTimeout(function() {
+		runGame(drawer);
+	}, 0);
 }
 
 function typeFPS(drawer) {
