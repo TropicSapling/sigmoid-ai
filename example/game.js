@@ -3,6 +3,30 @@ var fps = "N/A";
 var frames = 0;
 var ff_time;
 
+function defZeroDelayTimeout() {
+	var timeouts = [];
+    var messageName = "zero-timeout-message";
+	
+    function setZeroTimeout(fn) {
+        timeouts.push(fn);
+        window.postMessage(messageName, "*");
+    }
+	
+    function handleMessage(event) {
+        if (event.source == window && event.data == messageName) {
+            event.stopPropagation();
+            if (timeouts.length > 0) {
+                var fn = timeouts.shift();
+                fn();
+            }
+        }
+    }
+	
+    window.addEventListener("message", handleMessage, true);
+	
+    window.setZeroTimeout = setZeroTimeout;
+}
+
 function Food(x, y, radius, r, g, b) {
 	this.x = x;
 	this.y = y;
@@ -84,9 +108,9 @@ function runGame(drawer) {
 	
 	frames++;
 	
-	setTimeout(function() {
+	setZeroTimeout(function() {
 		runGame(drawer);
-	}, 0);
+	});
 }
 
 function typeFPS(drawer) {
@@ -106,6 +130,8 @@ $(function() {
 	var drawer = canvas.getContext("2d");
 	
 	drawBg(drawer, 80, "#d5d5d5", "#ccc"); // To prevent flickering
+	
+	defZeroDelayTimeout();
 	
 	ff_time = performance.now();
 	
