@@ -98,7 +98,7 @@ function runGame(drawer) {
 	}
 	
 	clearScreen(drawer);
-	drawBg(drawer, 80, "#d5d5d5", "#ccc");
+	drawBg(drawer, 25, "#d5d5d5", "#ccc");
 	typeFPS(drawer);
 	drawAllFood(drawer);
 	
@@ -129,7 +129,7 @@ $(function() {
 	
 	var drawer = canvas.getContext("2d");
 	
-	drawBg(drawer, 50, "#d5d5d5", "#ccc"); // To prevent flickering
+	drawBg(drawer, 25, "#d5d5d5", "#ccc"); // To prevent flickering
 	
 	defZeroDelayTimeout();
 	
