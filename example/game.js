@@ -77,6 +77,12 @@ function runGame(drawer) {
 	}, 0);
 }
 
+function typeFPS(drawer, fps) {
+	drawer.font = "12px Arial";
+	drawer.fillStyle = "#000";
+	drawer.fillText("FPS: " + fps, 10, 22);
+}
+
 $(function() {
 	var canvas = document.getElementsByTagName("canvas")[0];
 	
