@@ -133,9 +133,8 @@ $(function() {
 	
 	defZeroDelayTimeout();
 	
-	ff_time = performance.now();
-	
 	setTimeout(function() {
+		ff_time = performance.now();
 		runGame(drawer);
-	}, 0); // This seems to fix a lag spike in the beginning of the game for some reason
+	}, 5000); // This seems to fix a lag spike in the beginning of the game for some reason
 });
