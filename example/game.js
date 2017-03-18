@@ -150,7 +150,7 @@ $(function() {
 	
 	drawer = canvas.getContext("2d");
 	
-	drawBg(drawer, 100, "#d5d5d5", "#ccc"); // To prevent flickering
+	drawBg(100, "#d5d5d5", "#ccc"); // To prevent flickering
 	
 	defZeroDelayTimeout();
 	
