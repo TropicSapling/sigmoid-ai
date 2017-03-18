@@ -1,3 +1,6 @@
+var canvas;
+var drawer;
+
 var food = [];
 var fps = "N/A";
 var tps = "N/A";
@@ -5,7 +8,7 @@ var ticks = 0;
 var ft_time;
 var lastCalledTime;
 
-function requestAnimFrame() {
+function calcFPS() {
 	if(!lastCalledTime) {
  		lastCalledTime = performance.now();
  		return;
@@ -14,7 +17,7 @@ function requestAnimFrame() {
 	delta = (performance.now() - lastCalledTime) / 1000;
 	lastCalledTime = performance.now();
 	fps = 1 / delta;
-} 
+}
 
 function defZeroDelayTimeout() {
 	var timeouts = [];
@@ -53,7 +56,7 @@ function randomBetween(min, max) {
 	return Math.floor(Math.random()*(max-min+1)+min);
 }
 
-function drawBg(drawer, square_size, bg_colour, line_colour) {
+function drawBg(square_size, bg_colour, line_colour) {
 	drawer.fillStyle = bg_colour;
 	drawer.fillRect(0, 0, window.innerWidth, window.innerHeight);
 	
@@ -72,7 +75,7 @@ function drawBg(drawer, square_size, bg_colour, line_colour) {
 	}
 }
 
-function drawFood(drawer, food_id) {
+function drawFood(food_id) {
 	var x = food[food_id].x;
 	var y = food[food_id].y;
 	var radius = food[food_id].radius;
@@ -92,7 +95,7 @@ function drawFood(drawer, food_id) {
 	drawer.stroke();
 }
 
-function drawAllFood(drawer) {
+function drawAllFood() {
 	for(var i = 0; i < food.length; i++) {
 		drawFood(drawer, i);
 	}
@@ -105,10 +108,6 @@ function runGame(drawer) {
 		ft_time = performance.now();
 	}
 	
-	drawBg(drawer, 100, "#d5d5d5", "#ccc");
-	typePerf(drawer);
-	drawAllFood(drawer);
-	
 	if(Math.floor(Math.random() * tps) == 1) {
 		food.push(new Food(Math.floor(Math.random() * window.innerWidth), Math.floor(Math.random() * window.innerHeight), randomBetween(3, 9), randomBetween(24, 256), randomBetween(24, 256), randomBetween(24, 256)));
 	}
@@ -118,6 +117,14 @@ function runGame(drawer) {
 	setZeroTimeout(function() {
 		runGame(drawer);
 	});
+}
+
+function drawGame() {
+	drawBg(100, "#d5d5d5", "#ccc");
+	typePerf();
+	drawAllFood();
+	
+	requestAnimationFrame(drawGame);
 }
 
 function typePerf(drawer) {
@@ -135,19 +142,21 @@ function typePerf(drawer) {
 }
 
 $(function() {
-	var canvas = document.getElementsByTagName("canvas")[0];
+	canvas = document.getElementsByTagName("canvas")[0];
 	
 	canvas.setAttribute("width", window.innerWidth);
 	canvas.setAttribute("height", window.innerHeight);
 	
-	var drawer = canvas.getContext("2d");
+	drawer = canvas.getContext("2d");
 	
 	drawBg(drawer, 100, "#d5d5d5", "#ccc"); // To prevent flickering
 	
 	defZeroDelayTimeout();
 	
+	ft_time = performance.now();
 	setTimeout(function() {
-		ft_time = performance.now();
-		runGame(drawer);
-	}, 0); // This seems to fix a lag spike in the beginning of the game for some reason
+		runGame();
+	}, 0);
+	
+	requestAnimationFrame(drawGame);
 });
