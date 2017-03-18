@@ -121,7 +121,9 @@ function runGame() {
 
 function drawGame() {
 	drawBg(100, "#d5d5d5", "#ccc");
-	typePerf();
+	if(Math.floor(Math.random() * fps) == 1) {
+		typePerf();
+	}
 	drawAllFood();
 	
 	calcFPS();
