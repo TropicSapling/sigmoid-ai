@@ -1,7 +1,20 @@
 var food = [];
 var fps = "N/A";
-var frames = 0;
-var ff_time;
+var tps = "N/A";
+var ticks = 0;
+var ft_time;
+var lastCalledTime;
+
+function requestAnimFrame() {
+	if(!lastCalledTime) {
+ 		lastCalledTime = performance.now();
+ 		return;
+	}
+	
+	delta = (performance.now() - lastCalledTime) / 1000;
+	lastCalledTime = performance.now();
+	fps = 1 / delta;
+} 
 
 function defZeroDelayTimeout() {
 	var timeouts = [];
@@ -87,31 +100,37 @@ function drawAllFood(drawer) {
 
 function runGame(drawer) {
 	if(performance.now() - ff_time >= 1000) {
-		fps = frames;
-		frames = 0;
-		ff_time = performance.now();
+		tps = ticks;
+		ticks = 0;
+		ft_time = performance.now();
 	}
 	
 	drawBg(drawer, 100, "#d5d5d5", "#ccc");
-	typeFPS(drawer);
+	typePerf(drawer);
 	drawAllFood(drawer);
 	
-	if(Math.floor(Math.random() * fps) == 1) {
+	if(Math.floor(Math.random() * tps) == 1) {
 		food.push(new Food(Math.floor(Math.random() * window.innerWidth), Math.floor(Math.random() * window.innerHeight), randomBetween(3, 9), randomBetween(24, 256), randomBetween(24, 256), randomBetween(24, 256)));
 	}
 	
-	frames++;
+	ticks++;
 	
 	setZeroTimeout(function() {
 		runGame(drawer);
 	});
 }
 
-function typeFPS(drawer) {
+function typePerf(drawer) {
 	if(fps != "N/A") {
 		drawer.font = "12px Arial";
 		drawer.fillStyle = "#000";
 		drawer.fillText("FPS: " + fps, 10, 20);
+	}
+	
+	if(tps != "N/A") {
+		drawer.font = "12px Arial";
+		drawer.fillStyle = "#000";
+		drawer.fillText("TPS: " + tps, 10, 40);
 	}
 }
 
@@ -128,7 +147,7 @@ $(function() {
 	defZeroDelayTimeout();
 	
 	setTimeout(function() {
-		ff_time = performance.now();
+		ft_time = performance.now();
 		runGame(drawer);
 	}, 0); // This seems to fix a lag spike in the beginning of the game for some reason
 });
