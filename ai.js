@@ -5,6 +5,7 @@ function genRandActions(input, output_count) {
 	// WIP
 }
 
-function AI(input, output_count, actions) {
+function AI(input, output_count, actions, properties) {
 	this.actions = actions ? actions : genRandActions(input, output_count);
+	this.properties = properties;
 }
