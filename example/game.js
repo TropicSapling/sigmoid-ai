@@ -124,6 +124,7 @@ function drawGame() {
 	typePerf();
 	drawAllFood();
 	
+	calcFPS();
 	requestAnimationFrame(drawGame);
 }
 
