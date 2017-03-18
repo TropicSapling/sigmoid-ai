@@ -1,1 +1,5 @@
 var AIs = [];
+
+$(function() {
+	// WIP
+});
