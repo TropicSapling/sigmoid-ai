@@ -101,7 +101,7 @@ function drawAllFood() {
 	}
 }
 
-function runGame(drawer) {
+function runGame() {
 	if(performance.now() - ft_time >= 1000) {
 		tps = ticks;
 		ticks = 0;
@@ -128,7 +128,7 @@ function drawGame() {
 	requestAnimationFrame(drawGame);
 }
 
-function typePerf(drawer) {
+function typePerf() {
 	if(fps != "N/A") {
 		drawer.font = "12px Arial";
 		drawer.fillStyle = "#000";
