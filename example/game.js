@@ -80,7 +80,7 @@ function drawFood(food_id) {
 	var x = food[food_id].x;
 	var y = food[food_id].y;
 	var radius = food[food_id].radius;
-	var r = food[food_id].y;
+	var r = food[food_id].r;
 	var g = food[food_id].g;
 	var b = food[food_id].b;
 	
@@ -99,6 +99,32 @@ function drawFood(food_id) {
 function drawAllFood() {
 	for(var i = 0; i < food.length; i++) {
 		drawFood(i);
+	}
+}
+
+function drawAI(id) {
+	var x = food[food_id].x;
+	var y = food[food_id].y;
+	var radius = food[food_id].radius;
+	var r = food[food_id].r;
+	var g = food[food_id].g;
+	var b = food[food_id].b;
+	
+	drawer.fillStyle = "rgb(" + r + "," + g + "," + b + ")";
+	drawer.strokeStyle = "rgb(" + (r - 25) + "," + (g - 25) + "," + (b - 25) + ")";
+	
+	drawer.beginPath();
+	drawer.arc(x, y, radius, 0, 2 * Math.PI);
+	drawer.fill();
+	
+	drawer.beginPath();
+	drawer.arc(x, y, radius, 0, 2 * Math.PI);
+	drawer.stroke();
+}
+
+function drawAIs() {
+	for(var i = 0; i < food.length; i++) {
+		drawAI(i);
 	}
 }
 
