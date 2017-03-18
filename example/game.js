@@ -16,7 +16,7 @@ function calcFPS() {
 	
 	delta = (performance.now() - lastCalledTime) / 1000;
 	lastCalledTime = performance.now();
-	fps = 1 / delta;
+	fps = Math.round(1 / delta);
 }
 
 function defZeroDelayTimeout() {
@@ -97,7 +97,7 @@ function drawFood(food_id) {
 
 function drawAllFood() {
 	for(var i = 0; i < food.length; i++) {
-		drawFood(drawer, i);
+		drawFood(i);
 	}
 }
 
@@ -115,7 +115,7 @@ function runGame() {
 	ticks++;
 	
 	setZeroTimeout(function() {
-		runGame(drawer);
+		runGame();
 	});
 }
 
