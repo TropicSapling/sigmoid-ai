@@ -134,7 +134,7 @@ function typePerf() {
 		drawer.font = "12px Arial";
 		drawer.fillStyle = "#000";
 		
-		if(Math.floor(Math.random() * fps) == 1) {
+		if(last_fps == "N/A" || Math.floor(Math.random() * fps) == 1) {
 			last_fps = fps;
 		}
 		
