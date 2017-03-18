@@ -123,7 +123,7 @@ function drawAI(id) {
 }
 
 function drawAIs() {
-	for(var i = 0; i < food.length; i++) {
+	for(var i = 0; i < AIs.length; i++) {
 		drawAI(i);
 	}
 }
