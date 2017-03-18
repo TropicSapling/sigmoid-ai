@@ -149,6 +149,7 @@ function runGame() {
 function drawGame() {
 	drawBg(100, "#d5d5d5", "#ccc");
 	drawAllFood();
+	drawAIs();
 	typePerf();
 	
 	calcFPS();
