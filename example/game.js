@@ -99,7 +99,7 @@ function drawAllFood(drawer) {
 }
 
 function runGame(drawer) {
-	if(performance.now() - ff_time >= 1000) {
+	if(performance.now() - ft_time >= 1000) {
 		tps = ticks;
 		ticks = 0;
 		ft_time = performance.now();
