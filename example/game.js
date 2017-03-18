@@ -3,6 +3,7 @@ var drawer;
 
 var food = [];
 var fps = "N/A";
+var last_fps = "N/A";
 var tps = "N/A";
 var ticks = 0;
 var ft_time;
@@ -121,9 +122,7 @@ function runGame() {
 
 function drawGame() {
 	drawBg(100, "#d5d5d5", "#ccc");
-	if(Math.floor(Math.random() * fps) == 1) {
-		typePerf();
-	}
+	typePerf();
 	drawAllFood();
 	
 	calcFPS();
@@ -134,7 +133,12 @@ function typePerf() {
 	if(fps != "N/A") {
 		drawer.font = "12px Arial";
 		drawer.fillStyle = "#000";
-		drawer.fillText("FPS: " + fps, 10, 20);
+		
+		if(Math.floor(Math.random() * fps) == 1) {
+			last_fps = fps;
+		}
+		
+		drawer.fillText("FPS: " + last_fps, 10, 20);
 	}
 	
 	if(tps != "N/A") {
