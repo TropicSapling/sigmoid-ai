@@ -4,7 +4,7 @@ var functions = ["Math.pow[2]", "Math.sqrt[1]", "Math.sin[1]", "Math.cos[1]", "M
 function genRandActions(input, output_count) {
 	var outputs = [];
 	for(var output = 0; output < output_count; output++) {
-		outputs.push([Math.round(Math.random())]); // WIP; WILL BE CHANGED
+		outputs.push([randomBetween(-5, 5)]); // WIP; WILL BE CHANGED
 	}
 	
 	return outputs;
