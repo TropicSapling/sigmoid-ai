@@ -139,8 +139,9 @@ function sigmoid(number) {
 function eatFood(x, y, radius) {
 	for(var i = 0; i < food.length; i++) {
 		if(x - radius <= food[i].x - food[i].radius && x + radius >= food[i].x + food[i].radius && y - radius <= food[i].y - food[i].radius && y + radius >= food[i].y + food[i].radius) {
+			var new_radius = Math.sqrt((Math.PI * Math.pow(radius, 2) + Math.PI * Math.pow(food[i].radius, 2)) / Math.PI);
 			food.splice(i, 1);
-			return Math.sqrt((Math.PI * Math.pow(radius, 2) + Math.PI * Math.pow(food[i].radius, 2)) / Math.PI);
+			return new_radius;
 		}
 	}
 }
