@@ -7,12 +7,10 @@ function genRandActions(input, output_count) {
 		outputs.push([Math.round(Math.random())]); // WIP; WILL BE CHANGED
 	}
 	
-	alert(outputs);
 	return outputs;
 }
 
 function AI(input, output_count, actions, properties) {
 	this.actions = actions ? actions : genRandActions(input, output_count);
-	alert(this.actions);
 	this.properties = properties;
 }
