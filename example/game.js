@@ -136,6 +136,10 @@ function sigmoid(number) {
 	return 1 / (1 + Math.pow(Math.E, 0 - number));
 }
 
+function eatFood(x, y, radius) {
+	// WIP
+}
+
 function updateAI(id) {
 	var props = AIs[id].properties;
 	
@@ -154,8 +158,14 @@ function updateAI(id) {
 	
 	var child = Math.round(sigmoid(AIs[id].actions[2]));
 	if(child) {
-		var child_size = Math.abs(exe(AIs[id].actions[3]));
+		var child_radius = Math.abs(exe(AIs[id].actions[3]));
+		if(props.radius - child_radius > 0 && child_radius >= 10) {
+			props.radius -= child_radius;
+			AIs.push(new AI(food, 4, props.actions, {x: Math.floor(Math.random() * window.innerWidth), y: Math.floor(Math.random() * window.innerHeight), r: randomBetween(24, 256), g: randomBetween(24, 256), b: randomBetween(24, 256), radius: child_radius}));
+		}
 	}
+	
+	props.radius += eatFood(props.x, props.y, props.radius);
 	
 	AIs[id].properties = props;
 }
