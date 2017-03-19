@@ -131,6 +131,8 @@ function drawAIs() {
 function updateAI(id) {
 	var radius = AIs[id].properties.radius;
 	radius = radius * 0.999;
+	AIs[id].properties.radius = radius;
+	
 	if(radius < 10) {
 		AIs.splice(id, 1);
 	}
