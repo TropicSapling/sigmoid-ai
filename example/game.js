@@ -135,10 +135,9 @@ function exe(action) {
 function updateAI(id) {
 	var props = AIs[id].properties;
 	
-	var radius = props.radius;
-	radius = radius * 0.999;
+	props.radius = props.radius * 0.999;
 	
-	if(radius < 10) {
+	if(props.radius < 10) {
 		AIs.splice(id, 1);
 		return;
 	}
