@@ -209,7 +209,7 @@ function runGame() {
 	if(timeout) {
 		setTimeout(function() {
 			runGame();
-		}, 25);
+		}, 10);
 	} else {
 		setZeroTimeout(function() {
 			runGame();
