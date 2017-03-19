@@ -6,7 +6,7 @@ function genRandAIs() {
 	}
 	
 	if(timeout) {
-		setTimeout(genRandAIs, 25);
+		setTimeout(genRandAIs, 10);
 	} else {
 		setZeroTimeout(genRandAIs);
 	}
