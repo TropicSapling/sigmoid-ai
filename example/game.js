@@ -129,7 +129,7 @@ function drawAIs() {
 }
 
 function exe(action) {
-	return 1 / (1 + Math.pow(e, 0 - (new Function("return " + action.join(" ")))()));
+	return 1 / (1 + Math.pow(Math.E, 0 - (new Function("return " + action.join(" ")))()));
 }
 
 function updateAI(id) {
