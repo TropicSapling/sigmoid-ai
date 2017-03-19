@@ -1,5 +1,6 @@
 var canvas;
 var drawer;
+var timeout = false;
 
 var food = [];
 var fps = "N/A";
@@ -8,6 +9,12 @@ var tps = "N/A";
 var ticks = 0;
 var ft_time;
 var lastCalledTime;
+
+$(document).on("keypress", function (e) {
+    if(e.which == 32) {
+		timeout = timeout ? false : true;
+	}
+});
 
 function calcFPS() {
 	if(!lastCalledTime) {
@@ -199,9 +206,15 @@ function runGame() {
 	
 	ticks++;
 	
-	setZeroTimeout(function() {
-		runGame();
-	});
+	if(timeout) {
+		setTimeout(function() {
+			runGame();
+		}, 50);
+	} else {
+		setZeroTimeout(function() {
+			runGame();
+		});
+	}
 }
 
 function drawGame() {
