@@ -137,19 +137,24 @@ function updateAI(id) {
 	
 	var radius = props.radius;
 	radius = radius * 0.999;
-	AIs[id].properties.radius = radius;
 	
 	if(radius < 10) {
 		AIs.splice(id, 1);
+		return;
 	}
 	
-	var x_movement = exe(props.actions[0]);
-	var y_movement = exe(props.actions[1]);
+	var x_movement = exe(AIs[id].actions[0]);
+	var y_movement = exe(AIs[id].actions[1]);
 	
-	var child = Math.round(exe(props.actions[2]));
+	props.x += x_movement;
+	props.y += y_movement;
+	
+	var child = Math.round(exe(AIs[id].actions[2]));
 	if(child) {
-		var child_size = exe(props.actions[3]);
+		var child_size = exe(AIs[id].actions[3]);
 	}
+	
+	AIs[id].properties = props;
 }
 
 function updateAIs() {
