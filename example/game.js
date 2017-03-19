@@ -198,7 +198,7 @@ function runGame() {
 		ft_time = performance.now();
 	}
 	
-	if(Math.floor(Math.random() * 100) == 1) {
+	if(Math.floor(Math.random() * 200) == 1) {
 		food.push(new Food(Math.floor(Math.random() * window.innerWidth), Math.floor(Math.random() * window.innerHeight), randomBetween(3, 9), randomBetween(24, 256), randomBetween(24, 256), randomBetween(24, 256)));
 	}
 	
@@ -209,7 +209,7 @@ function runGame() {
 	if(timeout) {
 		setTimeout(function() {
 			runGame();
-		}, 50);
+		}, 25);
 	} else {
 		setZeroTimeout(function() {
 			runGame();
