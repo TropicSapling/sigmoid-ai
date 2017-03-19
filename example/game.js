@@ -169,7 +169,7 @@ function updateAI(id) {
 		}
 	}
 	
-	props.radius += eatFood(props.x, props.y, props.radius);
+	props.radius = eatFood(props.x, props.y, props.radius);
 	
 	AIs[id].properties = props;
 }
