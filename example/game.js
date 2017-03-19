@@ -128,6 +128,20 @@ function drawAIs() {
 	}
 }
 
+function updateAI(id) {
+	var radius = AIs[id].properties.radius;
+	radius = radius * 0.999;
+	if(radius < 10) {
+		AIs.splice(id, 1);
+	}
+}
+
+function updateAIs() {
+	for(var i = 0; i < AIs.length; i++) {
+		updateAI(i);
+	}
+}
+
 function runGame() {
 	if(performance.now() - ft_time >= 1000) {
 		tps = ticks;
@@ -138,6 +152,8 @@ function runGame() {
 	if(Math.floor(Math.random() * 100) == 1) {
 		food.push(new Food(Math.floor(Math.random() * window.innerWidth), Math.floor(Math.random() * window.innerHeight), randomBetween(3, 9), randomBetween(24, 256), randomBetween(24, 256), randomBetween(24, 256)));
 	}
+	
+	updateAIs();
 	
 	ticks++;
 	
