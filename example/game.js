@@ -130,6 +130,11 @@ function drawAIs() {
 
 function exe(action) {
 	return 1 / (1 + Math.pow(Math.E, 0 - (new Function("return " + action.join(" ")))()));
+	return (new Function("return " + action.join(" ")))();
+}
+
+function sigmoid(number) {
+	return 1 / (1 + Math.pow(Math.E, 0 - number));
 }
 
 function updateAI(id) {
@@ -142,15 +147,15 @@ function updateAI(id) {
 		return;
 	}
 	
-	var x_movement = exe(AIs[id].actions[0]);
-	var y_movement = exe(AIs[id].actions[1]);
+	var x_movement = 1 / exe(AIs[id].actions[0]);
+	var y_movement = 1 / exe(AIs[id].actions[1]);
 	
 	props.x += x_movement;
 	props.y += y_movement;
 	
-	var child = Math.round(exe(AIs[id].actions[2]));
+	var child = Math.round(sigmoid(AIs[id].actions[2]));
 	if(child) {
-		var child_size = exe(AIs[id].actions[3]);
+		var child_size = Math.abs(exe(AIs[id].actions[3]));
 	}
 	
 	AIs[id].properties = props;
