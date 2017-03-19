@@ -137,7 +137,11 @@ function sigmoid(number) {
 }
 
 function eatFood(x, y, radius) {
-	// WIP
+	for(var i = 0; i < food.length; i++) {
+		if(x - radius <= food[i].x - food[i].radius && x + radius >= food[i].x + food[i].radius && y - radius <= food[i].y - food[i].radius && y + radius >= food[i].y + food[i].radius) {
+		   return Math.sqrt((Math.PI * Math.pow(radius, 2) + Math.PI * Math.pow(food[i].radius, 2)) / Math.PI);
+		}
+	}
 }
 
 function updateAI(id) {
