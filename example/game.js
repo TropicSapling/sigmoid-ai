@@ -144,6 +144,8 @@ function eatFood(x, y, radius) {
 			return new_radius;
 		}
 	}
+	
+	return radius;
 }
 
 function updateAI(id) {
