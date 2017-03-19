@@ -128,13 +128,27 @@ function drawAIs() {
 	}
 }
 
+function exe(action) {
+	return 1 / (1 + Math.pow(e, 0 - (new Function("return " + action.join(" ")))()));
+}
+
 function updateAI(id) {
-	var radius = AIs[id].properties.radius;
+	var props = AIs[id].properties;
+	
+	var radius = props.radius;
 	radius = radius * 0.999;
 	AIs[id].properties.radius = radius;
 	
 	if(radius < 10) {
 		AIs.splice(id, 1);
+	}
+	
+	var x_movement = exe(props.actions[0]);
+	var y_movement = exe(props.actions[1]);
+	
+	var child = Math.round(exe(props.actions[2]));
+	if(child) {
+		var child_size = exe(props.actions[3]);
 	}
 }
 
