@@ -129,7 +129,6 @@ function drawAIs() {
 }
 
 function exe(action) {
-	return 1 / (1 + Math.pow(Math.E, 0 - (new Function("return " + action.join(" ")))()));
 	return (new Function("return " + action.join(" ")))();
 }
 
