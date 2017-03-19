@@ -169,7 +169,7 @@ function updateAI(id) {
 		var child_radius = Math.abs(exe(AIs[id].actions[3]));
 		if(props.radius - child_radius > 0 && child_radius >= 10) {
 			props.radius -= child_radius;
-			AIs.push(new AI(food, 4, props.actions, {x: Math.floor(Math.random() * window.innerWidth), y: Math.floor(Math.random() * window.innerHeight), r: randomBetween(24, 256), g: randomBetween(24, 256), b: randomBetween(24, 256), radius: child_radius}));
+			AIs.push(new AI(food, 4, props.actions, {x: props.x, y: props.y, r: randomBetween(24, 256), g: randomBetween(24, 256), b: randomBetween(24, 256), radius: child_radius}));
 		}
 	}
 	
