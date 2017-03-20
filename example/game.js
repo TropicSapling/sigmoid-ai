@@ -174,7 +174,7 @@ function updateAI(id) {
 	var child = Math.round(sigmoid(AIs[id].actions[2]));
 	if(child) {
 		var child_radius = Math.abs(exe(AIs[id].actions[3]));
-		if(props.radius - child_radius > 0 && (child_radius >= 10 || (props.radius - child_radius < 10 && child_radius + props.radius - child_radius >= 10))) {
+		if(props.radius - child_radius >= 0 && (child_radius >= 10 || (props.radius - child_radius < 10 && child_radius + props.radius - child_radius >= 10))) {
 			props.radius -= child_radius;
 			if(props.radius - child_radius < 10) {
 				child_radius += props.radius;
