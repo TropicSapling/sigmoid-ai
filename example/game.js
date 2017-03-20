@@ -174,8 +174,12 @@ function updateAI(id) {
 	var child = Math.round(sigmoid(AIs[id].actions[2]));
 	if(child) {
 		var child_radius = Math.abs(exe(AIs[id].actions[3]));
-		if(props.radius - child_radius > 0 && child_radius >= 10) {
+		if(props.radius - child_radius > 0 && (child_radius >= 10 || (props.radius - child_radius < 10 && child_radius + props.radius - child_radius >= 10))) {
 			props.radius -= child_radius;
+			if(props.radius - child_radius < 10) {
+				child_radius += props.radius;
+				props.radius = 0;
+			}
 			AIs.push(new AI(food, 4, props.actions, {x: props.x, y: props.y, r: randomBetween(props.r - 8, props.r + 8), g: randomBetween(props.g - 8, props.g + 8), b: randomBetween(props.b - 8, props.b + 8), radius: child_radius}));
 		}
 	}
