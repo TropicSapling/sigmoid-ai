@@ -7,7 +7,10 @@ function JSONToArray(data) {
         if (typeof value !== 'object') {
             arr.push(value);
         } else {
-            arr.push(JSONToArray(value));
+			var arr2 = JSONToArray(value);
+			for(var i = 0; i < arr2.length; i++) {
+				arr.push(arr2[i]);
+			}
         }
     }
     return arr;
