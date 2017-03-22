@@ -6,6 +6,7 @@ var food = [];
 var fps = "N/A";
 var last_fps = "N/A";
 var tps = "N/A";
+var last_tps = "N/A";
 var ticks = 0;
 var ft_time;
 var lastCalledTime;
@@ -13,6 +14,7 @@ var lastCalledTime;
 $(document).on("keypress", function (e) {
     if(e.which == 32) {
 		timeout = timeout ? false : true;
+		last_tps = tps;
 	}
 });
 
@@ -213,7 +215,7 @@ function runGame() {
 	if(timeout) {
 		setTimeout(function() {
 			runGame();
-		}, 10);
+		}, Math.round(last_tps / 5000));
 	} else {
 		setZeroTimeout(function() {
 			runGame();
