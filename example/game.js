@@ -50,6 +50,7 @@ function Player(colour) {
 	this.eatFood = function() {
 		var x = player.pos.x;
 		var y = player.pos.y;
+		var radius = player.radius;
 		
 		for(var i = 0; i < food.length; i++) {
 			if(x - radius - food[i].radius / 10 <= food[i].pos.x - food[i].radius && x + radius + food[i].radius / 10 >= food[i].pos.x + food[i].radius && y - radius - food[i].radius / 10 <= food[i].pos.y - food[i].radius && y + radius + food[i].radius / 10 >= food[i].pos.y + food[i].radius) {
