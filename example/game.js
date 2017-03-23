@@ -16,12 +16,14 @@ var players = [];
 function Player(colour) {
 	var player = this;
 	
-	this.colour.r = colour.r === undefined ? Math.floor(Math.random() * 256) : colour.r;
-	this.colour.g = colour.g === undefined ? Math.floor(Math.random() * 256) : colour.g;
-	this.colour.b = colour.b === undefined ? Math.floor(Math.random() * 256) : colour.b;
+	this.colour.r = colour.r === undefined ? randomBetween(24, 256) : colour.r;
+	this.colour.g = colour.g === undefined ? randomBetween(24, 256) : colour.g;
+	this.colour.b = colour.b === undefined ? randomBetween(24, 256) : colour.b;
 	
 	this.pos.x = Math.floor(Math.random() * canvas.getAttribute("width"));
 	this.pos.y = Math.floor(Math.random() * canvas.getAttribute("height"));
+	
+	this.radius = 32;
 	
 	this.changePos = function(x_change, y_change) {
 		if(x_change > 1) {
@@ -44,7 +46,10 @@ function Player(colour) {
 	this.spawnChild = function(radius) {
 		players.push(new Player({r: randomBetween(player.colour.r - 8, player.colour.r + 8), g: randomBetween(player.colour.g - 8, player.colour.g + 8), b: randomBetween(player.colour.b - 8, player.colour.b + 8)}));
 		players[players.length - 1].pos = {x: randomBetween(player.pos.x - 16, player.pos.x + 16), y: randomBetween(player.pos.y - 16, player.pos.y + 16)};
+		players[players.length - 1].radius = radius;
 	}
+	
+	players.push(this);
 }
 
 $(document).on("keypress", function (e) {

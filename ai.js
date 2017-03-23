@@ -18,7 +18,6 @@ function genRandActions(input, output_count) {
 	return outputs;
 }
 
-function AI(input, output_count, actions, properties) {
+function AI(input, output_count, actions) {
 	this.actions = actions ? actions : genRandActions(input, output_count);
-	this.properties = properties;
 }

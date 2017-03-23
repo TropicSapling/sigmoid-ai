@@ -2,17 +2,21 @@ var AIs = [];
 
 function JSONToArray(data) {
     var arr = [];
+	
     for (var key in data) {
         var value = data[key];
-        if (typeof value !== 'object') {
-            arr.push(value);
-        } else {
-			var arr2 = JSONToArray(value);
-			for(var i = 0; i < arr2.length; i++) {
-				arr.push(arr2[i]);
+		if(typeof value !== 'function') {
+			if (typeof value !== 'object') {
+				arr.push(value);
+			} else {
+				var arr2 = JSONToArray(value);
+				for(var i = 0; i < arr2.length; i++) {
+					arr.push(arr2[i]);
+				}
 			}
-        }
+		}
     }
+	
     return arr;
 }
 
@@ -26,10 +30,15 @@ function sigmoid(number) {
 
 function genRandAIs() {
 	if(Math.floor(Math.random() * 1000) == 1) {
-		var food_arr = JSONToArray(food);
-		food_arr.push(Food.length);
+		var raw_input = 6; // Push amount of properties each food has
+		raw_input.push(food);
 		
-		AIs.push(new AI(food_arr, 4, undefined, {x: Math.floor(Math.random() * window.innerWidth), y: Math.floor(Math.random() * window.innerHeight), r: randomBetween(24, 256), g: randomBetween(24, 256), b: randomBetween(24, 256), radius: 32}));
+		raw_input.push(6); // Push amount of properties each player has
+		raw_input.push(new Player());
+		
+		var input = JSONToArray(raw_input);
+		
+		AIs.push(new AI(input, 4, undefined));
 	}
 	
 	if(timeout) {
