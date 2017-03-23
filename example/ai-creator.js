@@ -28,26 +28,30 @@ function sigmoid(number) {
 	return 1 / (1 + Math.pow(Math.E, 0 - number));
 }
 
-function genRandAIs() {
+function genRandAI() {
+	var raw_input = [6]; // Push amount of properties each food has
+	raw_input.push(food);
+	
+	raw_input.push(6); // Push amount of properties each player has
+	raw_input.push(new Player());
+	
+	var input = JSONToArray(raw_input);
+	
+	AIs.push(new AI(input, 4, undefined));
+}
+
+function runAIs() {
 	if(Math.floor(Math.random() * 1000) == 1) {
-		var raw_input = [6]; // Push amount of properties each food has
-		raw_input.push(food);
-		
-		raw_input.push(6); // Push amount of properties each player has
-		raw_input.push(new Player());
-		
-		var input = JSONToArray(raw_input);
-		
-		AIs.push(new AI(input, 4, undefined));
+		genRandAI();
 	}
 	
 	if(timeout) {
-		setTimeout(genRandAIs, 10);
+		setTimeout(runAIs, 10);
 	} else {
-		setZeroTimeout(genRandAIs);
+		setZeroTimeout(runAIs);
 	}
 }
 
 $(function() {
-	setTimeout(genRandAIs, 1000);
+	setTimeout(runAIs, 1000);
 });
