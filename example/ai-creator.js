@@ -21,7 +21,7 @@ function genRandAIs() {
 		var food_arr = JSONToArray(food);
 		food_arr.push(Food.length);
 		
-		AIs.push(new AI(food_arr, 4, undefined, {x: Math.floor(Math.random() * window.innerWidth), y: Math.floor(Math.random() * window.innerHeight), r: randomBetween(24, 256), g: randomBetween(24, 256), b: randomBetween(24, 256), radius: 24}));
+		AIs.push(new AI(food_arr, 4, undefined, {x: Math.floor(Math.random() * window.innerWidth), y: Math.floor(Math.random() * window.innerHeight), r: randomBetween(24, 256), g: randomBetween(24, 256), b: randomBetween(24, 256), radius: 32}));
 	}
 	
 	if(timeout) {
