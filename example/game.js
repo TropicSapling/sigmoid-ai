@@ -16,14 +16,16 @@ var players = [];
 function Player(colour) {
 	var player = this;
 	
-	this.colour = {};
-	this.colour.r = colour.r === undefined ? randomBetween(24, 256) : colour.r;
-	this.colour.g = colour.g === undefined ? randomBetween(24, 256) : colour.g;
-	this.colour.b = colour.b === undefined ? randomBetween(24, 256) : colour.b;
+	if(colour) {
+		this.colour = {};
+		this.colour.r = colour.r === undefined ? randomBetween(24, 256) : colour.r;
+		this.colour.g = colour.g === undefined ? randomBetween(24, 256) : colour.g;
+		this.colour.b = colour.b === undefined ? randomBetween(24, 256) : colour.b;
+	} else {
+		this.colour = {r: randomBetween(24, 256), g: randomBetween(24, 256), b: randomBetween(24, 256)};
+	}
 	
-	this.pos = {};
-	this.pos.x = Math.floor(Math.random() * canvas.getAttribute("width"));
-	this.pos.y = Math.floor(Math.random() * canvas.getAttribute("height"));
+	this.pos = {x: Math.floor(Math.random() * canvas.getAttribute("width")), y: Math.floor(Math.random() * canvas.getAttribute("height"))};
 	
 	this.radius = 32;
 	
@@ -97,16 +99,11 @@ function defZeroDelayTimeout() {
 }
 
 function Food(pos, radius, colour) {
-	this.pos = {};
-	this.pos.x = pos.x;
-	this.pos.y = pos.y;
+	this.pos = {x: pos.x, y: pos.y};
 	
 	this.radius = radius;
 	
-	this.colour = {};
-	this.colour.r = colour.r;
-	this.colour.g = colour.g;
-	this.colour.b = colour.b;
+	this.colour = {r: colour.r, g: colour.g, b: colour.b};
 }
 
 function randomBetween(min, max) {
