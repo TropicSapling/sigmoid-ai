@@ -30,7 +30,7 @@ function sigmoid(number) {
 
 function genRandAIs() {
 	if(Math.floor(Math.random() * 1000) == 1) {
-		var raw_input = 6; // Push amount of properties each food has
+		var raw_input = [6]; // Push amount of properties each food has
 		raw_input.push(food);
 		
 		raw_input.push(6); // Push amount of properties each player has
