@@ -37,7 +37,7 @@ function genRandAI() {
 	
 	var input = JSONToArray(raw_input);
 	
-	AIs.push(new AI(input, 4, undefined));
+	AIs.push(new AI(input, 4));
 }
 
 function runAIs() {
