@@ -47,6 +47,21 @@ function Player(colour) {
 		}
 	}
 	
+	this.eatFood = function() {
+		var x = player.pos.x;
+		var y = player.pos.y;
+		
+		for(var i = 0; i < food.length; i++) {
+			if(x - radius - food[i].radius / 10 <= food[i].pos.x - food[i].radius && x + radius + food[i].radius / 10 >= food[i].pos.x + food[i].radius && y - radius - food[i].radius / 10 <= food[i].pos.y - food[i].radius && y + radius + food[i].radius / 10 >= food[i].pos.y + food[i].radius) {
+				var new_radius = Math.sqrt((Math.PI * Math.pow(radius, 2) + Math.PI * Math.pow(food[i].radius, 2)) / Math.PI);
+				
+				food.splice(i, 1);
+				
+				player.radius = new_radius;
+			}
+		}
+	}
+	
 	this.spawnChild = function(radius) {
 		players.push(new Player({r: randomBetween(player.colour.r - 8, player.colour.r + 8), g: randomBetween(player.colour.g - 8, player.colour.g + 8), b: randomBetween(player.colour.b - 8, player.colour.b + 8)}));
 		players[players.length - 1].pos = {x: randomBetween(player.pos.x - 16, player.pos.x + 16), y: randomBetween(player.pos.y - 16, player.pos.y + 16)};
@@ -183,21 +198,6 @@ function drawPlayers() {
 	}
 }
 
-function eatFood(pos, radius) {
-	var x = pos.x;
-	var y = pos.y;
-	
-	for(var i = 0; i < food.length; i++) {
-		if(x - radius - food[i].radius / 10 <= food[i].x - food[i].radius && x + radius + food[i].radius / 10 >= food[i].x + food[i].radius && y - radius - food[i].radius / 10 <= food[i].y - food[i].radius && y + radius + food[i].radius / 10 >= food[i].y + food[i].radius) {
-			var new_radius = Math.sqrt((Math.PI * Math.pow(radius, 2) + Math.PI * Math.pow(food[i].radius, 2)) / Math.PI);
-			food.splice(i, 1);
-			return new_radius;
-		}
-	}
-	
-	return radius;
-}
-
 function updatePlayer(id) {
 	var player = players[id];
 	
@@ -208,7 +208,7 @@ function updatePlayer(id) {
 		return;
 	}
 	
-	player.radius = eatFood(player.pos, player.radius);
+	player.eatFood();
 	
 	players[id].radius = player.radius;
 }
