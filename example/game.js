@@ -14,12 +14,27 @@ var lastCalledTime;
 var players = [];
 
 function Player(pos, colour) {
-	this.pos.x = pos.x === undefined ? Math.floor(Math.random() * canvas.getAttribute("width")) : pos.x;
-	this.pos.y = pos.y === undefined ? Math.floor(Math.random() * canvas.getAttribute("height")) : pos.y;
-	
 	this.colour.r = colour.r === undefined ? Math.floor(Math.random() * 256) : colour.r;
 	this.colour.g = colour.g === undefined ? Math.floor(Math.random() * 256) : colour.g;
 	this.colour.b = colour.b === undefined ? Math.floor(Math.random() * 256) : colour.b;
+	
+	this.changePos = function(x_change, y_change) {
+		if(x_change > 1) {
+			this.pos.x += 1;
+		} else if(x_change < -1) {
+			this.pos.x -= 1;
+		} else {
+			this.pos.x += x_change;
+		}
+		
+		if(y_change > 1) {
+			this.pos.y += 1;
+		} else if(y_change < -1) {
+			this.pos.y -= 1;
+		} else {
+			this.pos.y += y_change;
+		}
+	}
 }
 
 $(document).on("keypress", function (e) {
