@@ -210,8 +210,6 @@ function updatePlayer(id) {
 	}
 	
 	player.eatFood();
-	
-	players[id].radius = player.radius;
 }
 
 function updatePlayers() {
