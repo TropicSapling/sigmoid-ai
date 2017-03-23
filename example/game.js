@@ -207,9 +207,9 @@ function updatePlayer(id) {
 	players[id] = player;
 }
 
-function updateAIs() {
-	for(var i = 0; i < AIs.length; i++) {
-		updateAI(i);
+function updatePlayers() {
+	for(var i = 0; i < players.length; i++) {
+		updatePlayer(i);
 	}
 }
 
@@ -224,7 +224,7 @@ function runGame() {
 		food.push(new Food(Math.floor(Math.random() * window.innerWidth), Math.floor(Math.random() * window.innerHeight), randomBetween(3, 9), randomBetween(24, 256), randomBetween(24, 256), randomBetween(24, 256)));
 	}
 	
-	updateAIs();
+	updatePlayers();
 	
 	ticks++;
 	
@@ -242,7 +242,7 @@ function runGame() {
 function drawGame() {
 	drawBg(100, "#d5d5d5", "#ccc");
 	drawAllFood();
-	drawAIs();
+	drawPlayers();
 	typePerf();
 	
 	calcFPS();
