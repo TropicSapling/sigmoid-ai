@@ -13,10 +13,15 @@ var lastCalledTime;
 
 var players = [];
 
-function Player(pos, colour) {
+function Player(colour) {
+	var player = this;
+	
 	this.colour.r = colour.r === undefined ? Math.floor(Math.random() * 256) : colour.r;
 	this.colour.g = colour.g === undefined ? Math.floor(Math.random() * 256) : colour.g;
 	this.colour.b = colour.b === undefined ? Math.floor(Math.random() * 256) : colour.b;
+	
+	this.pos.x = Math.floor(Math.random() * canvas.getAttribute("width"));
+	this.pos.y = Math.floor(Math.random() * canvas.getAttribute("height"));
 	
 	this.changePos = function(x_change, y_change) {
 		if(x_change > 1) {
@@ -34,6 +39,11 @@ function Player(pos, colour) {
 		} else {
 			this.pos.y += y_change;
 		}
+	}
+	
+	this.spawnChild = function(radius) {
+		players.push(new Player({r: randomBetween(player.colour.r - 8, player.colour.r + 8), g: randomBetween(player.colour.g - 8, player.colour.g + 8), b: randomBetween(player.colour.b - 8, player.colour.b + 8)}));
+		players[players.length - 1].pos = {x: randomBetween(player.pos.x - 16, player.pos.x + 16), y: randomBetween(player.pos.y - 16, player.pos.y + 16)};
 	}
 }
 
@@ -82,7 +92,9 @@ function defZeroDelayTimeout() {
 function Food(pos, radius, colour) {
 	this.pos.x = pos.x;
 	this.pos.y = pos.y;
+	
 	this.radius = radius;
+	
 	this.colour.r = colour.r;
 	this.colour.g = colour.g;
 	this.colour.b = colour.b;
@@ -165,14 +177,6 @@ function drawPlayers() {
 	}
 }
 
-function exe(action) {
-	return (new Function("return " + action.join(" ")))();
-}
-
-function sigmoid(number) {
-	return 1 / (1 + Math.pow(Math.E, 0 - number));
-}
-
 function eatFood(pos, radius) {
 	var x = pos.x;
 	var y = pos.y;
@@ -198,28 +202,9 @@ function updatePlayer(id) {
 		return;
 	}
 	
-	var x_movement = 1 / exe(AIs[id].actions[0]);
-	var y_movement = 1 / exe(AIs[id].actions[1]);
-	
-	player.pos.x += x_movement;
-	player.pos.y += y_movement;
-	
-	var child = Math.round(sigmoid(AIs[id].actions[2]));
-	if(child) {
-		var child_radius = Math.abs(exe(AIs[id].actions[3]));
-		if(props.radius - child_radius >= 0 && (child_radius >= 10 || (props.radius - child_radius < 10 && child_radius + props.radius - child_radius >= 10))) {
-			props.radius -= child_radius;
-			if(props.radius - child_radius < 10) {
-				child_radius += props.radius;
-				props.radius = 0;
-			}
-			AIs.push(new AI(food, 4, props.actions, {x: props.x, y: props.y, r: randomBetween(props.r - 8, props.r + 8), g: randomBetween(props.g - 8, props.g + 8), b: randomBetween(props.b - 8, props.b + 8), radius: child_radius}));
-		}
-	}
-	
 	player.radius = eatFood(player.pos, player.radius);
 	
-	players[id] = player;
+	players[id].radius = player.radius;
 }
 
 function updatePlayers() {
@@ -236,7 +221,7 @@ function runGame() {
 	}
 	
 	if(Math.floor(Math.random() * 200) == 1) {
-		food.push(new Food(Math.floor(Math.random() * window.innerWidth), Math.floor(Math.random() * window.innerHeight), randomBetween(3, 9), randomBetween(24, 256), randomBetween(24, 256), randomBetween(24, 256)));
+		food.push(new Food({x: Math.floor(Math.random() * window.innerWidth), y: Math.floor(Math.random() * window.innerHeight)}, randomBetween(3, 9), {r: randomBetween(24, 256), g: randomBetween(24, 256), b: randomBetween(24, 256)}));
 	}
 	
 	updatePlayers();

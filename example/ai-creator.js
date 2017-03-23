@@ -16,6 +16,14 @@ function JSONToArray(data) {
     return arr;
 }
 
+function exe(action) {
+	return (new Function("return " + action.join(" ")))();
+}
+
+function sigmoid(number) {
+	return 1 / (1 + Math.pow(Math.E, 0 - number));
+}
+
 function genRandAIs() {
 	if(Math.floor(Math.random() * 1000) == 1) {
 		var food_arr = JSONToArray(food);
