@@ -11,6 +11,17 @@ var ticks = 0;
 var ft_time;
 var lastCalledTime;
 
+var players = [];
+
+function Player(pos, colour) {
+	this.pos.x = pos.x === undefined ? Math.floor(Math.random() * canvas.getAttribute("width")) : pos.x;
+	this.pos.y = pos.y === undefined ? Math.floor(Math.random() * canvas.getAttribute("height")) : pos.y;
+	
+	this.colour.r = colour.r === undefined ? Math.floor(Math.random() * 256) : colour.r;
+	this.colour.g = colour.g === undefined ? Math.floor(Math.random() * 256) : colour.g;
+	this.colour.b = colour.b === undefined ? Math.floor(Math.random() * 256) : colour.b;
+}
+
 $(document).on("keypress", function (e) {
     if(e.which == 32) {
 		timeout = timeout ? false : true;
@@ -53,13 +64,13 @@ function defZeroDelayTimeout() {
     window.setZeroTimeout = setZeroTimeout;
 }
 
-function Food(x, y, radius, r, g, b) {
-	this.x = x;
-	this.y = y;
+function Food(pos, radius, colour) {
+	this.pos.x = pos.x;
+	this.pos.y = pos.y;
 	this.radius = radius;
-	this.r = r;
-	this.g = g;
-	this.b = b;
+	this.colour.r = colour.r;
+	this.colour.g = colour.g;
+	this.colour.b = colour.b;
 }
 
 function randomBetween(min, max) {
@@ -86,12 +97,12 @@ function drawBg(square_size, bg_colour, line_colour) {
 }
 
 function drawFood(food_id) {
-	var x = food[food_id].x;
-	var y = food[food_id].y;
+	var x = food[food_id].pos.x;
+	var y = food[food_id].pos.y;
 	var radius = food[food_id].radius;
-	var r = food[food_id].r;
-	var g = food[food_id].g;
-	var b = food[food_id].b;
+	var r = food[food_id].colour.r;
+	var g = food[food_id].colour.g;
+	var b = food[food_id].colour.b;
 	
 	drawer.fillStyle = "rgb(" + r + "," + g + "," + b + ")";
 	drawer.strokeStyle = "rgb(" + (r - 25) + "," + (g - 25) + "," + (b - 25) + ")";
@@ -111,13 +122,15 @@ function drawAllFood() {
 	}
 }
 
-function drawAI(id) {
-	var x = AIs[id].properties.x;
-	var y = AIs[id].properties.y;
-	var radius = AIs[id].properties.radius;
-	var r = AIs[id].properties.r;
-	var g = AIs[id].properties.g;
-	var b = AIs[id].properties.b;
+function drawPlayer(id) {
+	var x = players[id].pos.x;
+	var y = players[id].pos.y;
+	
+	var radius = players[id].radius;
+	
+	var r = players[id].colour.r;
+	var g = players[id].colour.g;
+	var b = players[id].colour.b;
 	
 	drawer.fillStyle = "rgb(" + r + "," + g + "," + b + ")";
 	drawer.strokeStyle = "rgb(" + (r - 25) + "," + (g - 25) + "," + (b - 25) + ")";
@@ -131,9 +144,9 @@ function drawAI(id) {
 	drawer.stroke();
 }
 
-function drawAIs() {
-	for(var i = 0; i < AIs.length; i++) {
-		drawAI(i);
+function drawPlayers() {
+	for(var i = 0; i < players.length; i++) {
+		drawPlayer(i);
 	}
 }
 
@@ -145,7 +158,10 @@ function sigmoid(number) {
 	return 1 / (1 + Math.pow(Math.E, 0 - number));
 }
 
-function eatFood(x, y, radius) {
+function eatFood(pos, radius) {
+	var x = pos.x;
+	var y = pos.y;
+	
 	for(var i = 0; i < food.length; i++) {
 		if(x - radius - food[i].radius / 10 <= food[i].x - food[i].radius && x + radius + food[i].radius / 10 >= food[i].x + food[i].radius && y - radius - food[i].radius / 10 <= food[i].y - food[i].radius && y + radius + food[i].radius / 10 >= food[i].y + food[i].radius) {
 			var new_radius = Math.sqrt((Math.PI * Math.pow(radius, 2) + Math.PI * Math.pow(food[i].radius, 2)) / Math.PI);
@@ -157,21 +173,21 @@ function eatFood(x, y, radius) {
 	return radius;
 }
 
-function updateAI(id) {
-	var props = AIs[id].properties;
+function updatePlayer(id) {
+	var player = players[id];
 	
-	props.radius = props.radius * 0.999;
+	player.radius = player.radius * 0.999;
 	
-	if(props.radius < 10) {
-		AIs.splice(id, 1);
+	if(player.radius < 10) {
+		players.splice(id, 1);
 		return;
 	}
 	
 	var x_movement = 1 / exe(AIs[id].actions[0]);
 	var y_movement = 1 / exe(AIs[id].actions[1]);
 	
-	props.x += x_movement;
-	props.y += y_movement;
+	player.pos.x += x_movement;
+	player.pos.y += y_movement;
 	
 	var child = Math.round(sigmoid(AIs[id].actions[2]));
 	if(child) {
@@ -186,9 +202,9 @@ function updateAI(id) {
 		}
 	}
 	
-	props.radius = eatFood(props.x, props.y, props.radius);
+	player.radius = eatFood(player.pos, player.radius);
 	
-	AIs[id].properties = props;
+	players[id] = player;
 }
 
 function updateAIs() {
