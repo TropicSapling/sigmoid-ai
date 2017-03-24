@@ -41,7 +41,7 @@ function genRandAI() {
 }
 
 function runAI(id) {
-	
+	var ai = AIs[id];
 }
 
 function runAIs() {
