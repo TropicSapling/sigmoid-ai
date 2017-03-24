@@ -29,7 +29,7 @@ function sigmoid(number) {
 }
 
 function getConstantInputs(id) {
-	
+	return [id, ["food", 6], ["players", 6]]; // [const, property_count]
 }
 
 function getInput() {
