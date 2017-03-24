@@ -47,7 +47,7 @@ function genRandAI() {
 function runAI(id) {
 	var ai = AIs[id];
 	
-	ai.exeAction(getInput());
+	ai.exeAction(0, getInput());
 }
 
 function runAIs() {
