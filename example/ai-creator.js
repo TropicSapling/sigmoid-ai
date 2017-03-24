@@ -40,9 +40,17 @@ function genRandAI() {
 	AIs.push(new AI(input, 4));
 }
 
+function runAI(id) {
+	
+}
+
 function runAIs() {
 	if(Math.floor(Math.random() * 1000) == 1) {
 		genRandAI();
+	}
+	
+	for(var i = 0; i < AIs.length; i++) {
+		runAI(i);
 	}
 	
 	if(timeout) {
