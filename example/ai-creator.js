@@ -28,20 +28,26 @@ function sigmoid(number) {
 	return 1 / (1 + Math.pow(Math.E, 0 - number));
 }
 
-function genRandAI() {
+function getInput() {
 	var raw_input = [6]; // Push amount of properties each food has
 	raw_input.push(food);
 	
 	raw_input.push(6); // Push amount of properties each player has
-	raw_input.push(new Player());
+	raw_input.push(players);
 	
-	var input = JSONToArray(raw_input);
+	return JSONToArray(raw_input);
+}
+
+function genRandAI() {
+	new Player();
 	
-	AIs.push(new AI(input, 4));
+	AIs.push(new AI(getInput(), 4));
 }
 
 function runAI(id) {
 	var ai = AIs[id];
+	
+	ai.exeAction(input);
 }
 
 function runAIs() {
