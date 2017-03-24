@@ -23,7 +23,7 @@ function AI(input, output_count, actions) {
 	
 	this.actions = actions ? actions : genRandActions(input, output_count);
 	
-	this.exeAction = function(n) {
+	this.exeAction = function(n, input) {
 		return (new Function("return " + ai.actions[n].join(" ")))();
 	}
 }
