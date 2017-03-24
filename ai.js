@@ -19,5 +19,11 @@ function genRandActions(input, output_count) {
 }
 
 function AI(input, output_count, actions) {
+	var ai = this;
+	
 	this.actions = actions ? actions : genRandActions(input, output_count);
+	
+	this.exeAction = function(n) {
+		return (new Function("return " + ai.actions[n].join(" ")))();
+	}
 }
