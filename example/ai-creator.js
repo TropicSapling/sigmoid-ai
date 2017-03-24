@@ -20,10 +20,6 @@ function JSONToArray(data) {
     return arr;
 }
 
-function exe(action) {
-	return (new Function("return " + action.join(" ")))();
-}
-
 function sigmoid(number) {
 	return 1 / (1 + Math.pow(Math.E, 0 - number));
 }
