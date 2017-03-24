@@ -28,6 +28,10 @@ function sigmoid(number) {
 	return 1 / (1 + Math.pow(Math.E, 0 - number));
 }
 
+function getConstantInputs(id) {
+	
+}
+
 function getInput() {
 	var raw_input = [6]; // Push amount of properties each food has
 	raw_input.push(food);
@@ -41,13 +45,13 @@ function getInput() {
 function genRandAI() {
 	new Player();
 	
-	AIs.push(new AI(getInput(), 4));
+	AIs.push(new AI(getConstantInputs(players.length - 1), 4));
 }
 
 function runAI(id) {
 	var ai = AIs[id];
 	
-	ai.exeAction(input);
+	ai.exeAction(getInput());
 }
 
 function runAIs() {
