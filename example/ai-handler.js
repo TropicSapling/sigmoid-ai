@@ -58,6 +58,9 @@ function runAI(id) {
 	
 	player.changePos(divideWithinRange(1, ai.exeAction(0, input)), divideWithinRange(1, ai.exeAction(1, input)));
 	
+	if(Math.round(sigmoid(ai.exeAction(2, input)))) {
+		player.spawnChild(Math.abs(ai.exeAction(3, input)));
+	}
 }
 
 function runAIs() {
