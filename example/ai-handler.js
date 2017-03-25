@@ -53,8 +53,11 @@ function genRandAI() {
 
 function runAI(id) {
 	var ai = AIs[id];
+	var player = players[id];
+	var input = getInput();
 	
-	players[id].changePos(ai.exeAction(0, getInput()), );
+	player.changePos(divideWithinRange(1, ai.exeAction(0, input)), divideWithinRange(1, ai.exeAction(1, input)));
+	
 }
 
 function runAIs() {
