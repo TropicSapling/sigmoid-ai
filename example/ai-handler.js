@@ -24,6 +24,13 @@ function sigmoid(number) {
 	return 1 / (1 + Math.pow(Math.E, 0 - number));
 }
 
+function divideWithinRange(a, b) {
+	b = (b < 1 && b >= 0) ? 1 : b;
+	b = (b > -1 && b < 0) ? -1 : b;
+	
+	return a / b;
+}
+
 function getConstantInputs(id) {
 	return [id, ["food", 6], ["players", 6]]; // [const, property_count]
 }
@@ -47,7 +54,7 @@ function genRandAI() {
 function runAI(id) {
 	var ai = AIs[id];
 	
-	ai.exeAction(0, getInput());
+	players[id].changePos(ai.exeAction(0, getInput()), );
 }
 
 function runAIs() {
