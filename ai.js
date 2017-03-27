@@ -6,7 +6,7 @@ var functions = ["Math.abs[1]", "Math.acos[1]", "Math.asin[1]", "Math.atan[1]", 
 function genRandAction(input) {
 	var action = [];
 	
-	action.push(randomBetween(-17, 16)); // WIP; will be changed
+	action.push("randomBetween(-17, 16)"); // WIP; will be changed
 	
 	return action;
 }
