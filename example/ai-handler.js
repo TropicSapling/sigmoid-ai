@@ -46,23 +46,22 @@ function getInput() {
 }
 
 function genRandAI() {
-	new Player();
-	
-	AIs.push(new AI(getConstantInputs(players.length - 1), 4));
+	AIs.push(new AI(getConstantInputs(players.length - 1), 4, {player: new Player()}));
 }
 
 function runAI(id) {
 	var ai = AIs[id];
-	var player = players[id];
-	var input = getInput();
+	var player = ai.info.player;
 	
-	player.changePos(divideWithinRange(1, ai.exeAction(0, input)), divideWithinRange(1, ai.exeAction(1, input)));
-	
-	if(Math.round(sigmoid(ai.exeAction(2, input)))) {
-		player.spawnChild(Math.abs(ai.exeAction(3, input)));
-	}
-	
-	if(player.radius < 10) {
+	if(player.length > 0) {
+		var input = getInput();
+		
+		player.changePos(divideWithinRange(1, ai.exeAction(0, input)), divideWithinRange(1, ai.exeAction(1, input)));
+		
+		if(Math.round(sigmoid(ai.exeAction(2, input)))) {
+			player.spawnChild(Math.abs(ai.exeAction(3, input)));
+		}
+	} else {
 		AIs.splice(id, 1);
 	}
 }
