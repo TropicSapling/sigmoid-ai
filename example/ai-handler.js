@@ -53,7 +53,7 @@ function runAI(id) {
 	var ai = AIs[id];
 	var player = ai.info.player;
 	
-	if(player.length > 0) {
+	if(player) {
 		var input = getInput();
 		
 		player.changePos(divideWithinRange(1, ai.exeAction(0, input)), divideWithinRange(1, ai.exeAction(1, input)));
