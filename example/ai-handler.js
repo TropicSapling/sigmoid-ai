@@ -61,6 +61,10 @@ function runAI(id) {
 	if(Math.round(sigmoid(ai.exeAction(2, input)))) {
 		player.spawnChild(Math.abs(ai.exeAction(3, input)));
 	}
+	
+	if(player.radius < 10) {
+		AIs.splice(id, 1);
+	}
 }
 
 function runAIs() {
