@@ -53,7 +53,9 @@ function runAI(id) {
 	var ai = AIs[id];
 	var player = ai.info.player;
 	
-	if(player) {
+	if(player.radius < 10) {
+		AIs.splice(id, 1);
+	} else {
 		var input = getInput();
 		
 		player.changePos(divideWithinRange(1, ai.exeAction(0, input)), divideWithinRange(1, ai.exeAction(1, input)));
@@ -61,8 +63,6 @@ function runAI(id) {
 		if(Math.round(sigmoid(ai.exeAction(2, input)))) {
 			player.spawnChild(Math.abs(ai.exeAction(3, input)));
 		}
-	} else {
-		AIs.splice(id, 1);
 	}
 }
 
