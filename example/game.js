@@ -70,6 +70,8 @@ function Player(colour) {
 			players[players.length - 1].radius = radius;
 			
 			player.radius = Math.sqrt((Math.pow(player.radius, 2) * Math.PI - Math.pow(radius, 2) * Math.PI) / Math.PI);
+			
+			alert(radius + "\n" + player.radius);
 		}
 	}
 	
