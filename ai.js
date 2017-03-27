@@ -20,10 +20,11 @@ function genRandActions(input, output_count) {
 	return outputs;
 }
 
-function AI(input, output_count, actions) {
+function AI(input, output_count, actions, info) {
 	var ai = this;
 	
 	this.actions = actions ? actions : genRandActions(input, output_count);
+	this.info = info;
 	
 	this.exeAction = function(n, input) {
 		return (new Function("n", "input", "return " + ai.actions[n].join(" ")))(n, input);
