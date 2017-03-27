@@ -46,7 +46,7 @@ function getInput() {
 }
 
 function genRandAI() {
-	AIs.push(new AI(getConstantInputs(players.length - 1), 4, {player: new Player()}));
+	AIs.push(new AI(getConstantInputs(players.length - 1), 4, undefined, {player: new Player()}));
 }
 
 function runAI(id) {
