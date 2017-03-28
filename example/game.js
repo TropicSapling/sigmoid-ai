@@ -1,5 +1,6 @@
 var canvas;
 var drawer;
+var req_clear = [];
 var req_draw = [];
 var game_size = 2048; // 2048px by 2048px
 
@@ -46,6 +47,8 @@ function Player(colour) {
 	this.radius = 32;
 	
 	this.changePos = function(x_change, y_change) {
+		req_clear.push([player.pos, player.radius]);
+		
 		if(x_change > 1) {
 			player.pos.x += 1;
 		} else if(x_change < -1) {
@@ -74,7 +77,7 @@ function Player(colour) {
 			if(x - radius - food[i].radius / 10 <= food[i].pos.x - food[i].radius && x + radius + food[i].radius / 10 >= food[i].pos.x + food[i].radius && y - radius - food[i].radius / 10 <= food[i].pos.y - food[i].radius && y + radius + food[i].radius / 10 >= food[i].pos.y + food[i].radius) {
 				var new_radius = Math.sqrt((Math.PI * Math.pow(radius, 2) + Math.PI * Math.pow(food[i].radius, 2)) / Math.PI);
 				
-				req_draw.push(["food", food[i]]);
+				req_clear.push([food[i].pos, food[i].radius]);
 				
 				food.splice(i, 1);
 				
@@ -87,6 +90,8 @@ function Player(colour) {
 	
 	this.spawnChild = function(radius) {
 		if(radius <= player.radius) {
+			req_clear.push([player.pos, player.radius]);
+			
 			players.push(new Player({r: randomBetween(player.colour.r - 8, player.colour.r + 8), g: randomBetween(player.colour.g - 8, player.colour.g + 8), b: randomBetween(player.colour.b - 8, player.colour.b + 8)}));
 			players[players.length - 1].pos = {x: randomBetween(player.pos.x - 16, player.pos.x + 16), y: randomBetween(player.pos.y - 16, player.pos.y + 16)};
 			players[players.length - 1].radius = radius;
