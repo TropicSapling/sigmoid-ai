@@ -31,8 +31,8 @@ function divideWithinRange(a, b) {
 	return a / b;
 }
 
-function getConstantInputs(id) {
-	return [id, ["food", 6], ["players", 6]]; // [const, property_count]
+function getConstantInputs(player) {
+	return [player, ["food", 6], ["players", 6]]; // [const, property_count]
 }
 
 function getInput() {
@@ -46,7 +46,9 @@ function getInput() {
 }
 
 function genRandAI() {
-	AIs.push(new AI(getConstantInputs(players.length - 1), 4, undefined, {player: new Player()}));
+	var p = new Player();
+	
+	AIs.push(new AI(getConstantInputs(p), 4, undefined, {player: p}));
 }
 
 function runAI(id) {
