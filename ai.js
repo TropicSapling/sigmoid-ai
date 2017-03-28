@@ -11,10 +11,18 @@ function genRandAction(inputs) {
 	} while(action_len % 2 == 0);
 	
 	for(var part = 0; part < action_len; part++) {
-		// WIP
+		if(part % 2) {
+			var rand = Math.floor(Math.random() * (constants.length + functions.length));
+			
+			if(rand < constants.length) {
+				action.push(constants[rand]);
+			} else {
+				action.push(functions[rand]);
+			}
+		} else {
+			// WIP
+		}
 	}
-	
-	action.push("randomBetween(-17, 16)"); // WIP; will be changed
 	
 	return action;
 }
