@@ -4,6 +4,11 @@ var functions = ["Math.abs[1]", "Math.acos[1]", "Math.asin[1]", "Math.atan[1]", 
 
 function genRandAction(inputs) {
 	var action = [];
+	var action_len;
+	
+	do {
+		action_len = randomBetween(2, 8);
+	} while(action_len % 2 == 0);
 	
 	action.push("randomBetween(-17, 16)"); // WIP; will be changed
 	
