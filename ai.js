@@ -12,6 +12,8 @@ function genRandAction(inputs) {
 	
 	for(var part = 0; part < action_len; part++) {
 		if(part % 2) {
+			action.push(ops[Math.floor(Math.random() * ops.length)]);
+		} else {
 			var rand = Math.floor(Math.random() * (constants.length + functions.length));
 			
 			if(rand < constants.length) {
@@ -20,8 +22,6 @@ function genRandAction(inputs) {
 				// action.push(functions[rand]);
 				action.push(constants[Math.round(Math.random())]); // Will be removed when above line is done
 			}
-		} else {
-			action.push(ops[Math.floor(Math.random() * ops.length)]);
 		}
 	}
 	
