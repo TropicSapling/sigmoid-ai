@@ -47,20 +47,22 @@ function Player(colour) {
 	
 	this.changePos = function(x_change, y_change) {
 		if(x_change > 1) {
-			this.pos.x += 1;
+			player.pos.x += 1;
 		} else if(x_change < -1) {
-			this.pos.x -= 1;
+			player.pos.x -= 1;
 		} else {
-			this.pos.x += x_change;
+			player.pos.x += x_change;
 		}
 		
 		if(y_change > 1) {
-			this.pos.y += 1;
+			player.pos.y += 1;
 		} else if(y_change < -1) {
-			this.pos.y -= 1;
+			player.pos.y -= 1;
 		} else {
-			this.pos.y += y_change;
+			player.pos.y += y_change;
 		}
+		
+		req_draw.push(["player", player.id]);
 	}
 	
 	this.eatFood = function() {
@@ -75,6 +77,8 @@ function Player(colour) {
 				food.splice(i, 1);
 				
 				player.radius = new_radius;
+				
+				req_draw.push(["player", player.id]);
 			}
 		}
 	}
@@ -86,11 +90,16 @@ function Player(colour) {
 			players[players.length - 1].radius = radius;
 			
 			player.radius = Math.sqrt((Math.pow(player.radius, 2) * Math.PI - Math.pow(radius, 2) * Math.PI) / Math.PI);
+			
+			req_draw.push(["player", player.id]);
 		}
 	}
 	
 	players.push(this);
-	req_draw.push(["player", players.length - 1]);
+	
+	this.id = players.length - 1
+	
+	req_draw.push(["player", this.id]);
 }
 
 $(document).on("keypress", function (e) {
