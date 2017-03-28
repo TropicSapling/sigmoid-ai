@@ -20,10 +20,6 @@ function genRandActions(inputs, output_count) {
 	return outputs;
 }
 
-function insertInput(action, input) {
-	return action; // WIP; will be changed
-}
-
 function AI(inputs, output_count, actions, info) {
 	var ai = this;
 	
@@ -31,6 +27,6 @@ function AI(inputs, output_count, actions, info) {
 	this.info = info;
 	
 	this.exeAction = function(n, input) {
-		return (new Function("return " + insertInput(ai.actions[n], input).join(" ")))();
+		return (new Function("input", "return " + ai.actions[n].join(" ")))(input);
 	}
 }
