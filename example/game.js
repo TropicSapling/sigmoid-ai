@@ -1,6 +1,7 @@
 var canvas;
 var drawer;
 var game_size = 2048; // 2048px * 2048px
+
 var timeout = false;
 
 var food = [];
@@ -26,7 +27,7 @@ function Player(colour) {
 		this.colour = {r: randomBetween(24, 256), g: randomBetween(24, 256), b: randomBetween(24, 256)};
 	}
 	
-	this.pos = {x: Math.floor(Math.random() * canvas.getAttribute("width")), y: Math.floor(Math.random() * canvas.getAttribute("height"))};
+	this.pos = {x: Math.floor(Math.random() * game_size), y: Math.floor(Math.random() * game_size)};
 	
 	this.radius = 32;
 	
