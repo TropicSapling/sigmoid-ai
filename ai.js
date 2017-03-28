@@ -17,7 +17,8 @@ function genRandAction(inputs) {
 			if(rand < constants.length) {
 				action.push(constants[rand]);
 			} else {
-				action.push(functions[rand]);
+				// action.push(functions[rand]);
+				action.push(constants[Math.round(Math.random())]); // Will be removed when above line is done
 			}
 		} else {
 			action.push(ops[Math.floor(Math.random() * ops.length)]);
