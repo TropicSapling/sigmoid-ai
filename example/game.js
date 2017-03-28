@@ -229,14 +229,16 @@ function updatePlayer(id) {
 	
 	player.radius = player.radius * 0.999;
 	
+	req_draw.push(["player", id]);
+	
 	if(player.radius < 10) {
+		req_clear.push([player.pos, player.radius]);
 		players.splice(id, 1);
+		
 		return;
 	}
 	
 	player.eatFood();
-	
-	req_draw.push(["player", id]);
 }
 
 function runGame() {
@@ -275,11 +277,16 @@ function drawGame() {
 		if(req[0] == "food") {
 			drawFood(req[1]);
 		} else {
-			drawPlayer(req[1])
+			drawPlayer(req[1]);
 		}
 	}
-	drawAllFood();
-	drawPlayers();
+	
+	for(var i = 0; i < req_clear.length; i++) {
+		var req = req_clear[i];
+		
+		clearCircle(req[0], req[1]);
+	}	
+	
 	typePerf();
 	
 	calcFPS();
