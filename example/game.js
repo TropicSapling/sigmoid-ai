@@ -74,6 +74,8 @@ function Player(colour) {
 			if(x - radius - food[i].radius / 10 <= food[i].pos.x - food[i].radius && x + radius + food[i].radius / 10 >= food[i].pos.x + food[i].radius && y - radius - food[i].radius / 10 <= food[i].pos.y - food[i].radius && y + radius + food[i].radius / 10 >= food[i].pos.y + food[i].radius) {
 				var new_radius = Math.sqrt((Math.PI * Math.pow(radius, 2) + Math.PI * Math.pow(food[i].radius, 2)) / Math.PI);
 				
+				req_draw.push(["food", food[i]]);
+				
 				food.splice(i, 1);
 				
 				player.radius = new_radius;
@@ -97,7 +99,7 @@ function Player(colour) {
 	
 	players.push(this);
 	
-	this.id = players.length - 1
+	this.id = players.length - 1;
 	
 	req_draw.push(["player", this.id]);
 }
