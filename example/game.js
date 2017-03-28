@@ -15,6 +15,19 @@ var lastCalledTime;
 
 var players = [];
 
+window.onerror = function(msg, url, line, column, error) {
+	alert("An error has occurred. Check console for details.");
+	
+	if(error) {
+		console.log("[!] " + msg + " in file " + url);
+		console.log("Line: " + line + ", column: " + column);
+		console.log("Stack Trace:");
+		console.log(error.stack);
+	} else {
+		alert("[!] Error: " + msg + " in file " + url + "\n\nLine: " + line + ", column: " + column);
+	}
+}
+
 function Player(colour) {
 	var player = this;
 	
