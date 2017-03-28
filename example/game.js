@@ -90,6 +90,7 @@ function Player(colour) {
 	}
 	
 	players.push(this);
+	req_draw.push(["player", players.length - 1]);
 }
 
 $(document).on("keypress", function (e) {
@@ -222,12 +223,6 @@ function updatePlayer(id) {
 	req_draw.push(["player", id]);
 }
 
-function updatePlayers() {
-	for(var i = 0; i < players.length; i++) {
-		updatePlayer(i);
-	}
-}
-
 function runGame() {
 	if(performance.now() - ft_time >= 1000) {
 		tps = ticks;
@@ -237,6 +232,7 @@ function runGame() {
 	
 	if(Math.floor(Math.random() * 200) == 1) {
 		food.push(new Food({x: Math.floor(Math.random() * game_size), y: Math.floor(Math.random() * game_size)}, randomBetween(3, 9), {r: randomBetween(24, 256), g: randomBetween(24, 256), b: randomBetween(24, 256)}));
+		req_draw.push(["food", food.length - 1]);
 	}
 	
 	updatePlayers();
