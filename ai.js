@@ -20,7 +20,7 @@ function genRandAction(inputs) {
 				action.push(functions[rand]);
 			}
 		} else {
-			// WIP
+			action.push(ops[Math.floor(Math.random() * ops.length)]);
 		}
 	}
 	
