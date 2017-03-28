@@ -268,8 +268,18 @@ function runGame() {
 	}
 }
 
+function clearCircle(pos, radius) {
+	
+}
+
 function drawGame() {
 	drawBg(100, "#d5d5d5", "#ccc");
+	
+	for(var i = 0; i < req_clear.length; i++) {
+		var req = req_clear[i];
+		
+		clearCircle(req[0], req[1]);
+	}
 	
 	for(var i = 0; i < req_draw.length; i++) {
 		var req = req_draw[i];
@@ -279,18 +289,13 @@ function drawGame() {
 		} else {
 			drawPlayer(req[1]);
 		}
-	}
-	
-	for(var i = 0; i < req_clear.length; i++) {
-		var req = req_clear[i];
-		
-		clearCircle(req[0], req[1]);
 	}	
 	
 	typePerf();
 	
 	calcFPS();
 	
+	req_clear = [];
 	req_draw = [];
 	requestAnimationFrame(drawGame);
 }
