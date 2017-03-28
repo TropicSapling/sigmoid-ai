@@ -43,6 +43,11 @@ function AI(inputs, output_count, actions, info) {
 	this.info = info;
 	
 	this.exeAction = function(n, input) {
-		return (new Function("input", "return " + ai.actions[n].join(" ")))(input);
+		try { 
+			return (new Function("input", "return " + ai.actions[n].join(" ")))(input);
+		} catch(e) {
+			ai.actions[n] = genRandAction(inputs);
+			ai.exeAction(n, input);
+		}
 	}
 }
