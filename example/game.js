@@ -282,8 +282,8 @@ function typePerf() {
 $(function() {
 	canvas = document.getElementsByTagName("canvas")[0];
 	
-	canvas.setAttribute("width", window.innerWidth);
-	canvas.setAttribute("height", window.innerHeight);
+	canvas.setAttribute("width", game_size + "px";
+	canvas.setAttribute("height", game_size + "px");
 	
 	drawer = canvas.getContext("2d");
 	
