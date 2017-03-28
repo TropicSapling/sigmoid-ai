@@ -147,19 +147,19 @@ function randomBetween(min, max) {
 
 function drawBg(square_size, bg_colour, line_colour) {
 	drawer.fillStyle = bg_colour;
-	drawer.fillRect(0, 0, window.innerWidth, window.innerHeight);
+	drawer.fillRect(0, 0, game_size, game_size);
 	
 	drawer.strokeStyle = line_colour;
 	
-	for(var i = 0; i < window.innerWidth; i += square_size) {
+	for(var i = 0; i < game_size; i += square_size) {
 		drawer.moveTo(i, 0);
-		drawer.lineTo(i, window.innerHeight);
+		drawer.lineTo(i, game_size);
 		drawer.stroke();
 	}
 	
-	for(var i = 0; i < window.innerHeight; i += square_size) {
+	for(var i = 0; i < game_size; i += square_size) {
 		drawer.moveTo(0, i);
-		drawer.lineTo(window.innerWidth, i);
+		drawer.lineTo(game_size, i);
 		drawer.stroke();
 	}
 }
