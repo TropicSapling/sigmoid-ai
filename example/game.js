@@ -1,5 +1,6 @@
 var canvas;
 var drawer;
+var req_draw = [];
 var game_size = 2048; // 2048px by 2048px
 
 var timeout = false;
@@ -184,12 +185,6 @@ function drawFood(food_id) {
 	drawer.stroke();
 }
 
-function drawAllFood() {
-	for(var i = 0; i < food.length; i++) {
-		drawFood(i);
-	}
-}
-
 function drawPlayer(id) {
 	var x = players[id].pos.x;
 	var y = players[id].pos.y;
@@ -212,12 +207,6 @@ function drawPlayer(id) {
 	drawer.stroke();
 }
 
-function drawPlayers() {
-	for(var i = 0; i < players.length; i++) {
-		drawPlayer(i);
-	}
-}
-
 function updatePlayer(id) {
 	var player = players[id];
 	
@@ -229,6 +218,8 @@ function updatePlayer(id) {
 	}
 	
 	player.eatFood();
+	
+	req_draw.push(["player", id]);
 }
 
 function updatePlayers() {
@@ -265,11 +256,23 @@ function runGame() {
 
 function drawGame() {
 	drawBg(100, "#d5d5d5", "#ccc");
+	
+	for(var i = 0; i < req_draw.length; i++) {
+		var req = req_draw[i];
+		
+		if(req[0] == "food") {
+			drawFood(req[1]);
+		} else {
+			drawPlayer(req[1])
+		}
+	}
 	drawAllFood();
 	drawPlayers();
 	typePerf();
 	
 	calcFPS();
+	
+	req_draw = [];
 	requestAnimationFrame(drawGame);
 }
 
