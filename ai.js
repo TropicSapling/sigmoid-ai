@@ -31,6 +31,6 @@ function AI(inputs, output_count, actions, info) {
 	this.info = info;
 	
 	this.exeAction = function(n, input) {
-		return (new Function("n", "input", "return " + insertInput(ai.actions[n], input).join(" ")))(n, input);
+		return (new Function("return " + insertInput(ai.actions[n], input).join(" ")))();
 	}
 }
