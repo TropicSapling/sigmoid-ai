@@ -1,6 +1,6 @@
 var canvas;
 var drawer;
-var game_size = 2048; // 2048px * 2048px
+var game_size = 2048; // 2048px by 2048px
 
 var timeout = false;
 
