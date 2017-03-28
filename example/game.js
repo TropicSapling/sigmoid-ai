@@ -1,5 +1,6 @@
 var canvas;
 var drawer;
+var game_size = 2048; // 2048px * 2048px
 var timeout = false;
 
 var food = [];
@@ -230,7 +231,7 @@ function runGame() {
 	}
 	
 	if(Math.floor(Math.random() * 200) == 1) {
-		food.push(new Food({x: Math.floor(Math.random() * window.innerWidth), y: Math.floor(Math.random() * window.innerHeight)}, randomBetween(3, 9), {r: randomBetween(24, 256), g: randomBetween(24, 256), b: randomBetween(24, 256)}));
+		food.push(new Food({x: Math.floor(Math.random() * game_size), y: Math.floor(Math.random() * game_size)}, randomBetween(3, 9), {r: randomBetween(24, 256), g: randomBetween(24, 256), b: randomBetween(24, 256)}));
 	}
 	
 	updatePlayers();
