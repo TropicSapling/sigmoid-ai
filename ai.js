@@ -40,13 +40,15 @@ function AI(inputs, output_count, actions, info) {
 	var ai = this;
 	
 	this.actions = actions ? actions : genRandActions(inputs, output_count);
+	this.inputs = inputs;
+	
 	this.info = info;
 	
 	this.exeAction = function(n, input) {
 		try { 
 			return (new Function("input", "return " + ai.actions[n].join(" ")))(input);
 		} catch(e) {
-			ai.actions[n] = genRandAction(inputs);
+			ai.actions[n] = genRandAction(ai.inputs);
 			ai.exeAction(n, input);
 		}
 	}
