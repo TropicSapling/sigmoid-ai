@@ -10,6 +10,10 @@ function genRandAction(inputs) {
 		action_len = randomBetween(2, 8);
 	} while(action_len % 2 == 0);
 	
+	for(var part = 0; part < action_len; part++) {
+		// WIP
+	}
+	
 	action.push("randomBetween(-17, 16)"); // WIP; will be changed
 	
 	return action;
