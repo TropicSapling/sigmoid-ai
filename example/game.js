@@ -269,7 +269,11 @@ function runGame() {
 }
 
 function clearCircle(pos, radius) {
+	drawer.fillStyle = "#d5d5d5";
 	
+	drawer.beginPath();
+	drawer.arc(pos.x, pos.y, radius, 0, 2 * Math.PI);
+	drawer.fill();
 }
 
 function drawGame() {
