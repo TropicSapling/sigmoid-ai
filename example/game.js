@@ -228,15 +228,15 @@ function updatePlayer(id) {
 	var player = players[id];
 	
 	player.radius = player.radius * 0.999;
-	
-	req_draw.push(["player", id]);
-	
+		
 	if(player.radius < 10) {
 		req_clear.push([player.pos, player.radius]);
 		players.splice(id, 1);
 		
 		return;
 	}
+	
+	req_draw.push(["player", id]);
 	
 	player.eatFood();
 }
@@ -313,7 +313,7 @@ function typePerf() {
 		last_fps = fps;
 		
 		drawer.fillStyle = "#d5d5d5";
-		drawer.fillRect(10, 20, 50, 40);
+		drawer.fillRect(10, 20, 50, 20);
 		
 		drawer.font = "18px Arial";
 		drawer.fillStyle = "#000";
@@ -323,7 +323,7 @@ function typePerf() {
 	
 	if(tps != "N/A") {
 		drawer.fillStyle = "#d5d5d5";
-		drawer.fillRect(10, 40, 100, 60);
+		drawer.fillRect(10, 40, 100, 20);
 		
 		drawer.font = "18px Arial";
 		drawer.fillStyle = "#000";
