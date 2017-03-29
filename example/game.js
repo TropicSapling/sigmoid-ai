@@ -306,6 +306,9 @@ function typePerf() {
 	if(fps != "N/A" && (last_fps == "N/A" || Math.floor(Math.random() * fps) == 1)) {
 		last_fps = fps;
 		
+		drawer.fillStyle = "#d5d5d5";
+		drawer.fillRect(10, 20, 50, 40);
+		
 		drawer.font = "18px Arial";
 		drawer.fillStyle = "#000";
 		
@@ -313,6 +316,9 @@ function typePerf() {
 	}
 	
 	if(tps != "N/A") {
+		drawer.fillStyle = "#d5d5d5";
+		drawer.fillRect(10, 40, 100, 60);
+		
 		drawer.font = "18px Arial";
 		drawer.fillStyle = "#000";
 		drawer.fillText("TPS: " + tps, 10, 40);
