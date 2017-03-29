@@ -241,6 +241,12 @@ function updatePlayer(id) {
 	player.eatFood();
 }
 
+function updatePlayers() {
+	for(var i = 0; i < players.length; i++) {
+		updatePlayer(i);
+	}
+}
+
 function runGame() {
 	if(performance.now() - ft_time >= 1000) {
 		tps = ticks;
