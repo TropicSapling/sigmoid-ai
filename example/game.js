@@ -230,7 +230,7 @@ function updatePlayer(id) {
 	player.radius = player.radius * 0.999;
 		
 	if(player.radius < 10) {
-		req_clear.push([player.pos, player.radius]);
+		req_clear.push([player.pos, player.radius, player.id]);
 		players.splice(id, 1);
 		
 		return;
@@ -282,7 +282,28 @@ function clearCircle(pos, radius) {
 	drawer.fill();
 }
 
+function cleanRequests() {
+	var clears = [];
+	for(var i = 0; i < req_clear.length; i++) {
+		var req = req_clear[i];
+		
+		if(req.length > 2) {
+			clears.push(req[2]);
+		}
+	}
+	
+	for(var i = 0; i < req_draw.length; i++) {
+		for(var j = 0; j < clears.length; j++) {
+			if(req_draw[i][1] == clears[j]) {
+				req_draw.splice(i, 1);
+			}
+		}
+	}
+}
+
 function drawGame() {
+	cleanRequests();
+	
 	for(var i = 0; i < req_clear.length; i++) {
 		var req = req_clear[i];
 		
