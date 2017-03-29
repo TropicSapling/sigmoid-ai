@@ -288,7 +288,7 @@ function typePerf() {
 	if(tps != "N/A") {
 		drawer.font = "18px Arial";
 		drawer.fillStyle = "#000";
-		drawer.fillText("TPS: " + tps, 10, 50);
+		drawer.fillText("TPS: " + tps, 10, 40);
 	}
 }
 
