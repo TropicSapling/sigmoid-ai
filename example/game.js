@@ -275,7 +275,7 @@ function drawGame() {
 
 function typePerf() {
 	if(fps != "N/A") {
-		drawer.font = "12px Arial";
+		drawer.font = "18px Arial";
 		drawer.fillStyle = "#000";
 		
 		if(last_fps == "N/A" || Math.floor(Math.random() * fps) == 1) {
@@ -286,9 +286,9 @@ function typePerf() {
 	}
 	
 	if(tps != "N/A") {
-		drawer.font = "12px Arial";
+		drawer.font = "18px Arial";
 		drawer.fillStyle = "#000";
-		drawer.fillText("TPS: " + tps, 10, 40);
+		drawer.fillText("TPS: " + tps, 10, 50);
 	}
 }
 
