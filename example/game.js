@@ -303,15 +303,13 @@ function drawGame() {
 }
 
 function typePerf() {
-	if(fps != "N/A") {
-		if(last_fps == "N/A" || Math.floor(Math.random() * fps) == 1) {
-			last_fps = fps;
-			
-			drawer.font = "18px Arial";
-			drawer.fillStyle = "#000";
-			
-			drawer.fillText("FPS: " + last_fps, 10, 20);
-		}
+	if(fps != "N/A" && (last_fps == "N/A" || Math.floor(Math.random() * fps) == 1)) {
+		last_fps = fps;
+		
+		drawer.font = "18px Arial";
+		drawer.fillStyle = "#000";
+		
+		drawer.fillText("FPS: " + last_fps, 10, 20);
 	}
 	
 	if(tps != "N/A") {
