@@ -1,5 +1,7 @@
 var canvas;
 var drawer;
+var req_clear = [];
+var req_draw = [];
 var game_size = 2048; // 2048px by 2048px
 
 var timeout = false;
@@ -45,21 +47,25 @@ function Player(colour) {
 	this.radius = 32;
 	
 	this.changePos = function(x_change, y_change) {
+		req_clear.push([player.pos, player.radius]);
+		
 		if(x_change > 1) {
-			this.pos.x += 1;
+			player.pos.x += 1;
 		} else if(x_change < -1) {
-			this.pos.x -= 1;
+			player.pos.x -= 1;
 		} else {
-			this.pos.x += x_change;
+			player.pos.x += x_change;
 		}
 		
 		if(y_change > 1) {
-			this.pos.y += 1;
+			player.pos.y += 1;
 		} else if(y_change < -1) {
-			this.pos.y -= 1;
+			player.pos.y -= 1;
 		} else {
-			this.pos.y += y_change;
+			player.pos.y += y_change;
 		}
+		
+		req_draw.push(["player", player.id]);
 	}
 	
 	this.eatFood = function() {
@@ -71,24 +77,36 @@ function Player(colour) {
 			if(x - radius - food[i].radius / 10 <= food[i].pos.x - food[i].radius && x + radius + food[i].radius / 10 >= food[i].pos.x + food[i].radius && y - radius - food[i].radius / 10 <= food[i].pos.y - food[i].radius && y + radius + food[i].radius / 10 >= food[i].pos.y + food[i].radius) {
 				var new_radius = Math.sqrt((Math.PI * Math.pow(radius, 2) + Math.PI * Math.pow(food[i].radius, 2)) / Math.PI);
 				
+				req_clear.push([food[i].pos, food[i].radius]);
+				
 				food.splice(i, 1);
 				
 				player.radius = new_radius;
+				
+				req_draw.push(["player", player.id]);
 			}
 		}
 	}
 	
 	this.spawnChild = function(radius) {
 		if(radius <= player.radius) {
+			req_clear.push([player.pos, player.radius]);
+			
 			players.push(new Player({r: randomBetween(player.colour.r - 8, player.colour.r + 8), g: randomBetween(player.colour.g - 8, player.colour.g + 8), b: randomBetween(player.colour.b - 8, player.colour.b + 8)}));
 			players[players.length - 1].pos = {x: randomBetween(player.pos.x - 16, player.pos.x + 16), y: randomBetween(player.pos.y - 16, player.pos.y + 16)};
 			players[players.length - 1].radius = radius;
 			
 			player.radius = Math.sqrt((Math.pow(player.radius, 2) * Math.PI - Math.pow(radius, 2) * Math.PI) / Math.PI);
+			
+			req_draw.push(["player", player.id]);
 		}
 	}
 	
 	players.push(this);
+	
+	this.id = players.length - 1;
+	
+	req_draw.push(["player", this.id]);
 }
 
 $(document).on("keypress", function (e) {
@@ -184,12 +202,6 @@ function drawFood(food_id) {
 	drawer.stroke();
 }
 
-function drawAllFood() {
-	for(var i = 0; i < food.length; i++) {
-		drawFood(i);
-	}
-}
-
 function drawPlayer(id) {
 	var x = players[id].pos.x;
 	var y = players[id].pos.y;
@@ -212,29 +224,21 @@ function drawPlayer(id) {
 	drawer.stroke();
 }
 
-function drawPlayers() {
-	for(var i = 0; i < players.length; i++) {
-		drawPlayer(i);
-	}
-}
-
 function updatePlayer(id) {
 	var player = players[id];
 	
 	player.radius = player.radius * 0.999;
 	
+	req_draw.push(["player", id]);
+	
 	if(player.radius < 10) {
+		req_clear.push([player.pos, player.radius]);
 		players.splice(id, 1);
+		
 		return;
 	}
 	
 	player.eatFood();
-}
-
-function updatePlayers() {
-	for(var i = 0; i < players.length; i++) {
-		updatePlayer(i);
-	}
 }
 
 function runGame() {
@@ -246,6 +250,7 @@ function runGame() {
 	
 	if(Math.floor(Math.random() * 200) == 1) {
 		food.push(new Food({x: Math.floor(Math.random() * game_size), y: Math.floor(Math.random() * game_size)}, randomBetween(3, 9), {r: randomBetween(24, 256), g: randomBetween(24, 256), b: randomBetween(24, 256)}));
+		req_draw.push(["food", food.length - 1]);
 	}
 	
 	updatePlayers();
@@ -263,29 +268,57 @@ function runGame() {
 	}
 }
 
+function clearCircle(pos, radius) {
+	drawer.fillStyle = "#d5d5d5";
+	
+	drawer.beginPath();
+	drawer.arc(pos.x, pos.y, radius, 0, 2 * Math.PI);
+	drawer.fill();
+}
+
 function drawGame() {
-	drawBg(100, "#d5d5d5", "#ccc");
-	drawAllFood();
-	drawPlayers();
+	for(var i = 0; i < req_clear.length; i++) {
+		var req = req_clear[i];
+		
+		clearCircle(req[0], req[1]);
+	}
+	
+	for(var i = 0; i < req_draw.length; i++) {
+		var req = req_draw[i];
+		
+		if(req[0] == "food") {
+			drawFood(req[1]);
+		} else {
+			drawPlayer(req[1]);
+		}
+	}	
+	
 	typePerf();
 	
 	calcFPS();
+	
+	req_clear = [];
+	req_draw = [];
 	requestAnimationFrame(drawGame);
 }
 
 function typePerf() {
-	if(fps != "N/A") {
+	if(fps != "N/A" && (last_fps == "N/A" || Math.floor(Math.random() * fps) == 1)) {
+		last_fps = fps;
+		
+		drawer.fillStyle = "#d5d5d5";
+		drawer.fillRect(10, 20, 50, 40);
+		
 		drawer.font = "18px Arial";
 		drawer.fillStyle = "#000";
-		
-		if(last_fps == "N/A" || Math.floor(Math.random() * fps) == 1) {
-			last_fps = fps;
-		}
 		
 		drawer.fillText("FPS: " + last_fps, 10, 20);
 	}
 	
 	if(tps != "N/A") {
+		drawer.fillStyle = "#d5d5d5";
+		drawer.fillRect(10, 40, 100, 60);
+		
 		drawer.font = "18px Arial";
 		drawer.fillStyle = "#000";
 		drawer.fillText("TPS: " + tps, 10, 40);
@@ -300,7 +333,7 @@ $(function() {
 	
 	drawer = canvas.getContext("2d");
 	
-	drawBg(100, "#d5d5d5", "#ccc"); // To prevent flickering
+	drawBg(100, "#d5d5d5", "#ccc");
 	
 	defZeroDelayTimeout();
 	
