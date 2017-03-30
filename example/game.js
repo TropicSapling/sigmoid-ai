@@ -47,7 +47,7 @@ function Player(colour) {
 	this.radius = 32;
 	
 	this.changePos = function(x_change, y_change) {
-		req_clear.push([player.pos, player.radius]);
+		req_clear.push([player.pos, player.radius, player.id]);
 		
 		if(x_change > 1) {
 			player.pos.x += 1;
@@ -90,7 +90,7 @@ function Player(colour) {
 	
 	this.spawnChild = function(radius) {
 		if(radius <= player.radius) {
-			req_clear.push([player.pos, player.radius]);
+			req_clear.push([player.pos, player.radius, player.id]);
 			
 			players.push(new Player({r: randomBetween(player.colour.r - 8, player.colour.r + 8), g: randomBetween(player.colour.g - 8, player.colour.g + 8), b: randomBetween(player.colour.b - 8, player.colour.b + 8)}));
 			players[players.length - 1].pos = {x: randomBetween(player.pos.x - 16, player.pos.x + 16), y: randomBetween(player.pos.y - 16, player.pos.y + 16)};
@@ -230,7 +230,7 @@ function updatePlayer(id) {
 	player.radius = player.radius * 0.999;
 		
 	if(player.radius < 10) {
-		req_clear.push([player.pos, player.radius, player.id]);
+		req_clear.push([player.pos, player.radius, player.id, true]);
 		players.splice(id, 1);
 		
 		return;
@@ -284,10 +284,27 @@ function clearCircle(pos, radius) {
 
 function cleanRequests() {
 	var clears = [];
+	var taken_ids = [];
 	for(var i = 0; i < req_clear.length; i++) {
 		var req = req_clear[i];
+		var taken = false;
 		
-		if(req.length > 2) {
+		if(req[2]) {
+			for(var j = 0; j < taken_ids.length; j++) {
+				if(req[2] == taken_ids[j]) {
+					taken = true;
+					break;
+				}
+			}
+			
+			if(taken) {
+				continue;
+			}
+			
+			taken_ids.push(req[2]);
+		}
+		
+		if(req[3]) {
 			clears.push(req[2]);
 		}
 	}
