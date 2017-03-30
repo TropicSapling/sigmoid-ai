@@ -306,28 +306,31 @@ function cleanRequests() {
 function drawGame() {
 	cleanRequests();
 	
-	for(var i = 0; i < req_clear.length; i++) {
-		var req = req_clear[i];
+	var req_clear_copy = req_clear; // Copy needed because of async stuff
+	var req_draw_copy = req_draw;
+	
+	req_clear = [];
+	req_draw = [];
+	
+	for(var i = 0; i < req_clear_copy.length; i++) {
+		var req = req_clear_copy[i];
 		
 		clearCircle(req[0], req[1]);
 	}
 	
-	for(var i = 0; i < req_draw.length; i++) {
-		var req = req_draw[i];
+	for(var i = 0; i < req_draw_copy.length; i++) {
+		var req = req_draw_copy[i];
 		
 		if(req[0] == "food") {
 			drawFood(req[1]);
-		} else {
+		} else if(req[1] < players.length) {
 			drawPlayer(req[1]);
 		}
 	}	
 	
 	typePerf();
-	
 	calcFPS();
 	
-	req_clear = [];
-	req_draw = [];
 	requestAnimationFrame(drawGame);
 }
 
