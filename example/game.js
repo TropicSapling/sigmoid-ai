@@ -350,7 +350,7 @@ function typePerf() {
 	
 	if(tps != "N/A") {
 		drawer.fillStyle = "#d5d5d5";
-		drawer.fillRect(10, 20, 100, 20);
+		drawer.fillRect(10, 20, 100, 21);
 		
 		drawer.font = "18px Arial";
 		drawer.fillStyle = "#000";
