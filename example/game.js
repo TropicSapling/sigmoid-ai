@@ -321,7 +321,7 @@ function drawGame() {
 	for(var i = 0; i < req_draw_copy.length; i++) {
 		var req = req_draw_copy[i];
 		
-		if(req[0] == "food") {
+		if(req[0] == "food" && req[1] < food.length) {
 			drawFood(req[1]);
 		} else if(req[1] < players.length) {
 			drawPlayer(req[1]);
