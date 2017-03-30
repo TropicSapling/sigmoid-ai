@@ -336,12 +336,13 @@ function drawGame() {
 
 function typePerf() {
 	if(fps != "N/A" && (last_fps == "N/A" || Math.floor(Math.random() * fps) == 1)) {
+		drawer.font = "18px Arial";
+		drawer.fillStyle = "#d5d5d5";
+		
+		drawer.fillText("FPS: " + last_fps, 10, 20);
+		
 		last_fps = fps;
 		
-		drawer.fillStyle = "#d5d5d5";
-		drawer.fillRect(10, 20, 50, 20);
-		
-		drawer.font = "18px Arial";
 		drawer.fillStyle = "#000";
 		
 		drawer.fillText("FPS: " + last_fps, 10, 20);
