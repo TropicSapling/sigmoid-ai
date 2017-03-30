@@ -298,6 +298,8 @@ function cleanRequests() {
 			}
 			
 			if(taken) {
+				req_clear.splice(i, 1);
+				i--;
 				continue;
 			}
 			
@@ -308,6 +310,8 @@ function cleanRequests() {
 			clears.push(req[2]);
 		}
 	}
+	
+	taken_ids = [];
 	
 	for(var i = 0; i < req_draw.length; i++) {
 		for(var j = 0; j < clears.length; j++) {
