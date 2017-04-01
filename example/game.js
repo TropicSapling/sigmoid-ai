@@ -311,7 +311,7 @@ function cleanRequests() {
 		}
 	}
 	
-	taken_ids = [];
+	var taken_ids = [];
 	
 	for(var i = req_draw.length - 1; i >= 0; i++) {
 		var req = req_draw[i];
