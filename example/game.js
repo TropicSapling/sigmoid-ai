@@ -316,7 +316,6 @@ function cleanRequests() {
 	for(var i = req_draw.length - 1; i >= 0; i++) {
 		var req = req_draw[i];
 		var taken = false;
-		alert("[" + taken_ids.join(", ") + "]");
 		
 		for(var j = 0; j < taken_ids.length; j++) {
 			if(req[2] == taken_ids[j]) {
