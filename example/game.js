@@ -313,14 +313,32 @@ function cleanRequests() {
 	
 	taken_ids = [];
 	
-	for(var i = 0; i < req_draw.length; i++) {
+	for(var i = req_draw.length - 1; i >= 0; i++) {
+		var req = req_draw[i];
+		var taken = false;
+		
+		for(var j = 0; j < taken_ids.length; j++) {
+			if(req[2] == taken_ids[j]) {
+				taken = true;
+				break;
+			}
+		}
+		
+		if(taken) {
+			req_draw.splice(i, 1);
+			i--;
+			continue;
+		}
+		
 		for(var j = 0; j < clears.length; j++) {
-			if(req_draw[i][1] == clears[j]) {
+			if(req[1] == clears[j]) {
 				req_draw.splice(i, 1);
 				i--;
 				break;
 			}
 		}
+		
+		taken_ids.push(req[2]);
 	}
 }
 
