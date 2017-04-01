@@ -311,14 +311,15 @@ function cleanRequests() {
 		}
 	}
 	
-	var taken_ids = [];
+	var taken_ids2 = [];
+	
 	
 	for(var i = req_draw.length - 1; i >= 0; i++) {
 		var req = req_draw[i];
 		var taken = false;
 		
-		for(var j = 0; j < taken_ids.length; j++) {
-			if(req[2] == taken_ids[j]) {
+		for(var j = 0; j < taken_ids2.length; j++) {
+			if(req[2] == taken_ids2[j]) {
 				taken = true;
 				break;
 			}
@@ -338,7 +339,7 @@ function cleanRequests() {
 			}
 		}
 		
-		taken_ids.push(req[2]);
+		taken_ids2.push(req[2]);
 	}
 }
 
