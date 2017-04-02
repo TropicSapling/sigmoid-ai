@@ -323,6 +323,9 @@ function cleanRequests() {
 	var req_clear_copy = deepClone(req_clear);
 	var req_draw_copy = deepClone(req_draw);
 	
+	console.log(req_clear_copy);
+	console.log(req_draw_copy);
+	
 	req_clear = [];
 	req_draw = [];
 	
