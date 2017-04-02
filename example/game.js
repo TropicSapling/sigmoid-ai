@@ -326,14 +326,12 @@ function cleanRequests() {
 		
 		if(taken) {
 			req_draw.splice(i, 1);
-			i--;
 			continue;
 		}
 		
 		for(var j = 0; j < clears.length; j++) {
 			if(req[1] == clears[j]) {
 				req_draw.splice(i, 1);
-				i--;
 				break;
 			}
 		}
