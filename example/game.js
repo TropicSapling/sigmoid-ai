@@ -288,7 +288,6 @@ function cleanRequests() {
 	for(var i = 0; i < req_clear.length; i++) {
 		var req = req_clear[i];
 		var taken = false;
-		console.log(req);
 		
 		if(req[2]) {
 			for(var j = 0; j < taken_ids.length; j++) {
@@ -317,6 +316,7 @@ function cleanRequests() {
 	for(var i = req_draw.length - 1; i >= 0; i++) {
 		var req = req_draw[i];
 		var taken = false;
+		console.log(req);
 		
 		for(var j = 0; j < taken_ids.length; j++) {
 			if(req[2] == taken_ids[j]) {
