@@ -317,6 +317,8 @@ function cleanRequests() {
 		var req = req_draw[i];
 		var taken = false;
 		console.log(req);
+		console.log(i);
+		console.log(req_draw);
 		
 		for(var j = 0; j < taken_ids.length; j++) {
 			if(req[2] == taken_ids[j]) {
