@@ -30,8 +30,22 @@ window.onerror = function(msg, url, line, column, error) {
 	}
 }
 
+Array.prototype.mapArr = function(callback) { // I use this instead of built-in .map to get better performance
+    'use strict';
+	
+    if (typeof callback !== 'function') {
+        throw new TypeError();
+    }
+
+    var thisArg = arguments.length >= 2 ? arguments[1] : void 0;
+
+    for (var i = 0, len = this.length; i < len; i++) {
+        this[i] = callback.call(thisArg, this[i], i, this);
+    };
+};
+
 function deepClone(arr) {
-	return arr.map(a => (typeof a === "object" ? JSON.parse(JSON.stringify(a)) : a));
+	return arr.mapArr(a => (typeof a === "object" ? JSON.parse(JSON.stringify(a)) : a));
 }
 
 function Player(colour) {
