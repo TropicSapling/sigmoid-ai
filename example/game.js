@@ -45,7 +45,11 @@ Array.prototype.mapArr = function(callback) { // I use this instead of built-in 
 };
 
 function deepClone(arr) {
-	return arr.mapArr(a => (typeof a === "object" ? JSON.parse(JSON.stringify(a)) : a));
+	var arr_copy = [];
+	
+	arr.mapArr(a => (typeof a === "object" ? arr_copy.push(JSON.parse(JSON.stringify(a))) : arr_copy.push(a)));
+	
+	return arr_copy;
 }
 
 function Player(colour) {
