@@ -25,9 +25,9 @@ window.onerror = function(msg, url, line, column, error) {
 		console.log("Line: " + line + ", column: " + column);
 		console.log("Stack Trace:");
 		console.log(error.stack);
+	} else {
+		alert("[!] Error: " + msg + " in file " + url + "\n\nLine: " + line + ", column: " + column);
 	}
-	
-	alert("[!] Error: " + msg + " in file " + url + "\n\nLine: " + line + ", column: " + column);
 }
 
 function Player(colour) {
