@@ -298,9 +298,23 @@ function clearCircle(pos, radius) {
 }
 
 function cleanRequests() {
+	var req_clear_copy = req_clear;
+	var req_draw_copy = req_draw;
+	
+	req_clear = [];
+	req_draw = [];
+	
+	for(var i = 0; i < players.length; i++) {
+		players[i].graphics_cleared = false;
+	}
+	
+	for(var i = 0; i < food.length; i++) {
+		food[i].graphics_cleared = false;
+	}
+	
 	var clears = [];
-	for(var i = 0; i < req_clear.length; i++) {
-		var req = req_clear[i];
+	for(var i = 0; i < req_clear_copy.length; i++) {
+		var req = req_clear_copy[i];
 		
 		if(req[2]) {
 			clears.push(req[2]);
@@ -309,8 +323,8 @@ function cleanRequests() {
 	
 	var taken_ids = [];
 	
-	for(var i = req_draw.length - 1; i >= 0; i++) {
-		var req = req_draw[i];
+	for(var i = req_draw_copy.length - 1; i >= 0; i++) {
+		var req = req_draw_copy[i];
 		var taken = false;
 		
 		for(var j = 0; j < taken_ids.length; j++) {
@@ -321,29 +335,28 @@ function cleanRequests() {
 		}
 		
 		if(taken) {
-			req_draw.splice(i, 1);
+			req_draw_copy.splice(i, 1);
 			continue;
 		}
 		
 		for(var j = 0; j < clears.length; j++) {
 			if(req[1] == clears[j]) {
-				req_draw.splice(i, 1);
+				req_draw_copy.splice(i, 1);
 				break;
 			}
 		}
 		
 		taken_ids.push(req[1]);
 	}
+	
+	return [req_clear_copy, req_draw_copy];
 }
 
 function drawGame() {
-	cleanRequests();
+	var req_copy = cleanRequests(); // Copy needed because of async stuff
 	
-	var req_clear_copy = req_clear; // Copy needed because of async stuff
-	var req_draw_copy = req_draw;
-	
-	req_clear = [];
-	req_draw = [];
+	var req_clear_copy = req_copy[0];
+	var req_draw_copy = req_copy[1];
 	
 	for(var i = 0; i < req_clear_copy.length; i++) {
 		var req = req_clear_copy[i];
