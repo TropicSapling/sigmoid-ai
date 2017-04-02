@@ -348,7 +348,7 @@ function cleanRequests() {
 	
 	var taken_ids = [];
 	
-	for(var i = req_draw_copy.length - 1; i >= 0; i++) {
+	for(var i = req_draw_copy.length - 1; i >= 0; i--) {
 		var req = req_draw_copy[i];
 		var taken = false;
 		console.log(req);
