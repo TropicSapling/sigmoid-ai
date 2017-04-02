@@ -323,9 +323,6 @@ function cleanRequests() {
 	var req_clear_copy = deepClone(req_clear);
 	var req_draw_copy = deepClone(req_draw);
 	
-	console.log(req_clear_copy);
-	console.log(req_draw_copy);
-	
 	req_clear = [];
 	req_draw = [];
 	
@@ -351,8 +348,6 @@ function cleanRequests() {
 	for(var i = req_draw_copy.length - 1; i >= 0; i--) {
 		var req = req_draw_copy[i];
 		var taken = false;
-		console.log(req);
-		console.log(i);
 		
 		for(var j = 0; j < taken_ids.length; j++) {
 			if(req[1] == taken_ids[j]) {
