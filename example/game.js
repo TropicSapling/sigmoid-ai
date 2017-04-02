@@ -30,6 +30,10 @@ window.onerror = function(msg, url, line, column, error) {
 	}
 }
 
+function deepClone(arr) {
+	return arr.map(a => Object.assign({}, a));
+}
+
 function Player(colour) {
 	var player = this;
 	
@@ -298,8 +302,8 @@ function clearCircle(pos, radius) {
 }
 
 function cleanRequests() {
-	var req_clear_copy = req_clear;
-	var req_draw_copy = req_draw;
+	var req_clear_copy = deepClone(req_clear);
+	var req_draw_copy = deepClone(req_draw);
 	
 	req_clear = [];
 	req_draw = [];
