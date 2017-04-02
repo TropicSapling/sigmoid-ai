@@ -31,7 +31,7 @@ window.onerror = function(msg, url, line, column, error) {
 }
 
 function deepClone(arr) {
-	return arr.map(a => Object.assign({}, a));
+	return arr.map(a => (typeof a === "function" ? Object.assign({}, a) : (typeof a === "object" ? JSON.parse(JSON.stringify(a)) : a)));
 }
 
 function Player(colour) {
