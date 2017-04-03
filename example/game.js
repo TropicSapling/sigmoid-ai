@@ -345,8 +345,6 @@ function cleanRequests() {
 	
 	var taken_ids = [];
 	
-	var prev_draw_copy = deepClone(req_draw_copy);
-	
 	for(var i = req_draw_copy.length - 1; i >= 0; i--) {
 		var req = req_draw_copy[i];
 		var taken = false;
@@ -373,23 +371,7 @@ function cleanRequests() {
 		taken_ids.push(req[1]);
 	}
 	
-	console.log(arraysEqual(prev_draw_copy, req_draw_copy));
-	
 	return [req_clear_copy, req_draw_copy];
-}
-
-function arraysEqual(a, b) {
-  if (a === b) return true;
-  if (a == null || b == null) return false;
-  if (a.length != b.length) return false;
-
-  // If you don't care about the order of the elements inside
-  // the array, you should sort both arrays here.
-
-  for (var i = 0; i < a.length; ++i) {
-    if (a[i] !== b[i]) return false;
-  }
-  return true;
 }
 
 function drawGame() {
