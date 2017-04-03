@@ -345,7 +345,7 @@ function cleanRequests() {
 	
 	var taken_ids = [];
 	
-	var prev_draw_copy = deepCopy(req_draw_copy);
+	var prev_draw_copy = deepClone(req_draw_copy);
 	
 	for(var i = req_draw_copy.length - 1; i >= 0; i--) {
 		var req = req_draw_copy[i];
