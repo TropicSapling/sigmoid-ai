@@ -391,7 +391,7 @@ function drawGame() {
 		
 		if(req[0] == "food" && req[1] < food.length) {
 			drawFood(req[1]);
-		} else if(req[1] < players.length) {
+		} else if(req[0] == "player" && req[1] < players.length) {
 			drawPlayer(req[1]);
 		}
 	}	
