@@ -406,7 +406,7 @@ function typePerf() {
 	if(fps != "N/A" && (last_fps == "N/A" || Math.floor(Math.random() * fps) == 1)) {
 		drawer.fillStyle = "#d5d5d5";
 		
-		drawer.fillRect(10, 0, 70, 20);
+		drawer.fillRect(10, 0, 80, 20);
 		
 		last_fps = fps;
 		
