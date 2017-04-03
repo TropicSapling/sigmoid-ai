@@ -380,6 +380,11 @@ function drawGame() {
 	var req_clear_copy = req_copy[0];
 	var req_draw_copy = req_copy[1];
 	
+	if(Math.floor(Math.random() * 10000) == 1) {
+		console.log(req_clear_copy);
+		console.log(req_draw_copy);
+	}
+	
 	for(var i = 0; i < req_clear_copy.length; i++) {
 		var req = req_clear_copy[i];
 		
