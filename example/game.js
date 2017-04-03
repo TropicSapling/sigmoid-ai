@@ -110,6 +110,10 @@ function Player(colour) {
 				
 				food.splice(i, 1);
 				
+				if(!player.graphics_cleared) {
+					req_clear.push([player.pos, player.radius, player.id]);
+				}
+				
 				player.radius = new_radius;
 				
 				req_draw.push(["player", player.id]);
