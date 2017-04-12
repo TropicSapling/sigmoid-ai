@@ -72,7 +72,7 @@ function Player(colour) {
 	
 	this.changePos = function(x_change, y_change) {
 		if(!player.graphics_cleared) {
-			req_clear.push([player.pos, player.radius]);
+			req_clear.push([{x: player.pos.x, y: player.pos.y}, player.radius]);
 			player.graphics_cleared = true;
 		}
 		
@@ -105,13 +105,13 @@ function Player(colour) {
 				var new_radius = Math.sqrt((Math.PI * Math.pow(radius, 2) + Math.PI * Math.pow(food[i].radius, 2)) / Math.PI);
 				
 				if(!food[i].graphics_cleared) {
-					req_clear.push([food[i].pos, food[i].radius]);
+					req_clear.push([{x: food[i].pos.x, y: food[i].pos.y}, food[i].radius]);
 				}
 				
 				food.splice(i, 1);
 				
 				if(!player.graphics_cleared) {
-					req_clear.push([player.pos, player.radius, player.id]);
+					req_clear.push([{x: player.pos.x, y: player.pos.y}, player.radius, player.id]);
 				}
 				
 				player.radius = new_radius;
@@ -124,7 +124,7 @@ function Player(colour) {
 	this.spawnChild = function(radius) {
 		if(radius <= player.radius) {
 			if(!player.graphics_cleared) {
-				req_clear.push([player.pos, player.radius]);
+				req_clear.push([{x: player.pos.x, y: player.pos.y}, player.radius]);
 				player.graphics_cleared = true;
 			}
 			
@@ -269,7 +269,7 @@ function updatePlayer(id) {
 		
 	if(player.radius < 10) {
 		if(!player.graphics_cleared) {
-			req_clear.push([player.pos, player.radius, player.id]);
+			req_clear.push([{x: player.pos.x, y: player.pos.y}, player.radius, player.id]);
 		}
 		
 		players.splice(id, 1);
