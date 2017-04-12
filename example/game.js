@@ -458,7 +458,7 @@ $(function() {
 	drawer = canvas.getContext("2d");
 	
 	// Performance
-	perf_canvas = document.getElementById("bg");
+	perf_canvas = document.getElementById("perf");
 	
 	perf_canvas.setAttribute("width", "150px");
 	perf_canvas.setAttribute("height", "50px");
