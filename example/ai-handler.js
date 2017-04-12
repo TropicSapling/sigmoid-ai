@@ -32,7 +32,7 @@ function divideWithinRange(a, b) {
 }
 
 function getConstantInputs(player) {
-	return [player, ["food", 6], ["players", 6]]; // [const, property_count]
+	return {AI: player, other: [["food", 6], ["players", 6]]}; // [const, property_count]
 }
 
 function getInput() {
