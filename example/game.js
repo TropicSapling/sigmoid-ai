@@ -2,6 +2,8 @@ var bg_canvas;
 var bg_drawer;
 var canvas;
 var drawer;
+var perf_canvas;
+var perf_drawer;
 var req_clear = [];
 var req_draw = [];
 var game_size = 2048; // 2048px by 2048px
@@ -417,22 +419,22 @@ function drawGame() {
 
 function typePerf() {
 	if(fps != "N/A" && (last_fps == "N/A" || Math.floor(Math.random() * fps) == 1)) {
-		drawer.clearRect(10, 0, 80, 20);
+		perf_drawer.clearRect(10, 0, 80, 20);
 		
 		last_fps = fps;
 		
-		drawer.font = "18px Arial";
-		drawer.fillStyle = "#000";
+		perf_drawer.font = "18px Arial";
+		perf_drawer.fillStyle = "#000";
 		
-		drawer.fillText("FPS: " + last_fps, 10, 20);
+		perf_drawer.fillText("FPS: " + last_fps, 10, 20);
 	}
 	
 	if(tps != "N/A") {
-		drawer.clearRect(10, 20, 100, 21);
+		perf_drawer.clearRect(10, 20, 100, 21);
 		
-		drawer.font = "18px Arial";
-		drawer.fillStyle = "#000";
-		drawer.fillText("TPS: " + tps, 10, 40);
+		perf_drawer.font = "18px Arial";
+		perf_drawer.fillStyle = "#000";
+		perf_drawer.fillText("TPS: " + tps, 10, 40);
 	}
 }
 
@@ -454,6 +456,14 @@ $(function() {
 	canvas.setAttribute("height", game_size + "px");
 	
 	drawer = canvas.getContext("2d");
+	
+	// Performance
+	perf_canvas = document.getElementById("bg");
+	
+	perf_canvas.setAttribute("width", "150px");
+	perf_canvas.setAttribute("height", "50px");
+	
+	perf_drawer = perf_canvas.getContext("2d");
 	
 	defZeroDelayTimeout();
 	
