@@ -1,5 +1,5 @@
 var ops = ["+", "-", "*", "/", "%", "==", "!=", ">", "<", "&&", "||", "!"];
-var constants = [Math.E, Math.PI];
+var constants = [Math.E, Math.PI, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
 var functions = ["Math.abs[1]", "Math.acos[1]", "Math.asin[1]", "Math.atan[1]", "Math.atan2[2]", "Math.ceil[1]", "Math.cos[1]", "Math.floor[1]", "Math.max[]", "Math.min[]", "Math.pow[2]", "Math.random[0]", "Math.round[1]", "Math.sin[1]", "Math.sqrt[1]", "Math.tan[1]"]; // [n] = amount of args needed, if brackets are empty you can choose how many args
 
 function parseFunc(func) {
@@ -18,9 +18,9 @@ function genFunc(id) {
 		var rand = Math.floor(Math.random() * (constants.length + functions.length));
 			
 		if(rand < constants.length) {
-			func += constants[rand - constants.length];
+			func += constants[rand];
 		} else {
-			func += genFunc(id);
+			func += genFunc(rand - constants.length);
 		}
 		
 		if(par + 1 < pars) {
