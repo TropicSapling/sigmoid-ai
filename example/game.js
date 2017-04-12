@@ -322,7 +322,7 @@ function clearCircle(pos, radius) {
 	drawer.arc(pos.x, pos.y, radius + 1, 0, 2 * Math.PI);
 	drawer.clip();
 	drawer.clearRect(pos.x - radius - 1, pos.y - radius - 1, radius * 2 + 2, radius * 2 + 2);
-	drawer.closePath();
+	drawer.resetClip();
 }
 
 function cleanRequests() {
