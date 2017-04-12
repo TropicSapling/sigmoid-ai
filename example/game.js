@@ -1,3 +1,5 @@
+var bg_canvas;
+var bg_drawer;
 var canvas;
 var drawer;
 var req_clear = [];
@@ -202,21 +204,21 @@ function randomBetween(min, max) {
 }
 
 function drawBg(square_size, bg_colour, line_colour) {
-	drawer.fillStyle = bg_colour;
-	drawer.fillRect(0, 0, game_size, game_size);
+	bg_drawer.fillStyle = bg_colour;
+	bg_drawer.fillRect(0, 0, game_size, game_size);
 	
-	drawer.strokeStyle = line_colour;
+	bg_drawer.strokeStyle = line_colour;
 	
 	for(var i = 0; i < game_size; i += square_size) {
-		drawer.moveTo(i, 0);
-		drawer.lineTo(i, game_size);
-		drawer.stroke();
+		bg_drawer.moveTo(i, 0);
+		bg_drawer.lineTo(i, game_size);
+		bg_drawer.stroke();
 	}
 	
 	for(var i = 0; i < game_size; i += square_size) {
-		drawer.moveTo(0, i);
-		drawer.lineTo(game_size, i);
-		drawer.stroke();
+		bg_drawer.moveTo(0, i);
+		bg_drawer.lineTo(game_size, i);
+		bg_drawer.stroke();
 	}
 }
 
@@ -316,11 +318,11 @@ function runGame() {
 }
 
 function clearCircle(pos, radius) {
-	drawer.fillStyle = "#d5d5d5";
-	
 	drawer.beginPath();
 	drawer.arc(pos.x, pos.y, radius + 1, 0, 2 * Math.PI);
-	drawer.fill();
+	drawer.clip();
+	drawer.clearRect(pos.x - radius - 1, pos.y - radius - 1, radius * 2 + 2, radius * 2 + 2);
+	drawer.closePath();
 }
 
 function cleanRequests() {
@@ -408,9 +410,7 @@ function drawGame() {
 
 function typePerf() {
 	if(fps != "N/A" && (last_fps == "N/A" || Math.floor(Math.random() * fps) == 1)) {
-		drawer.fillStyle = "#d5d5d5";
-		
-		drawer.fillRect(10, 0, 80, 20);
+		drawer.clearRect(10, 0, 80, 20);
 		
 		last_fps = fps;
 		
@@ -421,8 +421,7 @@ function typePerf() {
 	}
 	
 	if(tps != "N/A") {
-		drawer.fillStyle = "#d5d5d5";
-		drawer.fillRect(10, 20, 100, 21);
+		drawer.clearRect(10, 20, 100, 21);
 		
 		drawer.font = "18px Arial";
 		drawer.fillStyle = "#000";
@@ -431,14 +430,23 @@ function typePerf() {
 }
 
 $(function() {
-	canvas = document.getElementsByTagName("canvas")[0];
+	// Background
+	bg_canvas = document.getElementById("bg");
+	
+	bg_canvas.setAttribute("width", game_size + "px");
+	bg_canvas.setAttribute("height", game_size + "px");
+	
+	bg_drawer = bg_canvas.getContext("2d");
+	
+	drawBg(100, "#d5d5d5", "#ccc");
+	
+	// Game
+	canvas = document.getElementById("game");
 	
 	canvas.setAttribute("width", game_size + "px");
 	canvas.setAttribute("height", game_size + "px");
 	
 	drawer = canvas.getContext("2d");
-	
-	drawBg(100, "#d5d5d5", "#ccc");
 	
 	defZeroDelayTimeout();
 	
