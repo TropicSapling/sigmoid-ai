@@ -119,7 +119,7 @@ function Player(colour) {
 				player.radius = new_radius;
 				
 				req_draw.push(["player", player.id]);
-			} else if(x - radius - food[i].radius <= food[i].pos.x - food[i].radius && x + radius + food[i].radius >= food[i].pos.x + food[i].radius && y - radius - food[i].radius <= food[i].pos.y - food[i].radius && y + radius + food[i].radius >= food[i].pos.y + food[i].radius) {
+			} else if(x - radius - food[i].radius * 2 <= food[i].pos.x - food[i].radius && x + radius + food[i].radius * 2 >= food[i].pos.x + food[i].radius && y - radius - food[i].radius * 2 <= food[i].pos.y - food[i].radius && y + radius + food[i].radius * 2 >= food[i].pos.y + food[i].radius) {
 				req_draw.push(["food", i]);
 			}
 		}
