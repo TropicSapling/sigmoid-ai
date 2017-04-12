@@ -321,6 +321,10 @@ function clearCircle(pos, radius) {
 	drawer.beginPath();
 	drawer.arc(pos.x, pos.y, radius, 0, 2 * Math.PI);
 	drawer.fill();
+	
+	drawer.beginPath();
+	drawer.arc(pos.x, pos.y, radius, 0, 2 * Math.PI);
+	drawer.stroke();
 }
 
 function cleanRequests() {
