@@ -438,7 +438,7 @@ $(function() {
 	
 	drawer = canvas.getContext("2d");
 	
-	drawBg(100, "#d5d5d5", "#ccc");
+//	drawBg(100, "#d5d5d5", "#ccc");
 	
 	defZeroDelayTimeout();
 	
