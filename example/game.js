@@ -321,9 +321,9 @@ function clearCircle(pos, radius) {
 	drawer.save();
 	
 	drawer.beginPath();
-	drawer.arc(pos.x, pos.y, radius + 1, 0, 2 * Math.PI);
+	drawer.arc(pos.x, pos.y, radius + 2, 0, 2 * Math.PI);
 	drawer.clip();
-	drawer.clearRect(pos.x - radius - 1, pos.y - radius - 1, radius * 2 + 2, radius * 2 + 2);
+	drawer.clearRect(pos.x - radius - 2, pos.y - radius - 2, radius * 2 + 4, radius * 2 + 4);
 	
 	drawer.restore();
 }
