@@ -26,7 +26,7 @@ function genRandAction(inputs) {
 			if(rand < constants.length) {
 				action.push(constants[rand]);
 			} else {
-				var func_parsed = parseFunc(functions[rand]);
+				var func_parsed = parseFunc(functions[rand - constants.length]);
 				var func = func_parsed[0];
 				var pars = func_parsed[1];
 				
