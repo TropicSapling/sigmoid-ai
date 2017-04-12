@@ -9,6 +9,28 @@ function parseFunc(func) {
 	return [func.substring(0, i) + "(", pars ? Number(pars) : randomBetween(0, 10)];
 }
 
+function genFunc(id) {
+	var func_parsed = parseFunc(functions[id]);
+	var func = func_parsed[0];
+	var pars = func_parsed[1];
+	
+	for(var par = 0; par < pars; par++) {
+		var rand = Math.floor(Math.random() * (constants.length + functions.length));
+			
+		if(rand < constants.length) {
+			func += constants[rand - constants.length];
+		} else {
+			func += genFunc(id);
+		}
+		
+		if(par + 1 < pars) {
+			func += ", ";
+		}
+	}
+	
+	return func + ")";
+}
+
 function genRandAction(inputs) {
 	var action = [];
 	var action_len;
@@ -26,19 +48,7 @@ function genRandAction(inputs) {
 			if(rand < constants.length) {
 				action.push(constants[rand]);
 			} else {
-				var func_parsed = parseFunc(functions[rand - constants.length]);
-				var func = func_parsed[0];
-				var pars = func_parsed[1];
-				
-				for(var par = 0; par < pars; par++) {
-					func += constants[Math.round(Math.random())]; // TEMP; will be changed
-					
-					if(par + 1 < pars) {
-						func += ", ";
-					}
-				}
-				
-				action.push(func + ")");
+				action.push(genFunc(rand - constants.length));
 			}
 		}
 	}
