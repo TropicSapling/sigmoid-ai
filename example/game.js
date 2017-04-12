@@ -274,6 +274,8 @@ function updatePlayer(id) {
 	var player = players[id];
 	
 	player.radius = player.radius * 0.999;
+	
+	player.eatFood();
 		
 	if(player.radius < 10) {
 		if(!player.graphics_cleared) {
@@ -286,8 +288,6 @@ function updatePlayer(id) {
 	}
 	
 	req_draw.push(["player", id]);
-	
-	player.eatFood();
 }
 
 function updatePlayers() {
