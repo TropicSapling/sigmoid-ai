@@ -151,6 +151,8 @@ $(document).on("keypress", function (e) {
     if(e.which == 32) {
 		timeout = timeout ? false : true;
 		last_tps = tps;
+		
+		e.preventDefault();
 	}
 });
 
