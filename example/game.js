@@ -316,7 +316,7 @@ function runGame() {
 }
 
 function clearCircle(pos, radius) {
-	drawer.fillStyle = "rgba(0, 0, 0, 0)";
+	drawer.fillStyle = "#d5d5d5";
 	
 	drawer.beginPath();
 	drawer.arc(pos.x, pos.y, radius, 0, 2 * Math.PI);
@@ -408,7 +408,7 @@ function drawGame() {
 
 function typePerf() {
 	if(fps != "N/A" && (last_fps == "N/A" || Math.floor(Math.random() * fps) == 1)) {
-		drawer.fillStyle = "rgba(0, 0, 0, 0)";
+		drawer.fillStyle = "#d5d5d5";
 		
 		drawer.fillRect(10, 0, 80, 20);
 		
@@ -421,7 +421,7 @@ function typePerf() {
 	}
 	
 	if(tps != "N/A") {
-		drawer.fillStyle = "rgba(0, 0, 0, 0)";
+		drawer.fillStyle = "#d5d5d5";
 		drawer.fillRect(10, 20, 100, 21);
 		
 		drawer.font = "18px Arial";
