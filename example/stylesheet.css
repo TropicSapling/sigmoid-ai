@@ -16,3 +16,7 @@ canvas {
 #game {
 	z-index: 1;
 }
+
+#perf {
+	z-index: 2;
+}
