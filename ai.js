@@ -20,6 +20,8 @@ function genRandFunc(id, inputs, calls) {
 	
 	var func_len;
 	
+	var parentheses = 0;
+	
 	for(var par = 0; par < pars; par++) {
 		do {
 			func_len = randomBetween(0, 4);
@@ -27,7 +29,10 @@ function genRandFunc(id, inputs, calls) {
 		
 		for(var part = 0; part < func_len; part++) {
 			if(part % 2) {
-				func.push(ops[Math.floor(Math.random() * ops.length)]);
+				var op_arr = getRandOp(parentheses);
+				parentheses = op_arr[1];
+				
+				func.push(op_arr[0]);
 			} else {
 				var consts_len = constants.length * 4;
 				
@@ -38,7 +43,13 @@ function genRandFunc(id, inputs, calls) {
 				}
 				
 				if(rand < consts_len) {
-					func.push(constants[rand % constants.length]);
+					var constant = constants[rand % constants.length];
+					
+					if(constant == "(") {
+						parentheses++;
+					}
+					
+					func.push(constant);
 				} else {
 					var new_func = genRandFunc(rand - consts_len, inputs, calls + 1);
 					
@@ -97,7 +108,13 @@ function genRandAction(inputs) {
 			var rand = Math.floor(Math.random() * (consts_len + functions.length));
 			
 			if(rand < consts_len) {
-				action.push(constants[rand % constants.length]);
+				var constant = constants[rand % constants.length];
+				
+				if(constant == "(") {
+					parentheses++;
+				}
+				
+				action.push(constant);
 			} else {
 				var func = genRandFunc(rand - consts_len, inputs);
 				
