@@ -1,5 +1,5 @@
-var ops = ["+", "-", "*", "/", "%", "==", "!=", ">", "<", "&&", "||", "!"];
-var constants = [Math.E, Math.PI, 0, 1, 2, 3, 4, 5, 6, 7];
+var ops = ["+", "-", "*", "/", "%", "==", "!=", ">", "<", "&&", "||", "!", ")"];
+var constants = [Math.E, Math.PI, 0, 1, 2, 3, 4, 5, 6, 7, "("];
 var functions = ["Math.abs[1]", "Math.acos[1]", "Math.asin[1]", "Math.atan[1]", "Math.atan2[2]", "Math.ceil[1]", "Math.cos[1]", "Math.floor[1]", "Math.max[]", "Math.min[]", "Math.pow[2]", "Math.random[0]", "Math.round[1]", "Math.sin[1]", "Math.sqrt[1]", "Math.tan[1]"]; // [n] = amount of args needed, if brackets are empty you can choose how many args
 
 function parseRandFunc(func, calls) {
@@ -59,6 +59,23 @@ function genRandFunc(id, inputs, calls) {
 	return func;
 }
 
+function getRandOp(parentheses) {
+	var op = ops[Math.floor(Math.random() * ops.length)];
+	
+	if(op == ")") {
+		if(parentheses > 0) {
+			parentheses--;
+		} else {
+			var op_arr = getRandOp(parentheses);
+			parentheses = op_arr[1];
+			
+			op = op_arr[0];
+		}
+	}
+	
+	return op;
+}
+
 function genRandAction(inputs) {
 	var action = [];
 	var action_len;
@@ -67,9 +84,14 @@ function genRandAction(inputs) {
 		action_len = randomBetween(2, 8);
 	} while(action_len % 2 == 0);
 	
+	var parentheses = 0;
+	
 	for(var part = 0; part < action_len; part++) {
 		if(part % 2) {
-			action.push(ops[Math.floor(Math.random() * ops.length)]);
+			var op_arr = getRandOp(parentheses);
+			parentheses = op_arr[1];
+			
+			action.push(op_arr[0]);
 		} else {
 			var consts_len = constants.length * 4;
 			var rand = Math.floor(Math.random() * (consts_len + functions.length));
