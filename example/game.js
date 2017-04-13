@@ -6,7 +6,7 @@ var perf_canvas;
 var perf_drawer;
 var req_clear = [];
 var req_draw = [];
-var game_size = 2048; // 2048px by 2048px
+var game_size = 1920; // 1920px by 1920px
 
 var timeout = false;
 
