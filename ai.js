@@ -86,7 +86,7 @@ function getRandOp(parentheses) {
 		}
 	}
 	
-	return op;
+	return [op, parentheses];
 }
 
 function genRandAction(inputs) {
