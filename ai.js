@@ -80,12 +80,9 @@ function getRandOp(parentheses) {
 	
 	if(op == ")") {
 		if(parentheses > 0) {
-			parentheses--;
+			return [op, parentheses - 1];
 		} else {
-			var op_arr = getRandOp(parentheses);
-			parentheses = op_arr[1];
-			
-			op = op_arr[0];
+			return getRandOp(parentheses);
 		}
 	}
 	
