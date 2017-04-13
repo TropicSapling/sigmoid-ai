@@ -70,7 +70,7 @@ function Player(colour) {
 	
 	this.pos = {x: Math.floor(Math.random() * game_size), y: Math.floor(Math.random() * game_size)};
 	
-	this.radius = 32;
+	this.radius = 64;
 	
 	this.graphics_cleared = true;
 	
@@ -114,13 +114,7 @@ function Player(colour) {
 				
 				food.splice(i, 1);
 				
-				if(!player.graphics_cleared) {
-					req_clear.push([{x: player.pos.x, y: player.pos.y}, player.radius, player.id]);
-				}
-				
 				player.radius = new_radius;
-				
-				req_draw.push(["player", player.id]);
 			} else if(x - radius - food[i].radius * 2 <= food[i].pos.x - food[i].radius && x + radius + food[i].radius * 2 >= food[i].pos.x + food[i].radius && y - radius - food[i].radius * 2 <= food[i].pos.y - food[i].radius && y + radius + food[i].radius * 2 >= food[i].pos.y + food[i].radius) {
 				req_draw.push(["food", i]);
 			}
@@ -273,15 +267,16 @@ function drawPlayer(id) {
 function updatePlayer(id) {
 	var player = players[id];
 	
+	if(!player.graphics_cleared) {
+		req_clear.push([{x: player.pos.x, y: player.pos.y}, player.radius, player.id]);
+		player.graphics_cleared = true;
+	}
+	
 	player.radius = player.radius * 0.999;
 	
 	player.eatFood();
 		
 	if(player.radius < 10) {
-		if(!player.graphics_cleared) {
-			req_clear.push([{x: player.pos.x, y: player.pos.y}, player.radius, player.id]);
-		}
-		
 		players.splice(id, 1);
 		
 		return;
