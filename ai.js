@@ -1,5 +1,5 @@
 var ops = ["+", "-", "*", "/", "%", "==", "!=", ">", "<", "&&", "||", "!"];
-var constants = [Math.E, Math.PI, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7];
+var constants = [Math.E, Math.PI, 0, 1, 2, 3, 4, 5, 6, 7];
 var functions = ["Math.abs[1]", "Math.acos[1]", "Math.asin[1]", "Math.atan[1]", "Math.atan2[2]", "Math.ceil[1]", "Math.cos[1]", "Math.floor[1]", "Math.max[]", "Math.min[]", "Math.pow[2]", "Math.random[0]", "Math.round[1]", "Math.sin[1]", "Math.sqrt[1]", "Math.tan[1]"]; // [n] = amount of args needed, if brackets are empty you can choose how many args
 
 function parseRandFunc(func) {
@@ -29,12 +29,13 @@ function genRandFunc(id, inputs, calls) {
 			if(part % 2) {
 				func.push(ops[Math.floor(Math.random() * ops.length)]);
 			} else {
-				var rand = Math.floor(Math.random() * (constants.length * calls + functions.length));
+				var consts_len = Math.pow(constants.length, calls);
+				var rand = Math.floor(Math.random() * (consts_len + functions.length));
 				
-				if(rand < constants.length * calls) {
+				if(rand < consts_len) {
 					func.push(constants[rand % constants.length]);
 				} else {
-					var new_func = genRandFunc(rand - constants.length * calls, inputs, calls + 1);
+					var new_func = genRandFunc(rand - consts_len, inputs, calls + 1);
 					
 					for(var i = 0; i < new_func.length; i++) {
 						func.push(new_func[i]);
