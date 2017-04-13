@@ -64,6 +64,10 @@ function runAI(id) {
 		
 		if(Math.round(sigmoid(ai.exeAction(2, input)))) {
 			player.spawnChild(Math.abs(ai.exeAction(3, input)));
+			
+			var child = players[players.length - 1];
+			
+			AIs.push(new AI(getConstantInputs(child), 4, ai.actions, {player: child}));
 		}
 	}
 }
