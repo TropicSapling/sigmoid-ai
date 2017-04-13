@@ -25,12 +25,14 @@ function genRandFunc(id, inputs) {
 			if(part % 2) {
 				func.push(ops[Math.floor(Math.random() * ops.length)]);
 			} else {
-				var rand = Math.floor(Math.random() * (constants.length + functions.length));
+				var rand = Math.floor(Math.random() * (constants.length * 2 + functions.length));
 				
 				if(rand < constants.length) {
 					func.push(constants[rand]);
+				} else if(rand < constants.length * 2) {
+					func.push(constants[rand - constants.length]);
 				} else {
-					var new_func = genRandFunc(rand - constants.length);
+					var new_func = genRandFunc(rand - constants.length * 2);
 					
 					for(var i = 0; i < new_func.length; i++) {
 						func.push(new_func[i]);
