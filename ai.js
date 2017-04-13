@@ -10,7 +10,7 @@ function parseRandFunc(func) {
 }
 
 function genRandFunc(id, inputs) {
-	var func_parsed = parseFunc(functions[id]);
+	var func_parsed = parseRandFunc(functions[id]);
 	var func = func_parsed[0];
 	var pars = func_parsed[1];
 	
@@ -30,7 +30,7 @@ function genRandFunc(id, inputs) {
 				if(rand < constants.length) {
 					func.push(constants[rand]);
 				} else {
-					var new_func = genFunc(rand - constants.length);
+					var new_func = genRandFunc(rand - constants.length);
 					
 					for(var i = 0; i < new_func.length; i++) {
 						func.push(new_func[i]);
@@ -66,7 +66,7 @@ function genRandAction(inputs) {
 			if(rand < constants.length) {
 				action.push(constants[rand]);
 			} else {
-				var func = genFunc(rand - constants.length, inputs);
+				var func = genRandFunc(rand - constants.length, inputs);
 				
 				for(var i = 0; i < func.length; i++) {
 					action.push(func[i]);
