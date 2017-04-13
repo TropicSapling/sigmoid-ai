@@ -60,6 +60,11 @@ function genRandFunc(id, inputs, calls) {
 			}
 		}
 		
+		while(parentheses > 0) {
+			func.push(")");
+			parentheses--;
+		}
+		
 		if(par + 1 < pars) {
 			func.push(",");
 		}
@@ -123,6 +128,11 @@ function genRandAction(inputs) {
 				}
 			}
 		}
+	}
+	
+	while(parentheses > 0) {
+		action.push(")");
+		parentheses--;
 	}
 	
 	return action;
