@@ -70,7 +70,7 @@ function Player(colour) {
 	
 	this.pos = {x: Math.floor(Math.random() * game_size), y: Math.floor(Math.random() * game_size)};
 	
-	this.radius = 128;
+	this.radius = 64;
 	
 	this.graphics_cleared = true;
 	
