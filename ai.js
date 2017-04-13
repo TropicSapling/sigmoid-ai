@@ -29,8 +29,13 @@ function genRandFunc(id, inputs, calls) {
 			if(part % 2) {
 				func.push(ops[Math.floor(Math.random() * ops.length)]);
 			} else {
-				var consts_len = Math.pow(constants.length, calls);
-				var rand = Math.floor(Math.random() * (consts_len + functions.length));
+				var consts_len = constants.length * 4;
+				
+				if(calls > 1) {
+					var rand = Math.floor(Math.random() * constants.length);
+				} else {
+					var rand = Math.floor(Math.random() * (consts_len + functions.length));
+				}
 				
 				if(rand < consts_len) {
 					func.push(constants[rand % constants.length]);
@@ -66,12 +71,13 @@ function genRandAction(inputs) {
 		if(part % 2) {
 			action.push(ops[Math.floor(Math.random() * ops.length)]);
 		} else {
-			var rand = Math.floor(Math.random() * (constants.length + functions.length));
+			var consts_len = constants.length * 4;
+			var rand = Math.floor(Math.random() * (consts_len + functions.length));
 			
-			if(rand < constants.length) {
-				action.push(constants[rand]);
+			if(rand < consts_len) {
+				action.push(constants[rand % constants.length]);
 			} else {
-				var func = genRandFunc(rand - constants.length, inputs);
+				var func = genRandFunc(rand - consts_len, inputs);
 				
 				for(var i = 0; i < func.length; i++) {
 					action.push(func[i]);
