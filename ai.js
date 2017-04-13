@@ -9,7 +9,11 @@ function parseRandFunc(func) {
 	return [[func.substring(0, i), "("], pars ? Number(pars) : randomBetween(0, 10)];
 }
 
-function genRandFunc(id, inputs) {
+function genRandFunc(id, inputs, calls) {
+	if(!calls) {
+		var calls = 1;
+	}
+	
 	var func_parsed = parseRandFunc(functions[id]);
 	var func = func_parsed[0];
 	var pars = func_parsed[1];
@@ -25,14 +29,12 @@ function genRandFunc(id, inputs) {
 			if(part % 2) {
 				func.push(ops[Math.floor(Math.random() * ops.length)]);
 			} else {
-				var rand = Math.floor(Math.random() * (constants.length * 2 + functions.length));
+				var rand = Math.floor(Math.random() * (constants.length * calls + functions.length));
 				
-				if(rand < constants.length) {
-					func.push(constants[rand]);
-				} else if(rand < constants.length * 2) {
-					func.push(constants[rand - constants.length]);
+				if(rand < constants.length * calls) {
+					func.push(constants[rand % constants.length]);
 				} else {
-					var new_func = genRandFunc(rand - constants.length * 2);
+					var new_func = genRandFunc(rand - constants.length * calls, inputs, calls + 1);
 					
 					for(var i = 0; i < new_func.length; i++) {
 						func.push(new_func[i]);
