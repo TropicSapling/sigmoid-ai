@@ -96,6 +96,18 @@ function Player(colour) {
 			player.pos.y += y_change;
 		}
 		
+		if(player.pos.x + player.radius > game_size) {
+			player.pos.x = game_size - player.radius;
+		} else if(player.pos.x < player.radius) {
+			player.pos.x = player.radius;
+		}
+		
+		if(player.pos.y + player.radius > game_size) {
+			player.pos.y = game_size - player.radius;
+		} else if(player.pos.y < player.radius) {
+			player.pos.y = player.radius;
+		}
+		
 		req_draw.push(["player", player.id]);
 	}
 	
