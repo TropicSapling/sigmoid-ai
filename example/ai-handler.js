@@ -63,11 +63,15 @@ function runAI(id) {
 		player.changePos(divideWithinRange(1, ai.exeAction(0, input)), divideWithinRange(1, ai.exeAction(1, input)));
 		
 		if(Math.round(sigmoid(ai.exeAction(2, input)))) {
-			player.spawnChild(Math.abs(ai.exeAction(3, input)));
+			var child_radius = Math.abs(ai.exeAction(3, input));
 			
-			var child = players[players.length - 1];
+			player.spawnChild(child_radius);
 			
-			AIs.push(new AI(getConstantInputs(child), 4, ai.actions, {player: child}));
+			if(child_radius <= player.radius && child_radius > 10) {
+				var child = players[players.length - 1];
+				
+				AIs.push(new AI(getConstantInputs(child), 4, ai.actions, {player: child}));
+			}
 		}
 	}
 }
