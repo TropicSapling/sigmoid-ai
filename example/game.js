@@ -122,7 +122,7 @@ function Player(colour) {
 	}
 	
 	this.spawnChild = function(radius) {
-		if(radius <= player.radius) {
+		if(radius <= player.radius && radius >= 10) {
 			if(!player.graphics_cleared) {
 				req_clear.push([{x: player.pos.x, y: player.pos.y}, player.radius]);
 				player.graphics_cleared = true;
