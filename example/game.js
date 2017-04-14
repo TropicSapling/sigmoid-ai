@@ -160,7 +160,7 @@ function Player(colour) {
 }
 
 $(document).on("keypress", function (e) {
-    if(e.which == 32) {
+    if(e.key == " ") {
 		timeout = timeout ? false : true;
 		last_tps = tps;
 		
