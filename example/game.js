@@ -172,12 +172,8 @@ $(window).bind('mousewheel', function(e) {
     if(e.originalEvent.wheelDelta >= 0) {
         zoom = zoom * 1.1;
     } else {
-        zoom = zoom * 0.9;
+        zoom = zoom * (1 / 1.1);
     }
-	
-	if(zoom != 1 && ((zoom * 0.9 < zoom && zoom > 1) || (zoom * 1.1 > zoom && zoom < 1))) {
-	   zoom = 1;
-	}
 	
 	
 	$('#game').css('zoom', zoom);
