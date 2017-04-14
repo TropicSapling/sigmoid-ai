@@ -327,8 +327,8 @@ function runGame() {
 		ft_time = performance.now();
 	}
 	
-	if(Math.floor(Math.random() * 200) == 1) {
-		food.push(new Food({x: Math.floor(Math.random() * game_size), y: Math.floor(Math.random() * game_size)}, randomBetween(3, 9), {r: randomBetween(24, 256), g: randomBetween(24, 256), b: randomBetween(24, 256)}));
+	if(Math.floor(Math.random() * 500) == 1) {
+		food.push(new Food({x: Math.floor(Math.random() * game_size), y: Math.floor(Math.random() * game_size)}, randomBetween(5, 9), {r: randomBetween(24, 256), g: randomBetween(24, 256), b: randomBetween(24, 256)}));
 		req_draw.push(["food", food.length - 1]);
 	}
 	
