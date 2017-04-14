@@ -175,6 +175,9 @@ $(window).bind('mousewheel', function(e) {
         zoom = zoom * (1 / 1.1);
     }
 	
+	if(zoom > 0.99 && zoom < 1.01) {
+		zoom = 1;
+	}
 	
 	$('#game').css('zoom', zoom);
 	$('#bg').css('zoom', zoom);
