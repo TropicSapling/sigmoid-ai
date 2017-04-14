@@ -170,9 +170,9 @@ $(document).on("keypress", function (e) {
 
 $(window).bind('mousewheel', function(e) {
     if(e.originalEvent.wheelDelta >= 0) {
-        zoom += 0.1;
+        zoom = zoom * 1.1;
     } else {
-        zoom -= 0.1;
+        zoom = zoom * 0.9;
     }
 	
 	
