@@ -48,7 +48,8 @@ function getInput() {
 function genRandAI() {
 	var p = new Player();
 	
-	AIs.push(new AI(getConstantInputs(p), 4, undefined, {player: p}));
+	AIs.push(new AI(getConstantInputs(p), 3, undefined, {player: p}));
+	AIs[AIs.length - 1].actions.push(["randomBetween(", 15, ",", 25, ")"]);
 }
 
 function runAI(id) {
