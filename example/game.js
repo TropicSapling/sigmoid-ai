@@ -8,6 +8,8 @@ var req_clear = [];
 var req_draw = [];
 var game_size = 1920; // 1920px by 1920px
 
+var zoom = 1;
+
 var timeout = false;
 
 var food = [];
@@ -164,6 +166,18 @@ $(document).on("keypress", function (e) {
 		
 		e.preventDefault();
 	}
+});
+
+$(window).bind('mousewheel', function(e) {
+    if(e.originalEvent.wheelDelta >= 0) {
+        zoom += 0.1;
+    } else {
+        zoom -= 0.1;
+    }
+	
+	
+	$('#game').css('zoom', zoom);
+	$('#bg').css('zoom', zoom);
 });
 
 function calcFPS() {
