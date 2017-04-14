@@ -67,7 +67,7 @@ function runAI(id) {
 			
 			player.spawnChild(child_radius);
 			
-			if(child_radius <= player.radius && child_radius > 10) {
+			if(child_radius <= player.radius && child_radius >= 10) {
 				var child = players[players.length - 1];
 				
 				AIs.push(new AI(getConstantInputs(child), 4, ai.actions, {player: child}));
