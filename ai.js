@@ -148,8 +148,18 @@ function genRandActions(inputs, output_count) {
 	return outputs;
 }
 
+function mutateAction() {
+	
+}
+
 function mutateActions(inputs, actions, chance) {
-	// WIP
+	var mutated_actions = [];
+	
+	for(var action = 0; action < actions.length; action++) {
+		mutated_actions.push(mutateAction(inputs, actions[action], chance));
+	}
+	
+	return mutated_actions;
 }
 
 function AI(inputs, output_count, actions, info) {
