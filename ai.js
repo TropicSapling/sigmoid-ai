@@ -23,14 +23,10 @@ function getRandConst(inputs, parentheses, consts_len, calls) {
 	var constant = constants[rand % constants.length];
 	
 	if(constant == "(") {
-		if(func.length > 0 && func[func.length - 1] == ")") {
-			var rand_const_obj = getRandConst(inputs, parentheses, consts_len, calls);
-			
-			constant = rand_const_obj[0];
-			parentheses = rand_const_obj[1];
-		} else {
-			parentheses++;
-		}
+		var rand_const_obj = getRandConst(inputs, parentheses, consts_len, calls);
+		
+		constant = rand_const_obj[0];
+		parentheses = rand_const_obj[1];
 	}
 	
 	return [constant, parentheses];
