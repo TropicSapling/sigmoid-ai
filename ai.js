@@ -197,7 +197,7 @@ function mutateAction(inputs, action, chance) {
 				parentheses = op_arr[1];
 				
 				mutated_action.push(op_arr[0]);
-			} else if(constants.indexOf(action[part]) != -1) {
+			} else if(constants.indexOf(action[part]) != -1 || constants.indexOf(Number(action[part])) != -1) {
 				var constant = constants[Math.floor(Math.random() * constants.length)];
 				
 				if(constant == "(") {
