@@ -148,6 +148,10 @@ function genRandActions(inputs, output_count) {
 	return outputs;
 }
 
+function mutateActions(inputs, actions, chance) {
+	// WIP
+}
+
 function AI(inputs, output_count, actions, info) {
 	var ai = this;
 	
@@ -166,6 +170,6 @@ function AI(inputs, output_count, actions, info) {
 	}
 	
 	this.mutate = function(chance) {
-		// WIP
+		mutateActions(ai.inputs, ai.actions, chance);
 	}
 }
