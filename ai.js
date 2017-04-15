@@ -280,13 +280,13 @@ function AI(inputs, output_count, actions, info) {
 	this.info = info;
 	
 	this.exeAction = function(n, input) {
-		try { 
+//		try { 
 			return (new Function("input", "return " + ai.actions[n].join(" ")))(input);
-		} catch(e) {
+/*		} catch(e) {
 //			ai.actions[n] = mutateAction(ai.inputs, ai.actions[n], 0.2);
 			ai.actions[n] = genRandAction(ai.inputs);
 			ai.exeAction(n, input);
-		}
+		} */
 	}
 	
 	this.mutate = function(chance) {
