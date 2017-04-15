@@ -148,8 +148,8 @@ function genRandActions(inputs, output_count) {
 	return outputs;
 }
 
-function mutateAction() {
-	
+function mutateAction(inputs, action, chance) {
+	// WIP
 }
 
 function mutateActions(inputs, actions, chance) {
