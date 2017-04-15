@@ -10,7 +10,7 @@ function parseRandFunc(func, calls) {
 	var i = func.indexOf("[");
 	var pars = func.substring(i + 1, func.indexOf("]"));
 	
-	return [[func.substring(0, i), "("], pars ? Number(pars) : randomBetween(0, 4 / calls)];
+	return [[func.substring(0, i), "("], pars ? Number(pars) : randomBetween(1, 4 / calls)];
 }
 
 function getRandConst(inputs, parentheses) {
@@ -44,7 +44,7 @@ function genRandFunc(id, inputs, calls) {
 	
 	for(var par = 0; par < pars; par++) {
 		do {
-			func_len = randomBetween(0, 4);
+			func_len = randomBetween(1, 3);
 		} while(func_len % 2 == 0);
 		
 		for(var part = 0; part < func_len; part++) {
@@ -121,7 +121,7 @@ function genRandAction(inputs) {
 	var action_len;
 	
 	do {
-		action_len = randomBetween(2, 8);
+		action_len = randomBetween(3, 7);
 	} while(action_len % 2 == 0);
 	
 	var parentheses = 0;
