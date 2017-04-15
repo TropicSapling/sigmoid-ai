@@ -222,6 +222,8 @@ function mutateAction(inputs, action, chance) {
 						parentheses = rand_const_obj[1];
 					} else {
 						parentheses++;
+						
+						action.splice(part + 1, 1);
 					}
 				}
 				
