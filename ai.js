@@ -205,50 +205,74 @@ function mutateAction(inputs, action, chance) {
 	var parentheses = 0;
 	
 	for(var part = 0; part < action.length; part++) {
-		if(action[part] != "(" && action[part] != ")" && action[part] != "," && Math.floor(Math.random() * (1 / chance)) == 0) {	
-			if(ops.indexOf(action[part]) != -1) {
-				var op_arr = getRandOp(parentheses);
-				parentheses = op_arr[1];
-				
-				mutated_action.push(op_arr[0]);
-			} else if(constants.indexOf(action[part]) != -1 || constants.indexOf(Number(action[part])) != -1) {
-				var constant = constants[Math.floor(Math.random() * constants.length)];
-				
-				if(constant == "(") {
-					if(mutated_action.length > 0 && mutated_action[mutated_action.length - 1] == ")") {
-						var rand_const_obj = getRandConst(inputs, parentheses);
+		if(action[part] != "(" && action[part] != ")" && action[part] != "," && Math.floor(Math.random() * (1 / chance)) == 0) {
+			if(Math.floor(Math.random() * 5) == 1) {
+				if(Math.floor(Math.random() * 3) == 1) {
+					action.splice(part, 2);
+				} else {
+					var rand = Math.floor(Math.random() * (action.length - 1));
+					var tries = 0;
+					
+					while(tries < 9 && (action[rand] == "(" || action_rand == ")" || ops.indexOf(action[part]) != ops.indexOf(action[rand]) || constants.indexOf(action[part]) != constants.indexOf(action[rand]) || functions.indexOf(action[part]) != functions.indexOf(action[rand]))) {
+						rand = Math.floor(Math.random() * (action.length - 1));
 						
-						constant = rand_const_obj[0];
-						parentheses = rand_const_obj[1];
-					} else {
-						parentheses++;
+						tries++;
+					}
+					
+					if(tries < 9) {
+						action.splice(part, 0, action[rand + 1]);
+						action.splice(part, 0, action[rand]);
 						
-						action.splice(part + 1, 1);
+						if(Math.round(Math.random())) {
+							action.splice(rand, 2);
+						}
 					}
 				}
-				
-				mutated_action.push(constant);
 			} else {
-				var pars;
-				for(var id = 0; id < functions.length; id++) {
-					var func_parsed = parseFunc(functions[id]);
+				if(ops.indexOf(action[part]) != -1) {
+					var op_arr = getRandOp(parentheses);
+					parentheses = op_arr[1];
 					
-					if(action[part] == func_parsed[0][0]) {
-						pars = func_parsed[1];
-						break;
-					}
-				}
-				
-				var mod_functions = [];
-				for(var id = 0; id < functions.length; id++) {
-					var func_parsed = parseFunc(functions[id]);
+					mutated_action.push(op_arr[0]);
+				} else if(constants.indexOf(action[part]) != -1 || constants.indexOf(Number(action[part])) != -1) {
+					var constant = constants[Math.floor(Math.random() * constants.length)];
 					
-					if(func_parsed[1] == pars) {
-						mod_functions.push(func_parsed[0][0]);
+					if(constant == "(") {
+						if(mutated_action.length > 0 && mutated_action[mutated_action.length - 1] == ")") {
+							var rand_const_obj = getRandConst(inputs, parentheses);
+							
+							constant = rand_const_obj[0];
+							parentheses = rand_const_obj[1];
+						} else {
+							parentheses++;
+							
+							action.splice(part + 1, 1);
+						}
 					}
+					
+					mutated_action.push(constant);
+				} else {
+					var pars;
+					for(var id = 0; id < functions.length; id++) {
+						var func_parsed = parseFunc(functions[id]);
+						
+						if(action[part] == func_parsed[0][0]) {
+							pars = func_parsed[1];
+							break;
+						}
+					}
+					
+					var mod_functions = [];
+					for(var id = 0; id < functions.length; id++) {
+						var func_parsed = parseFunc(functions[id]);
+						
+						if(func_parsed[1] == pars) {
+							mod_functions.push(func_parsed[0][0]);
+						}
+					}
+					
+					mutated_action.push(mod_functions[Math.floor(Math.random() * mod_functions.length)]);
 				}
-				
-				mutated_action.push(mod_functions[Math.floor(Math.random() * mod_functions.length)]);
 			}
 		} else {
 			mutated_action.push(action[part]);
