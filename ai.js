@@ -203,6 +203,8 @@ function mutateAction(inputs, action, chance) {
 						parentheses++;
 					}
 				}
+				
+				mutated_action.push(constant);
 			} else {
 				var func = genRandFunc(Math.floor(Math.random() * functions.length), inputs);
 				
