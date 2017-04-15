@@ -225,10 +225,10 @@ function mutateAction(inputs, action, chance) {
 				
 				var mod_functions = [];
 				for(var id = 0; id < functions.length; id++) {
-					var func = functions[id];
+					var func_parsed = parseFunc(functions[id]);
 					
-					if(parseFunc(func)[1] == pars) {
-						mod_functions.push(func);
+					if(func_parsed[1] == pars) {
+						mod_functions.push(func_parsed[0][0]);
 					}
 				}
 				
