@@ -213,7 +213,7 @@ function mutateAction(inputs, action, chance) {
 					var rand = Math.floor(Math.random() * (action.length - 1));
 					var tries = 0;
 					
-					while(tries < 9 && (action[rand] == "(" || action_rand == ")" || ops.indexOf(action[part]) != ops.indexOf(action[rand]) || constants.indexOf(action[part]) != constants.indexOf(action[rand]) || functions.indexOf(action[part]) != functions.indexOf(action[rand]))) {
+					while(tries < 9 && (action[rand] == "(" || action[rand] == ")" || ops.indexOf(action[part]) != ops.indexOf(action[rand]) || constants.indexOf(action[part]) != constants.indexOf(action[rand]) || functions.indexOf(action[part]) != functions.indexOf(action[rand]))) {
 						rand = Math.floor(Math.random() * (action.length - 1));
 						
 						tries++;
