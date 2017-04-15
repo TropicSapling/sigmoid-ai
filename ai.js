@@ -21,7 +21,7 @@ function parseFunc(func) {
 }
 
 function getRandConst(inputs, parentheses) {
-	var mod_constants = constants;
+	var mod_constants = JSON.parse(JSON.stringify(constants));
 	mod_constants.splice(mod_constants.indexOf("("), 1);
 	
 	var constant = mod_constants[Math.floor(Math.random() * mod_constants.length)];
