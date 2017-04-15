@@ -226,6 +226,8 @@ function mutateAction(inputs, action, chance) {
 						if(Math.round(Math.random())) {
 							action.splice(rand, 2);
 						}
+					} else {
+						part--;
 					}
 				}
 			} else {
