@@ -13,17 +13,14 @@ function parseRandFunc(func, calls) {
 	return [[func.substring(0, i), "("], pars ? Number(pars) : randomBetween(0, 4 / calls)];
 }
 
-function getRandConst(inputs, parentheses, consts_len, calls) {
-	if(calls > 1) {
-		var rand = Math.floor(Math.random() * constants.length);
-	} else {
-		var rand = Math.floor(Math.random() * (consts_len + functions.length));
-	}
+function getRandConst(inputs, parentheses) {
+	var mod_constants = constants;
+	mod_constants.splice(mod_constants.indexOf("("), 1);
 	
-	var constant = constants[rand % constants.length];
+	var constant = mod_constants[Math.floor(Math.random() * mod_constants.length)];
 	
 	if(constant == "(") {
-		var rand_const_obj = getRandConst(inputs, parentheses, consts_len, calls);
+		var rand_const_obj = getRandConst(inputs, parentheses);
 		
 		constant = rand_const_obj[0];
 		parentheses = rand_const_obj[1];
@@ -70,7 +67,7 @@ function genRandFunc(id, inputs, calls) {
 					
 					if(constant == "(") {
 						if(func.length > 0 && func[func.length - 1] == ")") {
-							var rand_const_obj = getRandConst(inputs, parentheses, consts_len, calls);
+							var rand_const_obj = getRandConst(inputs, parentheses);
 							
 							constant = rand_const_obj[0];
 							parentheses = rand_const_obj[1];
@@ -144,7 +141,7 @@ function genRandAction(inputs) {
 				
 				if(constant == "(") {
 					if(action.length > 0 && action[action.length - 1] == ")") {
-						var rand_const_obj = getRandConst(inputs, parentheses, consts_len);
+						var rand_const_obj = getRandConst(inputs, parentheses);
 						
 						constant = rand_const_obj[0];
 						parentheses = rand_const_obj[1];
@@ -193,31 +190,24 @@ function mutateAction(inputs, action, chance) {
 				parentheses = op_arr[1];
 				
 				mutated_action.push(op_arr[0]);
-			} else {
-				var consts_len = constants.length * 4;
-				var rand = Math.floor(Math.random() * (consts_len + functions.length));
+			} else if(constants.indexOf(action[part]) != -1) {
+				var constant = constants[Math.floor(Math.random() * constants.length)];
 				
-				if(rand < consts_len) {
-					var constant = constants[rand % constants.length];
-					
-					if(constant == "(") {
-						if(mutated_action.length > 0 && mutated_action[mutated_action.length - 1] == ")") {
-							var rand_const_obj = getRandConst(inputs, parentheses, consts_len);
-							
-							constant = rand_const_obj[0];
-							parentheses = rand_const_obj[1];
-						} else {
-							parentheses++;
-						}
+				if(constant == "(") {
+					if(mutated_action.length > 0 && mutated_action[mutated_action.length - 1] == ")") {
+						var rand_const_obj = getRandConst(inputs, parentheses);
+						
+						constant = rand_const_obj[0];
+						parentheses = rand_const_obj[1];
+					} else {
+						parentheses++;
 					}
-					
-					mutated_action.push(constant);
-				} else {
-					var func = genRandFunc(rand - consts_len, inputs);
-					
-					for(var i = 0; i < func.length; i++) {
-						mutated_action.push(func[i]);
-					}
+				}
+			} else {
+				var func = genRandFunc(Math.floor(Math.random() * functions.length), inputs);
+				
+				for(var i = 0; i < func.length; i++) {
+					mutated_action.push(func[i]);
 				}
 			}
 		} else {
