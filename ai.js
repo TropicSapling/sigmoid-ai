@@ -149,7 +149,48 @@ function genRandActions(inputs, output_count) {
 }
 
 function mutateAction(inputs, action, chance) {
-	return action; // WIP; will be changed
+	var mutated_action = [];
+	
+	var parentheses = 0;
+	
+	for(var part = 0; part < action.length; part++) { // NEEDS CHANGING
+		if(Math.floor(Math.random() * (1 / chance)) == 0) {	
+			if(part % 2) {
+				var op_arr = getRandOp(parentheses);
+				parentheses = op_arr[1];
+				
+				mutated_action.push(op_arr[0]);
+			} else {
+				var consts_len = constants.length * 4;
+				var rand = Math.floor(Math.random() * (consts_len + functions.length));
+				
+				if(rand < consts_len) {
+					var constant = constants[rand % constants.length];
+					
+					if(constant == "(") {
+						parentheses++;
+					}
+					
+					mutated_action.push(constant);
+				} else {
+					var func = genRandFunc(rand - consts_len, inputs);
+					
+					for(var i = 0; i < func.length; i++) {
+						mutated_action.push(func[i]);
+					}
+				}
+			}
+		} else {
+			mutated_action.push(action[part]);
+		}
+	}
+	
+	while(parentheses > 0) {
+		mutated_action.push(")");
+		parentheses--;
+	}
+	
+	return mutated_action;
 }
 
 function mutateActions(inputs, actions, chance) {
@@ -174,7 +215,7 @@ function AI(inputs, output_count, actions, info) {
 		try { 
 			return (new Function("input", "return " + ai.actions[n].join(" ")))(input);
 		} catch(e) {
-			ai.actions[n] = genRandAction(ai.inputs);
+			ai.actions[n] = mutateAction(ai.inputs, ai.actions[n], 0.1);
 			ai.exeAction(n, input);
 		}
 	}
