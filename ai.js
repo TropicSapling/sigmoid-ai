@@ -31,9 +31,9 @@ function getRandConst(inputs, parentheses, consts_len, calls) {
 		} else {
 			parentheses++;
 		}
-		
-		return [constant, parentheses];
 	}
+	
+	return [constant, parentheses];
 }
 
 function genRandFunc(id, inputs, calls) {
