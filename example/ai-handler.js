@@ -49,7 +49,11 @@ function genRandAI() {
 	var p = new Player();
 	
 	AIs.push(new AI(getConstantInputs(p), 3, undefined, {player: p}));
-	AIs[AIs.length - 1].actions.push(["randomBetween(", 15, ",", 25, ")"]);
+	
+	var ai = AIs[AIs.length - 1];
+	
+	ai.actions.push(["randomBetween(", 15, ",", 25, ")"]); // Child spawn size
+	ai.actions.push(["randomBetween(", -3, ",", 0, ")"]); // Mutation chance
 }
 
 function runAI(id) {
@@ -71,7 +75,8 @@ function runAI(id) {
 			if(child_radius <= player.radius && child_radius >= 10) {
 				var child = players[players.length - 1];
 				
-				AIs.push(new AI(getConstantInputs(child), 4, ai.actions, {player: child}));
+				AIs.push(new AI(getConstantInputs(child), 5, ai.actions, {player: child}));
+				AIs[AIs.length - 1].mutate(sigmoid(ai.exeAction(4, input)));
 			}
 		}
 	}
