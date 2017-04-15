@@ -215,7 +215,7 @@ function AI(inputs, output_count, actions, info) {
 		try { 
 			return (new Function("input", "return " + ai.actions[n].join(" ")))(input);
 		} catch(e) {
-//			ai.actions[n] = mutateAction(ai.inputs, ai.actions[n], 0.1);
+//			ai.actions[n] = mutateAction(ai.inputs, ai.actions[n], 0.2);
 			ai.actions[n] = genRandAction(ai.inputs);
 			ai.exeAction(n, input);
 		}
