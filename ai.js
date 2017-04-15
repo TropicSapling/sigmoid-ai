@@ -232,7 +232,7 @@ function mutateAction(inputs, action, chance) {
 					}
 				}
 				
-				mutated_action.push(mod_functions[Math.floor(Math.random() * functions.length)]);
+				mutated_action.push(mod_functions[Math.floor(Math.random() * mod_functions.length)]);
 			}
 		} else {
 			mutated_action.push(action[part]);
