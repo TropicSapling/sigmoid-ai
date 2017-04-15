@@ -164,4 +164,8 @@ function AI(inputs, output_count, actions, info) {
 			ai.exeAction(n, input);
 		}
 	}
+	
+	this.mutate = function(chance) {
+		// WIP
+	}
 }
