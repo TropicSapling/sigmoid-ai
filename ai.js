@@ -59,6 +59,11 @@ function genRandFunc(id, inputs, calls) {
 				var op_arr = getRandOp(parentheses);
 				parentheses = op_arr[1];
 				
+				if(op_arr[0] == ")") {
+					part--;
+					func_len--;
+				}
+				
 				func.push(op_arr[0]);
 			} else {
 				var consts_len = constants.length * 4;
@@ -80,6 +85,8 @@ function genRandFunc(id, inputs, calls) {
 							parentheses = rand_const_obj[1];
 						} else {
 							parentheses++;
+							part--;
+							func_len--;
 						}
 					}
 					
@@ -138,6 +145,11 @@ function genRandAction(inputs) {
 			var op_arr = getRandOp(parentheses);
 			parentheses = op_arr[1];
 			
+			if(op_arr[0] == ")") {
+				part--;
+				action_len--;
+			}
+			
 			action.push(op_arr[0]);
 		} else {
 			var consts_len = constants.length * 4;
@@ -154,6 +166,8 @@ function genRandAction(inputs) {
 						parentheses = rand_const_obj[1];
 					} else {
 						parentheses++;
+						part--;
+						action_len--;
 					}
 				}
 				
