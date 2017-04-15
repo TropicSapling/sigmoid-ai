@@ -154,7 +154,7 @@ function mutateAction(inputs, action, chance) {
 	var parentheses = 0;
 	
 	for(var part = 0; part < action.length; part++) {
-		if(Math.floor(Math.random() * (1 / chance)) == 0) {	
+		if(action[part] != "(" && action[part] != ")" && action[part] != "," && Math.floor(Math.random() * (1 / chance)) == 0) {	
 			if(ops.indexOf(action[part]) != -1) {
 				var op_arr = getRandOp(parentheses);
 				parentheses = op_arr[1];
