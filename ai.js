@@ -290,6 +290,6 @@ function AI(inputs, output_count, actions, info) {
 	}
 	
 	this.mutate = function(chance) {
-		mutateActions(ai.inputs, ai.actions, chance);
+//		mutateActions(ai.inputs, ai.actions, chance);
 	}
 }
