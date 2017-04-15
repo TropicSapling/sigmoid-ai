@@ -74,8 +74,8 @@ function runAI(id) {
 				AIs.push(new AI(getConstantInputs(child), 4, ai.actions, {player: child}));
 				
 				if(Math.floor(Math.random() * 100) == 1) {
-					console.log("AI: " + JSON.stringify(AIs[AIs.length - 1].actions));
-					console.log("CHILD: " + JSON.stringify(child));
+					console.log("AI: " + AIs[AIs.length - 1].info.player.id);
+					console.log("CHILD: " + child.id);
 				}
 			}
 		}
