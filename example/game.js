@@ -63,11 +63,11 @@ function Player(colour) {
 	
 	if(colour) {
 		this.colour = {};
-		this.colour.r = colour.r === undefined ? randomBetween(24, 256) : colour.r;
-		this.colour.g = colour.g === undefined ? randomBetween(24, 256) : colour.g;
-		this.colour.b = colour.b === undefined ? randomBetween(24, 256) : colour.b;
+		this.colour.r = colour.r === undefined ? randomBetween(25, 255) : colour.r;
+		this.colour.g = colour.g === undefined ? randomBetween(25, 255) : colour.g;
+		this.colour.b = colour.b === undefined ? randomBetween(25, 255) : colour.b;
 	} else {
-		this.colour = {r: randomBetween(24, 256), g: randomBetween(24, 256), b: randomBetween(24, 256)};
+		this.colour = {r: randomBetween(25, 255), g: randomBetween(25, 255), b: randomBetween(25, 255)};
 	}
 	
 	this.pos = {x: Math.floor(Math.random() * game_size), y: Math.floor(Math.random() * game_size)};
@@ -328,7 +328,7 @@ function runGame() {
 	}
 	
 	if(Math.floor(Math.random() * 500) == 1) {
-		food.push(new Food({x: Math.floor(Math.random() * game_size), y: Math.floor(Math.random() * game_size)}, randomBetween(5, 9), {r: randomBetween(24, 256), g: randomBetween(24, 256), b: randomBetween(24, 256)}));
+		food.push(new Food({x: Math.floor(Math.random() * game_size), y: Math.floor(Math.random() * game_size)}, randomBetween(6, 8), {r: randomBetween(25, 255), g: randomBetween(25, 255), b: randomBetween(25, 255)}));
 		req_draw.push(["food", food.length - 1]);
 	}
 	
