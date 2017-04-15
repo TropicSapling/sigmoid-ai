@@ -13,6 +13,13 @@ function parseRandFunc(func, calls) {
 	return [[func.substring(0, i), "("], pars ? Number(pars) : randomBetween(1, 4 / calls)];
 }
 
+function parseFunc(func) {
+	var i = func.indexOf("[");
+	var pars = func.substring(i + 1, func.indexOf("]"));
+	
+	return [[func.substring(0, i), "("], pars ? Number(pars) : -1];
+}
+
 function getRandConst(inputs, parentheses) {
 	var mod_constants = constants;
 	mod_constants.splice(mod_constants.indexOf("("), 1);
@@ -206,11 +213,26 @@ function mutateAction(inputs, action, chance) {
 				
 				mutated_action.push(constant);
 			} else {
-				var func = genRandFunc(Math.floor(Math.random() * functions.length), inputs);
-				
-				for(var i = 0; i < func.length; i++) {
-					mutated_action.push(func[i]);
+				var pars;
+				for(var id = 0; id < functions.length; id++) {
+					var func_parsed = parseFunc(functions[id]);
+					
+					if(action[part] == func_parsed[0][0]) {
+						pars = func_parsed[1];
+						break;
+					}
 				}
+				
+				var mod_functions = [];
+				for(var id = 0; id < functions.length; id++) {
+					var func = functions[id];
+					
+					if(parseFunc(func)[1] == pars) {
+						mod_functions.push(func);
+					}
+				}
+				
+				mutated_action.push(mod_functions[Math.floor(Math.random() * functions.length)]);
 			}
 		} else {
 			mutated_action.push(action[part]);
