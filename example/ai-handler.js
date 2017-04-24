@@ -52,7 +52,7 @@ function genRandAI() {
 	
 	var ai = AIs[AIs.length - 1];
 	
-	ai.actions.push(["randomBetween", "(", 7, "*", 3, ",", 7, "*", 4, ")"]); // Child spawn size
+	ai.actions.push(["randomBetween", "(", 7, "*", 4, ",", 7, "*", 5, ")"]); // Child spawn size
 	ai.actions.push(["randomBetween", "(", 0, "-", 2, ",", 0, "-", 1, ")"]); // Mutation chance
 }
 
