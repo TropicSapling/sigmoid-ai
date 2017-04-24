@@ -307,13 +307,21 @@ function AI(inputs, output_count, actions, info) {
 	
 	this.info = info;
 	
-	this.exeAction = function(n, input) {
+	this.exeAction = function(n, input, calls) {
+		if(!calls) {
+			calls = 1;
+		}
+		
 		try { 
 			return (new Function("input", "return " + ai.actions[n].join(" ")))(input);
 		} catch(e) {
-//			ai.actions[n] = mutateAction(ai.inputs, ai.actions[n], 0.2);
-			ai.actions[n] = genRandAction(ai.inputs);
-			ai.exeAction(n, input);
+			if(calls > 9) {
+				ai.actions[n] = genRandAction(ai.inputs);
+			} else {
+				ai.actions[n] = mutateAction(ai.inputs, ai.actions[n], 0.2);
+			}
+			
+			ai.exeAction(n, input, calls + 1);
 		}
 	}
 	
