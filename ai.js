@@ -47,7 +47,7 @@ function genRandFunc(id, inputs, calls) {
 		
 		for(var part = 0; part < func_len; part++) {
 			if(part % 2) {
-				var op_arr = getRandOp(parentheses);
+				var op_arr = getRandOp(func.length > 0 && func[func.length - 1] == "(", parentheses);
 				parentheses = op_arr[1];
 				
 				if(op_arr[0] == ")") {
@@ -104,14 +104,14 @@ function genRandFunc(id, inputs, calls) {
 	return func;
 }
 
-function getRandOp(parentheses) {
+function getRandOp(parenthesis, parentheses) {
 	var op = ops[Math.floor(Math.random() * ops.length)];
 	
 	if(op == ")") {
-		if(parentheses > 0) {
-			return [op, parentheses - 1];
-		} else {
+		if(parentheses < 1 || parenthesis) {
 			return getRandOp(parentheses);
+		} else {
+			return [op, parentheses - 1];
 		}
 	}
 	
@@ -130,7 +130,7 @@ function genRandAction(inputs) {
 	
 	for(var part = 0; part < action_len; part++) {
 		if(part % 2) {
-			var op_arr = getRandOp(parentheses);
+			var op_arr = getRandOp(action.length > 0 && action[action.length - 1] == "(", parentheses);
 			parentheses = op_arr[1];
 			
 			if(op_arr[0] == ")") {
@@ -217,7 +217,7 @@ function mutateAction(inputs, action, chance) {
 				}
 			} else {
 				if(ops.indexOf(action[part]) != -1) {
-					var op_arr = getRandOp(parentheses);
+					var op_arr = getRandOp(action.length > 0 && action[action.length - 1] == "(", parentheses);
 					parentheses = op_arr[1];
 					
 					mutated_action.push(op_arr[0]);
