@@ -20,20 +20,11 @@ function parseFunc(func) {
 	return [[func.substring(0, i), "("], pars ? Number(pars) : -1];
 }
 
-function getRandConst(inputs, parentheses) {
+function getRandConst(inputs) {
 	var mod_constants = JSON.parse(JSON.stringify(constants));
 	mod_constants.splice(mod_constants.indexOf("("), 1);
 	
-	var constant = mod_constants[Math.floor(Math.random() * mod_constants.length)];
-	
-	if(constant == "(") {
-		var rand_const_obj = getRandConst(inputs, parentheses);
-		
-		constant = rand_const_obj[0];
-		parentheses = rand_const_obj[1];
-	}
-	
-	return [constant, parentheses];
+	return mod_constants[Math.floor(Math.random() * mod_constants.length)];
 }
 
 function genRandFunc(id, inputs, calls) {
@@ -79,10 +70,7 @@ function genRandFunc(id, inputs, calls) {
 					
 					if(constant == "(") {
 						if(func.length > 0 && func[func.length - 1] == ")") {
-							var rand_const_obj = getRandConst(inputs, parentheses);
-							
-							constant = rand_const_obj[0];
-							parentheses = rand_const_obj[1];
+							constant = getRandConst(inputs);
 						} else {
 							parentheses++;
 							part--;
@@ -160,10 +148,7 @@ function genRandAction(inputs) {
 				
 				if(constant == "(") {
 					if(action.length > 0 && action[action.length - 1] == ")") {
-						var rand_const_obj = getRandConst(inputs, parentheses);
-						
-						constant = rand_const_obj[0];
-						parentheses = rand_const_obj[1];
+						constant = getRandConst(inputs);
 					} else {
 						parentheses++;
 						part--;
@@ -241,10 +226,7 @@ function mutateAction(inputs, action, chance) {
 					
 					if(constant == "(") {
 						if(mutated_action.length > 0 && mutated_action[mutated_action.length - 1] == ")") {
-							var rand_const_obj = getRandConst(inputs, parentheses);
-							
-							constant = rand_const_obj[0];
-							parentheses = rand_const_obj[1];
+							constant = getRandConst(inputs);
 						} else {
 							parentheses++;
 							
