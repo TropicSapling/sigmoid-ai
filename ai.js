@@ -45,9 +45,15 @@ function genRandFunc(id, inputs, calls) {
 			func_len = randomBetween(1, 3);
 		} while(func_len % 2 == 0);
 		
+		var parentheses_disabled = false;
+		
+		if(func_len < 3) {
+			parentheses_disabled = true;
+		}
+		
 		for(var part = 0; part < func_len; part++) {
 			if(part % 2) {
-				var op_arr = getRandOp(func.length > 0 && func[func.length - 1] == "(", parentheses);
+				var op_arr = getRandOp(parentheses_disabled || (func.length > 0 && func[func.length - 1] == "("), parentheses);
 				parentheses = op_arr[1];
 				
 				if(op_arr[0] == ")") {
@@ -69,7 +75,7 @@ function genRandFunc(id, inputs, calls) {
 					var constant = constants[rand % constants.length];
 					
 					if(constant == "(") {
-						if(func.length > 0 && func[func.length - 1] == ")") {
+						if(parentheses_disabled || (func.length > 0 && func[func.length - 1] == ")")) {
 							constant = getRandConst(inputs);
 						} else {
 							parentheses++;
