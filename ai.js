@@ -309,7 +309,7 @@ function AI(inputs, output_count, actions, info) {
 		} catch(e) {
 			if(!ai.mutated || calls > 9) {
 				if(!ai.mutated) {
-					console.log(ai.actions[n].join(" "));
+					console.log(ai.actions[n]);
 				}
 				
 				ai.actions[n] = genRandAction(ai.inputs);
