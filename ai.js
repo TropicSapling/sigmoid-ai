@@ -55,6 +55,10 @@ function genRandFunc(id, inputs, calls) {
 						part--;
 					}
 					
+					if(!op_arr[0]) {
+						console.log("func");
+					}
+					
 					func.push(op_arr[0]);
 				} else {
 					func.push(")");
@@ -141,6 +145,10 @@ function genRandAction(inputs) {
 				
 				if(op_arr[0] == ")") {
 					part--;
+				}
+				
+				if(!op_arr[0]) {
+					console.log("action");
 				}
 				
 				action.push(op_arr[0]);
