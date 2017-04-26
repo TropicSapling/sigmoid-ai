@@ -45,15 +45,9 @@ function genRandFunc(id, inputs, calls) {
 			func_len = randomBetween(1, 3);
 		} while(func_len % 2 == 0);
 		
-		var parentheses_disabled = false;
-		
-		if(func_len < 3) {
-			parentheses_disabled = true;
-		}
-		
 		for(var part = 0; part < func_len; part++) {
 			if(part % 2) {
-				var op_arr = getRandOp(parentheses_disabled || (func.length > 0 && func[func.length - 1] == "("), parentheses);
+				var op_arr = getRandOp(parentheses < 1 || (func.length > 0 && func[func.length - 1] == "("), parentheses);
 				parentheses = op_arr[1];
 				
 				if(op_arr[0] == ")") {
@@ -75,7 +69,7 @@ function genRandFunc(id, inputs, calls) {
 					var constant = constants[rand % constants.length];
 					
 					if(constant == "(") {
-						if(parentheses_disabled || (func.length > 0 && func[func.length - 1] == ")")) {
+						if(part > func_len - 3 || (func.length > 0 && func[func.length - 1] == ")")) {
 							constant = getRandConst(inputs);
 						} else {
 							parentheses++;
@@ -136,7 +130,7 @@ function genRandAction(inputs) {
 	
 	for(var part = 0; part < action_len; part++) {
 		if(part % 2) {
-			var op_arr = getRandOp(action.length > 0 && action[action.length - 1] == "(", parentheses);
+			var op_arr = getRandOp(parentheses < 1 || (action.length > 0 && action[action.length - 1] == "("), parentheses);
 			parentheses = op_arr[1];
 			
 			if(op_arr[0] == ")") {
@@ -153,7 +147,7 @@ function genRandAction(inputs) {
 				var constant = constants[rand % constants.length];
 				
 				if(constant == "(") {
-					if(action.length > 0 && action[action.length - 1] == ")") {
+					if(part > action_len - 3 || (action.length > 0 && action[action.length - 1] == ")")) {
 						constant = getRandConst(inputs);
 					} else {
 						parentheses++;
@@ -318,7 +312,7 @@ function AI(inputs, output_count, actions, info) {
 	}
 	
 	this.mutate = function(chance) {
-		// mutateActions(ai.inputs, ai.actions, chance);
+		mutateActions(ai.inputs, ai.actions, chance);
 		
 		ai.mutated = true;
 	}
