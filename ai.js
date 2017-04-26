@@ -194,7 +194,7 @@ function mutateAction(inputs, action, chance) {
 	var parentheses = 0;
 	
 	for(var part = 0; part < action.length; part++) {
-		if(action[part] != "(" && action[part + 1] != "("  && action[part] != ")" && action[part + 1] != ")" && action[part] != "," && action[part + 1] != "," && Math.floor(Math.random() * (1 / chance)) == 0) {
+		if(action[part - 1] != "(" && action[part] != "(" && action[part + 1] != "("  && action[part - 1] != ")" && action[part] != ")" && action[part + 1] != ")" && action[part] != "," && action[part + 1] != "," && Math.floor(Math.random() * (1 / chance)) == 0) {
 			if(Math.floor(Math.random() * 5) == 1) {
 				if(Math.floor(Math.random() * 3) == 1) {
 					action.splice(part, 2);
