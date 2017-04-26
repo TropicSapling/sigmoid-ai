@@ -47,15 +47,21 @@ function genRandFunc(id, inputs, calls) {
 		
 		for(var part = 0; part < func_len; part++) {
 			if(part % 2) {
-				var op_arr = getRandOp(func.length > 0 && func[func.length - 1] == "(", parentheses);
-				parentheses = op_arr[1];
-				
-				if(op_arr[0] == ")") {
-					part--;
-					func_len--;
+				if(parentheses < func_len - part) {
+					var op_arr = getRandOp(func.length > 0 && func[func.length - 1] == "(", parentheses);
+					parentheses = op_arr[1];
+					
+					if(op_arr[0] == ")") {
+						part--;
+						func_len--;
+					}
+					
+					func.push(op_arr[0]);
+				} else {
+					func.push(")");
+					
+					parentheses--;
 				}
-				
-				func.push(op_arr[0]);
 			} else {
 				var consts_len = constants.length * 4;
 				
@@ -87,11 +93,6 @@ function genRandFunc(id, inputs, calls) {
 					}
 				}
 			}
-		}
-		
-		while(parentheses > 0) {
-			func.push(")");
-			parentheses--;
 		}
 		
 		if(par + 1 < pars) {
@@ -130,15 +131,21 @@ function genRandAction(inputs) {
 	
 	for(var part = 0; part < action_len; part++) {
 		if(part % 2) {
-			var op_arr = getRandOp(action.length > 0 && action[action.length - 1] == "(", parentheses);
-			parentheses = op_arr[1];
-			
-			if(op_arr[0] == ")") {
-				part--;
-				action_len--;
+			if(parentheses < action_len - part) {
+				var op_arr = getRandOp(action.length > 0 && action[action.length - 1] == "(", parentheses);
+				parentheses = op_arr[1];
+				
+				if(op_arr[0] == ")") {
+					part--;
+					action_len--;
+				}
+				
+				action.push(op_arr[0]);
+			} else {
+				action.push(")");
+					
+				parentheses--;
 			}
-			
-			action.push(op_arr[0]);
 		} else {
 			var consts_len = constants.length * 4;
 			var rand = Math.floor(Math.random() * (consts_len + functions.length));
@@ -165,11 +172,6 @@ function genRandAction(inputs) {
 				}
 			}
 		}
-	}
-	
-	while(parentheses > 0) {
-		action.push(")");
-		parentheses--;
 	}
 	
 	return action;
