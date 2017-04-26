@@ -1,5 +1,6 @@
 var ops = ["+", "-", "*", "/", "%", "&", "|", "^", "<<", ">>", ")"];
 var constants = [Math.E, Math.PI, 0, 1, 2, 3, 4, 5, 6, 7, "("];
+var constants_n = [Math.E, Math.PI, 0, 1, 2, 3, 4, 5, 6, 7];
 var functions = ["Math.abs[1]", "Math.acos[1]", "Math.asin[1]", "Math.atan[1]", "Math.atan2[2]", "Math.ceil[1]", "Math.cos[1]", "Math.floor[1]", "Math.max[]", "Math.min[]", "Math.pow[2]", "Math.random[0]", "Math.round[1]", "Math.sin[1]", "Math.sqrt[1]", "Math.tan[1]", "randomBetween[2]"]; // [n] = amount of args needed, if brackets are empty you can choose how many args
 
 function randomBetween(min, max) {
@@ -18,13 +19,6 @@ function parseFunc(func) {
 	var pars = func.substring(i + 1, func.indexOf("]"));
 	
 	return [[func.substring(0, i), "("], pars ? Number(pars) : -1];
-}
-
-function getRandConst(inputs) {
-	var mod_constants = JSON.parse(JSON.stringify(constants));
-	mod_constants.splice(mod_constants.indexOf("("), 1);
-	
-	return mod_constants[Math.floor(Math.random() * mod_constants.length)];
 }
 
 function genRandFunc(id, inputs, calls) {
@@ -76,7 +70,7 @@ function genRandFunc(id, inputs, calls) {
 					
 					if(constant == "(") {
 						if(part > func_len - 3 || (func.length > 0 && func[func.length - 1] == ")")) {
-							constant = getRandConst(inputs);
+							constant = constants_n[Math.floor(Math.random() * constants_n.length)];
 						} else {
 							parentheses++;
 							part--;
@@ -159,7 +153,7 @@ function genRandAction(inputs) {
 				
 				if(constant == "(") {
 					if(part > action_len - 3 || (action.length > 0 && action[action.length - 1] == ")")) {
-						constant = getRandConst(inputs);
+						constant = constants_n[Math.floor(Math.random() * constants_n.length)];
 					} else {
 						parentheses++;
 						part--;
@@ -236,7 +230,7 @@ function mutateAction(inputs, action, chance) {
 					
 					if(constant == "(") {
 						if(mutated_action.length > 0 && mutated_action[mutated_action.length - 1] == ")") {
-							constant = getRandConst(inputs);
+							constant = constants_n[Math.floor(Math.random() * constants_n.length)];
 						} else {
 							parentheses++;
 							
