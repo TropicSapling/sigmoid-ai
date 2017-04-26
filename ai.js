@@ -301,11 +301,9 @@ function AI(inputs, output_count, actions, info) {
 		try { 
 			return (new Function("input", "return " + ai.actions[n].join(" ")))(input);
 		} catch(e) {
+			console.log(ai.actions[n].join(" "));
+			
 			if(!ai.mutated || calls > 9) {
-				if(!ai.mutated) {
-					console.log(ai.actions[n].join(" "));
-				}
-				
 				ai.actions[n] = genRandAction(ai.inputs);
 			} else {
 				ai.actions[n] = mutateAction(ai.inputs, ai.actions[n], 0.2);
@@ -316,7 +314,7 @@ function AI(inputs, output_count, actions, info) {
 	}
 	
 	this.mutate = function(chance) {
-		// mutateActions(ai.inputs, ai.actions, chance);
+		mutateActions(ai.inputs, ai.actions, chance);
 		
 		ai.mutated = true;
 	}
