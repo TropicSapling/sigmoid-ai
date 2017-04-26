@@ -53,7 +53,6 @@ function genRandFunc(id, inputs, calls) {
 					
 					if(op_arr[0] == ")") {
 						part--;
-						func_len--;
 					}
 					
 					func.push(op_arr[0]);
@@ -80,7 +79,6 @@ function genRandFunc(id, inputs, calls) {
 						} else {
 							parentheses++;
 							part--;
-							func_len--;
 						}
 					}
 					
@@ -137,7 +135,6 @@ function genRandAction(inputs) {
 				
 				if(op_arr[0] == ")") {
 					part--;
-					action_len--;
 				}
 				
 				action.push(op_arr[0]);
@@ -159,7 +156,6 @@ function genRandAction(inputs) {
 					} else {
 						parentheses++;
 						part--;
-						action_len--;
 					}
 				}
 				
