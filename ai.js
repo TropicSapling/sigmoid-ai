@@ -47,7 +47,7 @@ function genRandFunc(id, inputs, calls) {
 		
 		for(var part = 0; part < func_len; part++) {
 			if(part % 2) {
-				var op_arr = getRandOp(parentheses < 1 || (func.length > 0 && func[func.length - 1] == "("), parentheses);
+				var op_arr = getRandOp(func.length > 0 && func[func.length - 1] == "(", parentheses);
 				parentheses = op_arr[1];
 				
 				if(op_arr[0] == ")") {
@@ -109,7 +109,7 @@ function getRandOp(parenthesis, parentheses) {
 	
 	if(op == ")") {
 		if(parentheses < 1 || parenthesis) {
-			return getRandOp(parentheses);
+			return getRandOp(parenthesis, parentheses);
 		} else {
 			return [op, parentheses - 1];
 		}
@@ -130,7 +130,7 @@ function genRandAction(inputs) {
 	
 	for(var part = 0; part < action_len; part++) {
 		if(part % 2) {
-			var op_arr = getRandOp(parentheses < 1 || (action.length > 0 && action[action.length - 1] == "("), parentheses);
+			var op_arr = getRandOp(action.length > 0 && action[action.length - 1] == "(", parentheses);
 			parentheses = op_arr[1];
 			
 			if(op_arr[0] == ")") {
