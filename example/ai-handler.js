@@ -31,10 +31,6 @@ function divideWithinRange(a, b) {
 	return a / b;
 }
 
-function getConstantInputs(player) {
-	return {AI: player, other: [["food", 6], ["players", 6]]}; // [const, property_count]
-}
-
 function getInput() {
 	var raw_input = [6]; // Push amount of properties each food has
 	raw_input.push(food);
@@ -48,7 +44,7 @@ function getInput() {
 function genRandAI() {
 	var p = new Player();
 	
-	AIs.push(new AI(getConstantInputs(p), 3, undefined, {player: p}));
+	AIs.push(new AI(3, undefined, {player: p}));
 	
 	var ai = AIs[AIs.length - 1];
 	
@@ -75,7 +71,7 @@ function runAI(id) {
 			if(child_radius <= player.radius && child_radius >= 10) {
 				var child = players[players.length - 1];
 				
-				AIs.push(new AI(getConstantInputs(child), 5, ai.actions, {player: child}));
+				AIs.push(new AI(5, ai.actions, {player: child}));
 				AIs[AIs.length - 1].mutate(sigmoid(ai.exeAction(4, input)));
 			}
 		}
