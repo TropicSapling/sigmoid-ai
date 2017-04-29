@@ -25,7 +25,7 @@ function parseFunc(func) {
 	return [[func.substring(0, i), "("], pars ? Number(pars) : -1];
 }
 
-function genRandFunc(id, inputs, calls) {
+function genRandFunc(id, calls) {
 	if(!calls) {
 		var calls = 1;
 	}
@@ -85,7 +85,7 @@ function genRandFunc(id, inputs, calls) {
 					
 					func.push(constant);
 				} else {
-					var new_func = genRandFunc(rand - consts_len, inputs, calls + 1);
+					var new_func = genRandFunc(rand - consts_len, calls + 1);
 					
 					for(var i = 0; i < new_func.length; i++) {
 						func.push(new_func[i]);
@@ -127,7 +127,7 @@ function getRandOp(parenthesis, parentheses) {
 	return [op, parentheses];
 }
 
-function genRandAction(inputs) {
+function genRandAction() {
 	var action = [];
 	var action_len;
 	
@@ -172,7 +172,7 @@ function genRandAction(inputs) {
 				
 				action.push(constant);
 			} else {
-				var func = genRandFunc(rand - consts_len, inputs);
+				var func = genRandFunc(rand - consts_len);
 				
 				for(var i = 0; i < func.length; i++) {
 					action.push(func[i]);
@@ -192,13 +192,13 @@ function genRandAction(inputs) {
 function genRandActions(inputs, output_count) {
 	var outputs = [];
 	for(var output = 0; output < output_count; output++) {
-		outputs.push(genRandAction(inputs));
+		outputs.push(genRandAction());
 	}
 	
 	return outputs;
 }
 
-function mutateAction(inputs, action, chance) {
+function mutateAction(action, chance) {
 	var mutated_action = [];
 	
 	var parentheses = 0;
@@ -289,17 +289,16 @@ function mutateActions(inputs, actions, chance) {
 	var mutated_actions = [];
 	
 	for(var action = 0; action < actions.length; action++) {
-		mutated_actions.push(mutateAction(inputs, actions[action], chance));
+		mutated_actions.push(mutateAction(actions[action], chance));
 	}
 	
 	return mutated_actions;
 }
 
-function AI(inputs, output_count, actions, info) {
+function AI(output_count, actions, info) {
 	var ai = this;
 	
-	this.actions = actions ? actions : genRandActions(inputs, output_count);
-	this.inputs = inputs;
+	this.actions = actions ? actions : genRandActions(output_count);
 	
 	this.info = info;
 	
@@ -316,9 +315,9 @@ function AI(inputs, output_count, actions, info) {
 			console.log(ai.actions[n].join(" "));
 			
 			if(!ai.mutated || calls > 9) {
-				ai.actions[n] = genRandAction(ai.inputs);
+				ai.actions[n] = genRandAction();
 			} else {
-				ai.actions[n] = mutateAction(ai.inputs, ai.actions[n], 0.2);
+				ai.actions[n] = mutateAction(, ai.actions[n], 0.2);
 			}
 			
 			ai.exeAction(n, input, calls + 1);
@@ -326,7 +325,7 @@ function AI(inputs, output_count, actions, info) {
 	}
 	
 	this.mutate = function(chance) {
-		mutateActions(ai.inputs, ai.actions, chance);
+		mutateActions(ai.actions, chance);
 		
 		ai.mutated = true;
 	}
