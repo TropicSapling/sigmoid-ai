@@ -317,7 +317,7 @@ function AI(output_count, actions, info) {
 			if(!ai.mutated || calls > 9) {
 				ai.actions[n] = genRandAction();
 			} else {
-				ai.actions[n] = mutateAction(, ai.actions[n], 0.2);
+				ai.actions[n] = mutateAction(ai.actions[n], 0.2);
 			}
 			
 			ai.exeAction(n, input, calls + 1);
