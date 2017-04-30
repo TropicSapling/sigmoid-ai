@@ -189,7 +189,7 @@ function genRandAction() {
 	return action;
 }
 
-function genRandActions(inputs, output_count) {
+function genRandActions(output_count) {
 	var outputs = [];
 	for(var output = 0; output < output_count; output++) {
 		outputs.push(genRandAction());
