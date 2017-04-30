@@ -31,8 +31,8 @@ function divideWithinRange(a, b) {
 	return a / b;
 }
 
-function getInput() {
-	var raw_input = [6]; // Push amount of properties each food has
+function getInput(id) {
+	var raw_input = [id, 6]; // Push player id and amount of properties each food has
 	raw_input.push(food);
 	
 	raw_input.push(6); // Push amount of properties each player has
@@ -59,7 +59,7 @@ function runAI(id) {
 	if(player.radius < 10) {
 		AIs.splice(id, 1);
 	} else {
-		var input = getInput();
+		var input = getInput(id);
 		
 		player.changePos(divideWithinRange(1, ai.exeAction(0, input)), divideWithinRange(1, ai.exeAction(1, input)));
 		
