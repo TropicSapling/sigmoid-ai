@@ -8,7 +8,7 @@ function randomBetween(min, max) {
 }
 
 function getInput(input, i) {
-	return input[i];
+	return input[Math.abs(Math.floor(i))];
 }
 
 function parseRandFunc(func, calls) {
