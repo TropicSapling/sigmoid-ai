@@ -295,6 +295,18 @@ function mutateActions(inputs, actions, chance) {
 	return mutated_actions;
 }
 
+function regenAction(n, ai, input, calls) {
+	if(!ai.mutated || calls > 9) {
+		ai.actions[n] = genRandAction();
+	} else {
+		ai.actions[n] = mutateAction(ai.actions[n], 0.2);
+	}
+	
+	ai.actions_exe[n] = ai.actions[n].join(" ");
+	
+	ai.exeAction(n, input, calls + 1);
+}
+
 function AI(output_count, actions, info) {
 	var ai = this;
 	
@@ -313,9 +325,11 @@ function AI(output_count, actions, info) {
 		}
 		
 		try {
-			if(ai.actions_exe[n].indexOf("i") == -1) {
-				return (new Function("input", "return " + ai.actions_exe[n]))(input);
-			} else {
+			var res = (new Function("input", 0, "return " + ai.actions_exe[n]))(input, i);
+			
+			if(isNaN(res)) {
+				regenAction(n, ai, input, calls);
+			} else if(ai.actions_exe[n].indexOf("i") != -1) {
 				var res = 0;
 				
 				for(var i = 0; i < input.length; i++) {
@@ -324,16 +338,10 @@ function AI(output_count, actions, info) {
 				
 				return res;
 			}
+			
+			return res;
 		} catch(e) {
-			if(!ai.mutated || calls > 9) {
-				ai.actions[n] = genRandAction();
-			} else {
-				ai.actions[n] = mutateAction(ai.actions[n], 0.2);
-			}
-			
-			ai.actions_exe[n] = ai.actions[n].join(" ");
-			
-			ai.exeAction(n, input, calls + 1);
+			regenAction(n, ai, input, calls);
 		}
 	}
 	
