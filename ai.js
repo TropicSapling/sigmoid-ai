@@ -301,7 +301,7 @@ function AI(output_count, actions, info) {
 	this.actions = actions ? actions : genRandActions(output_count);
 	
 	this.actions_exe = [];
-	for(var i = 0, l = ai.actions.length; i < l; i++) {
+	for(var i = 0; i < ai.actions.length; i++) {
 		ai.actions_exe.push(ai.actions[i].join(" "));
 	}
 	
@@ -315,7 +315,7 @@ function AI(output_count, actions, info) {
 		try {
 			var res = 0;
 			
-			for(var i = 0, l = input.length; i < l; i++) {
+			for(var i = 0; i < input.length; i++) {
 				res += (new Function("input", "i", "return " + ai.actions_exe[n]))(input, i);
 			}
 			
