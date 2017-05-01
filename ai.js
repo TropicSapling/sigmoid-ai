@@ -132,7 +132,7 @@ function genRandAction() {
 	var action_len;
 	
 	do {
-		action_len = randomBetween(3, 7);
+		action_len = randomBetween(3, 5);
 	} while(action_len % 2 == 0);
 	
 	var parentheses = 0;
