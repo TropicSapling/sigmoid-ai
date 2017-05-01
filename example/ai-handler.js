@@ -52,10 +52,10 @@ function genRandAI() {
 	var mutation_chance = ["randomBetween", "(", 0, "-", 2, ",", 0, "-", 1, ")"];
 	
 	ai.actions.push(child_spawn_size);
-	ai.actions_exe.push(child_spawn_size.join(" "));
+	ai.actions_exe.push(new Function("input", "i", "return " + child_spawn_size.join(" ")));
 	
 	ai.actions.push(mutation_chance);
-	ai.actions_exe.push(mutation_chance.join(" "));
+	ai.actions_exe.push(new Function("input", "i", "return " + mutation_chance.join(" ")));
 }
 
 function runAI(id) {
