@@ -313,13 +313,17 @@ function AI(output_count, actions, info) {
 		}
 		
 		try {
-			var res = 0;
-			
-			for(var i = 0; i < input.length; i++) {
-				res += (new Function("input", "i", "return " + ai.actions_exe[n]))(input, i);
+			if(ai.actions_exe[n].indexOf("i") == -1) {
+				return (new Function("input", "return " + ai.actions_exe[n]))(input);
+			} else {
+				var res = 0;
+				
+				for(var i = 0; i < input.length; i++) {
+					res += (new Function("input", "i", "return " + ai.actions_exe[n]))(input, i);
+				}
+				
+				return res;
 			}
-			
-			return res;
 		} catch(e) {
 			if(!ai.mutated || calls > 9) {
 				ai.actions[n] = genRandAction();
