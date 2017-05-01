@@ -317,7 +317,6 @@ function AI(output_count, actions, info) {
 			
 			for(var i = 0; i < input.length; i++) {
 				res += (new Function("input", "i", "return " + ai.actions_exe[n]))(input, i);
-				alert(res);
 			}
 			
 			return res;
