@@ -48,8 +48,14 @@ function genRandAI() {
 	
 	var ai = AIs[AIs.length - 1];
 	
-	ai.actions.push(["randomBetween", "(", 7, "*", 4, ",", 7, "*", 5, ")"]); // Child spawn size
-	ai.actions.push(["randomBetween", "(", 0, "-", 2, ",", 0, "-", 1, ")"]); // Mutation chance
+	var child_spawn_size = ["randomBetween", "(", 7, "*", 4, ",", 7, "*", 5, ")"];
+	var mutation_chance = ["randomBetween", "(", 0, "-", 2, ",", 0, "-", 1, ")"];
+	
+	ai.actions.push(child_spawn_size);
+	ai.actions_exe.push(child_spawn_size.join(" "));
+	
+	ai.actions.push(mutation_chance);
+	ai.actions_exe.push(mutation_chance.join(" "));
 }
 
 function runAI(id) {
