@@ -86,7 +86,7 @@ function Player(colour) {
 			player.pos.x += 1;
 		} else if(x_change < -1) {
 			player.pos.x -= 1;
-		} else {
+		} else if(x_change <= 1) {
 			player.pos.x += x_change;
 		}
 		
