@@ -1,13 +1,13 @@
 var ops = ["+", "-", "*", "/", "%", "&", "|", "^", "<<", ">>", ")"];
 var constants = [Math.E, Math.PI, 0, 1, 2, 3, 4, 5, 6, 7, "i", "("]; // "i" is not exactly a constant but it still fits in this category due to how the functions work
 var constants_n = [Math.E, Math.PI, 0, 1, 2, 3, 4, 5, 6, 7, "i"];
-var functions = ["getInput[1]", "Math.abs[1]", "Math.acos[1]", "Math.asin[1]", "Math.atan[1]", "Math.atan2[2]", "Math.ceil[1]", "Math.cos[1]", "Math.floor[1]", "Math.max[]", "Math.min[]", "Math.pow[2]", "Math.random[0]", "Math.round[1]", "Math.sin[1]", "Math.sqrt[1]", "Math.tan[1]", "randomBetween[2]"]; // [n] = amount of args needed, if brackets are empty you can choose how many args
+var functions = ["getInputById[1]", "Math.abs[1]", "Math.acos[1]", "Math.asin[1]", "Math.atan[1]", "Math.atan2[2]", "Math.ceil[1]", "Math.cos[1]", "Math.floor[1]", "Math.max[]", "Math.min[]", "Math.pow[2]", "Math.random[0]", "Math.round[1]", "Math.sin[1]", "Math.sqrt[1]", "Math.tan[1]", "randomBetween[2]"]; // [n] = amount of args needed, if brackets are empty you can choose how many args
 
 function randomBetween(min, max) {
 	return Math.floor(Math.random()*(max-min+1)+min);
 }
 
-function getInput(input, i) {
+function getInputById(input, i) {
 	return input[Math.abs(Math.floor(i))];
 }
 
@@ -34,7 +34,7 @@ function genRandFunc(id, calls) {
 	var func = func_parsed[0];
 	var pars = func_parsed[1];
 	
-	var isInputFunc = func_parsed[0][0] == "getInput";
+	var isInputFunc = func_parsed[0][0] == "getInputById";
 	
 	var func_len;
 	
