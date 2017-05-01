@@ -72,7 +72,7 @@ function Player(colour) {
 	
 	this.pos = {x: Math.floor(Math.random() * game_size), y: Math.floor(Math.random() * game_size)};
 	
-	this.radius = 64;
+	this.radius = 32;
 	
 	this.graphics_cleared = true;
 	
@@ -301,7 +301,7 @@ function updatePlayer(id) {
 		player.graphics_cleared = true;
 	}
 	
-	player.radius = player.radius * 0.999;
+	player.radius = Math.sqrt((Math.pow(player.radius, 2) * Math.PI - 32) / Math.PI);
 	
 	player.eatFood();
 		
