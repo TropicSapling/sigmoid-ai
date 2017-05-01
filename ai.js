@@ -308,9 +308,13 @@ function AI(output_count, actions, info) {
 		}
 		
 		try {
+			var res = 0;
+			
 			for(var i = 0; i < input.length; i++) {
-				return (new Function("input", "i", "return " + ai.actions[n].join(" ")))(input, i);
+				res += (new Function("input", "i", "return " + ai.actions[n].join(" ")))(input, i);
 			}
+			
+			return res;
 		} catch(e) {
 			console.log(ai.actions[n].join(" "));
 			
