@@ -325,7 +325,7 @@ function AI(output_count, actions, info) {
 		}
 		
 		try {
-			var res = (new Function("input", 0, "return " + ai.actions_exe[n]))(input, i);
+			var res = (new Function("input", "i", "return " + ai.actions_exe[n]))(input, 0);
 			
 			if(isNaN(res)) {
 				regenAction(n, ai, input, calls);
