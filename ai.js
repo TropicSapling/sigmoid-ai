@@ -332,7 +332,7 @@ function AI(output_count, actions, info) {
 			} else if(ai.actions_exe[n].indexOf("i") != -1) {
 				var res = 0;
 				
-				for(var i = 0; i < input.length; i++) {
+				for(var i = 1; i < input.length; i++) {
 					res += (new Function("input", "i", "return " + ai.actions_exe[n]))(input, i);
 				}
 				
