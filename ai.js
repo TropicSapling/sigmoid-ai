@@ -302,7 +302,7 @@ function regenAction(n, ai, input, calls) {
 		ai.actions[n] = mutateAction(ai.actions[n], 0.2);
 	}
 	
-	ai.actions_exe[n] = ai.actions[n].join(" ");
+	ai.actions_exe[n] = new Function("input", "i", "return " + ai.actions[n].join(" "));
 }
 
 function AI(output_count, actions, info) {
@@ -312,7 +312,7 @@ function AI(output_count, actions, info) {
 	
 	this.actions_exe = [];
 	for(var i = 0; i < ai.actions.length; i++) {
-		ai.actions_exe.push(ai.actions[i].join(" "));
+		ai.actions_exe.push(new Function("input", "i", "return " + ai.actions[i].join(" ")));
 	}
 	
 	this.info = info;
@@ -323,14 +323,14 @@ function AI(output_count, actions, info) {
 		}
 		
 		try {
-			var func = new Function("input", "i", "return " + ai.actions_exe[n]);
+			var func = ai.actions_exe[n];
 			var res = func(input, 0);
 			
 			if(isNaN(res)) {
 				regenAction(n, ai, input, calls);
 				
 				return ai.exeAction(n, input, calls + 1);
-			} else if(ai.actions_exe[n].indexOf("i") != -1) {
+			} else if(ai.actions[n].indexOf("i") != -1) {
 				var res = 0;
 				
 				for(var i = 1; i < input.length; i++) {
