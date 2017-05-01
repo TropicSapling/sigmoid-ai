@@ -303,8 +303,6 @@ function regenAction(n, ai, input, calls) {
 	}
 	
 	ai.actions_exe[n] = ai.actions[n].join(" ");
-	
-	ai.exeAction(n, input, calls + 1);
 }
 
 function AI(output_count, actions, info) {
@@ -329,6 +327,8 @@ function AI(output_count, actions, info) {
 			
 			if(isNaN(res)) {
 				regenAction(n, ai, input, calls);
+				
+				return ai.exeAction(n, input, calls + 1);
 			} else if(ai.actions_exe[n].indexOf("i") != -1) {
 				var res = 0;
 				
@@ -338,10 +338,10 @@ function AI(output_count, actions, info) {
 				
 				return res;
 			}
-			
-			return res;
 		} catch(e) {
 			regenAction(n, ai, input, calls);
+			
+			return ai.exeAction(n, input, calls + 1);
 		}
 	}
 	
