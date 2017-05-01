@@ -94,7 +94,7 @@ function Player(colour) {
 			player.pos.y += 1;
 		} else if(y_change < -1) {
 			player.pos.y -= 1;
-		} else {
+		} else if(y_change >= -1) {
 			player.pos.y += y_change;
 		}
 		
