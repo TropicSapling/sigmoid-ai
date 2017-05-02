@@ -73,7 +73,6 @@ function runAI(id) {
 		
 		if(Math.round(sigmoid(ai.exeAction(2, input)))) {
 			var child_radius = Math.abs(ai.exeAction(3, input));
-			console.log(child_radius);
 			
 			player.spawnChild(child_radius);
 			
