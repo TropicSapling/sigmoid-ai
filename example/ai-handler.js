@@ -13,7 +13,7 @@ var quickSort = (function () {
             }
         }
         swap(array, minEnd, right - 1);
-        return minEnd;t
+        return minEnd;
     }
 
     function swap(array, i, j) {
