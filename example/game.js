@@ -308,7 +308,7 @@ function updatePlayer(id) {
 	if(player.radius < 10) {
 		players.splice(id, 1);
 		
-		return;
+		return 1;
 	}
 	
 	req_draw.push(["player", id]);
@@ -316,7 +316,9 @@ function updatePlayer(id) {
 
 function updatePlayers() {
 	for(var i = 0; i < players.length; i++) {
-		updatePlayer(i);
+		if(updatePlayer(i)) {
+			i--;
+		}
 	}
 }
 
