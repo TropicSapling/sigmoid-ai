@@ -71,8 +71,9 @@ function runAI(id) {
 		
 		player.changePos(divideWithinRange(1, ai.exeAction(0, input)), divideWithinRange(1, ai.exeAction(1, input)));
 		
-		if(0 && Math.round(sigmoid(ai.exeAction(2, input)))) {
+		if(Math.round(sigmoid(ai.exeAction(2, input)))) {
 			var child_radius = Math.abs(ai.exeAction(3, input));
+			console.log(child_radius);
 			
 			player.spawnChild(child_radius);
 			
