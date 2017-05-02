@@ -64,8 +64,10 @@ function runAI(id) {
 	
 	if(player.radius < 10) {
 		AIs.splice(id, 1);
+		
+		return 1;
 	} else {
-		var input = getInput(id);
+		var input = getInput(player.id);
 		
 		player.changePos(divideWithinRange(1, ai.exeAction(0, input)), divideWithinRange(1, ai.exeAction(1, input)));
 		
@@ -90,7 +92,9 @@ function runAIs() {
 	}
 	
 	for(var i = 0; i < AIs.length; i++) {
-		runAI(i);
+		if(runAI(i)) {
+			i--;
+		}
 	}
 	
 	if(timeout) {
