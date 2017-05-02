@@ -79,6 +79,8 @@ function runAI(id) {
 		var input = getInput(player.id);
 		
 		player.changePos(divideWithinRange(1, ai.exeAction(0, input)), divideWithinRange(1, ai.exeAction(1, input)));
+		
+		ai.timeAlive += 1;
 	}
 }
 
