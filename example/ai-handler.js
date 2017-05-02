@@ -1,6 +1,42 @@
 var AIs = [];
 var best_AIs = [];
 
+var quickSort = (function () {
+    function partition(array, left, right) {
+        var cmp = array[right - 1].timeAlive,
+            minEnd = left,
+            maxEnd;
+        for (maxEnd = left; maxEnd < right - 1; maxEnd += 1) {
+            if (array[maxEnd].timeAlive <= cmp) {
+                swap(array, maxEnd, minEnd);
+                minEnd += 1;
+            }
+        }
+        swap(array, minEnd, right - 1);
+        return minEnd;
+    }
+
+    function swap(array, i, j) {
+        var temp = array[i].timeAlive;
+        array[i].timeAlive = array[j].timeAlive;
+        array[j].timeAlive = temp;
+        return array;
+    }
+
+    function quickSort(array, left, right) {
+        if (left < right) {
+            var p = partition(array, left, right);
+            quickSort(array, left, p);
+            quickSort(array, p + 1, right);
+        }
+        return array;
+    }
+
+    return function (array) {
+        return quickSort(array, 0, array.length);
+    };
+}());
+
 function JSONToArray(data) {
     var arr = [];
 	
@@ -60,8 +96,16 @@ function genMutatedAI() {
 }
 
 function addBestAI(ai) {
-	if(ai.timeAlive > best_AIs[bestAIs.length - 1].timeAlive) {
-		// WIP
+	var not_full = bestAIs.length < 128;
+	
+	if(not_full || ai.timeAlive > best_AIs[0].timeAlive) {
+		if(not_full) {
+			best_AIs.push(ai);
+		} else {
+			best_AIs[0] = ai;
+		}
+		
+		quickSort(best_AIs);
 	}
 }
 
