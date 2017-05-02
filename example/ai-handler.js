@@ -80,10 +80,9 @@ function getInput(id) {
 
 function genRandAI() {
 	var p = new Player();
+	var ai = new AI(2, undefined, {player: p});
 	
-	AIs.push(new AI(2, undefined, {player: p}));
-	
-	var ai = AIs[AIs.length - 1];
+	AIs.push(ai);
 	
 	var mutation_chance = ["randomBetween", "(", 0, "-", 2, ",", 0, "-", 1, ")"];
 	
@@ -92,7 +91,12 @@ function genRandAI() {
 }
 
 function genMutatedAI() {
-	// WIP
+	var p = new Player();
+	var ai = new AI(2, getRandActions(), {player: p});
+	
+	AIs.push(ai);
+	
+	ai.mutate();
 }
 
 function addBestAI(ai) {
