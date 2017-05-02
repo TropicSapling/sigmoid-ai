@@ -135,27 +135,6 @@ function Player(colour) {
 		}
 	}
 	
-	this.spawnChild = function(radius) {
-		if(radius <= player.radius && radius >= 10) {
-			if(!player.graphics_cleared) {
-				req_clear.push([{x: player.pos.x, y: player.pos.y}, player.radius]);
-				player.graphics_cleared = true;
-			}
-			
-			players.push(new Player({r: randomBetween(player.colour.r - 8, player.colour.r + 8), g: randomBetween(player.colour.g - 8, player.colour.g + 8), b: randomBetween(player.colour.b - 8, player.colour.b + 8)}));
-			players[players.length - 1].pos = {x: randomBetween(player.pos.x - 16, player.pos.x + 16), y: randomBetween(player.pos.y - 16, player.pos.y + 16)};
-			players[players.length - 1].radius = radius;
-			
-			player.radius = Math.sqrt((Math.pow(player.radius, 2) * Math.PI - Math.pow(radius, 2) * Math.PI) / Math.PI);
-			
-			if(!player.radius) { // In case radius gets NaN, which it does whenever the parent radius minus the child radius is below 0
-				player.radius = 7;
-			}
-			
-			req_draw.push(["player", player.id]);
-		}
-	}
-	
 	players.push(this);
 	
 	this.id = players.length - 1;

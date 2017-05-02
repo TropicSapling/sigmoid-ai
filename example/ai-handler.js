@@ -44,18 +44,18 @@ function getInput(id) {
 function genRandAI() {
 	var p = new Player();
 	
-	AIs.push(new AI(3, undefined, {player: p}));
+	AIs.push(new AI(2, undefined, {player: p}));
 	
 	var ai = AIs[AIs.length - 1];
 	
-	var child_spawn_size = ["randomBetween", "(", 7, "*", 4, ",", 7, "*", 5, ")"];
 	var mutation_chance = ["randomBetween", "(", 0, "-", 2, ",", 0, "-", 1, ")"];
-	
-	ai.actions.push(child_spawn_size);
-	ai.actions_exe.push(new Function("input", "i", "return " + child_spawn_size.join(" ")));
 	
 	ai.actions.push(mutation_chance);
 	ai.actions_exe.push(new Function("input", "i", "return " + mutation_chance.join(" ")));
+}
+
+function genMutatedAI() {
+	// WIP
 }
 
 function runAI(id) {
@@ -70,25 +70,16 @@ function runAI(id) {
 		var input = getInput(player.id);
 		
 		player.changePos(divideWithinRange(1, ai.exeAction(0, input)), divideWithinRange(1, ai.exeAction(1, input)));
-		
-		if(Math.round(sigmoid(ai.exeAction(2, input)))) {
-			var child_radius = Math.abs(ai.exeAction(3, input));
-			
-			player.spawnChild(child_radius);
-			
-			if(child_radius <= player.radius && child_radius >= 10) {
-				var child = players[players.length - 1];
-				
-				AIs.push(new AI(5, ai.actions, {player: child}));
-				AIs[AIs.length - 1].mutate(sigmoid(ai.exeAction(4, input)));
-			}
-		}
 	}
 }
 
 function runAIs() {
 	if(Math.floor(Math.random() * 1000) == 1) {
-		genRandAI();
+		if(Math.floor(Math.random() * 10) == 1) {
+			genRandAI();
+		} else {
+			genMutatedAI();
+		}
 	}
 	
 	for(var i = 0; i < AIs.length; i++) {
