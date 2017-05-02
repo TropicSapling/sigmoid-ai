@@ -317,7 +317,7 @@ function AI(output_count, actions, mutation_chance, info) {
 		ai.actions_exe.push(new Function("input", "i", "return " + ai.actions[i].join(" ")));
 	}
 	
-	this.mutationChance = mutation_chance ? mutation_chance : randomBetween(0.1, 0.25);
+	this.mutationChance = mutation_chance ? mutation_chance : randomBetween(10, 25) / 100;
 	
 	this.info = info;
 	
