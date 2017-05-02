@@ -301,7 +301,13 @@ function updatePlayer(id) {
 		player.graphics_cleared = true;
 	}
 	
+	if(isNaN(player.radius)) {
+		alert(player.radius);
+	}
+	
+	console.log("BEF: " + player.radius);
 	player.radius = Math.sqrt((Math.pow(player.radius, 2) * Math.PI - 2) / Math.PI);
+	console.log("AFTER: " + player.radius);
 	
 	player.eatFood();
 		
