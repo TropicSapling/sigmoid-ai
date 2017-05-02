@@ -85,7 +85,10 @@ function genRandAI() {
 }
 
 function genMutatedAI() {
+	alert(JSON.stringify(best_AIs));
 	var par = getPar();
+	alert(par);
+	alert(JSON.stringify(best_AIs));
 	
 	var p = new Player({r: randomBetween(par.colour.r - Math.round(par.mutationChance * 16), par.colour.r + Math.round(par.mutationChance * 16)), g: randomBetween(par.colour.g - Math.round(par.mutationChance * 16), par.colour.g + Math.round(par.mutationChance * 16)), b: randomBetween(par.colour.b - Math.round(par.mutationChance * 16), par.colour.b + Math.round(par.mutationChance * 16))});
 	var ai = new AI(2, par.actions, randomBetween(Math.round(par.mutationChance * 1000) - Math.round(par.mutationChance * 100), Math.round(par.mutationChance * 1000) + Math.round(par.mutationChance * 100)) / 1000, {player: p});
