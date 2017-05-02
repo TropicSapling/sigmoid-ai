@@ -146,7 +146,7 @@ function runAI(id) {
 
 function runAIs() {
 	if(Math.floor(Math.random() * 1000) == 1) {
-		if(Math.floor(Math.random() * 10) == 1) {
+		if(best_AIs.length < 1 || Math.floor(Math.random() * 10) == 1) {
 			genRandAI();
 		} else {
 			genMutatedAI();
