@@ -80,31 +80,39 @@ function getInput(id) {
 
 function genRandAI() {
 	var p = new Player();
-	var ai = new AI(2, undefined, {player: p});
 	
-	AIs.push(ai);
-	
-	var mutation_chance = ["randomBetween", "(", 0, "-", 2, ",", 0, "-", 1, ")"];
-	
-	ai.actions.push(mutation_chance);
-	ai.actions_exe.push(new Function("input", "i", "return " + mutation_chance.join(" ")));
+	AIs.push(new AI(2, undefined, undefined, {player: p}));
 }
 
 function genMutatedAI() {
-	var p = new Player();
-	var ai = new AI(2, getRandActions(), {player: p});
+	var par = getPar();
+	
+	var p = new Player({r: randomBetween(par.colour.r - 2, par.colour.r + 2), g: par.colour.g, b: par.colour.b});
+	var ai = new AI(2, par.actions, randomBetween(Math.round(par.mutationChance * 1000) - Math.round(par.mutationChance * 100), Math.round(par.mutationChance * 1000) + Math.round(par.mutationChance * 100)) / 1000, {player: p});
 	
 	AIs.push(ai);
 	
-	ai.mutate();
+	ai.mutate(par.mutationChance);
 }
 
-function getRandActions() {
-	// WIP
+function getPar() {
+	var total_time_alive = 0;
+	var par_chance = [];
+	for(var i = 0; i < best_AIs.length; i++) {
+		par_chance.push([total_time_alive, total_time_alive + best_AIs[i].timeAlive]);
+		total_time_alive += best_AIs[i].timeAlive;
+	}
+	
+	var randNumber = Math.floor(Math.random() * total_time_alive);
+	for(var i = 0; i < par_chance.length; i++) {
+		if(randNumber >= par_chance[i][0] && randNumber < par_chance[i][1]) {
+			return best_AIs[i];
+		}
+	}
 }
 
 function addBestAI(ai) {
-	var not_full = bestAIs.length < 128;
+	var not_full = best_AIs.length < 128;
 	
 	if(not_full || ai.timeAlive > best_AIs[0].timeAlive) {
 		if(not_full) {

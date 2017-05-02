@@ -307,7 +307,7 @@ function regenAction(n, ai, input, calls) {
 	ai.actions_exe[n] = new Function("input", "i", "return " + ai.actions[n].join(" "));
 }
 
-function AI(output_count, actions, info) {
+function AI(output_count, actions, mutation_chance, info) {
 	var ai = this;
 	
 	this.actions = actions ? actions : genRandActions(output_count);
@@ -316,6 +316,8 @@ function AI(output_count, actions, info) {
 	for(var i = 0; i < ai.actions.length; i++) {
 		ai.actions_exe.push(new Function("input", "i", "return " + ai.actions[i].join(" ")));
 	}
+	
+	this.mutationChance = mutation_chance ? mutation_chance : randomBetween(0.1, 0.25);
 	
 	this.info = info;
 	
