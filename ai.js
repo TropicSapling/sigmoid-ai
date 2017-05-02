@@ -336,9 +336,9 @@ function AI(output_count, actions, info) {
 				for(var i = 1; i < input.length; i++) {
 					res += func(input, i);
 				}
-				
-				return res;
 			}
+			
+			return res;
 		} catch(e) {
 			regenAction(n, ai, input, calls);
 			
