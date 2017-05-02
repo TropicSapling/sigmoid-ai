@@ -149,7 +149,7 @@ function Player(colour) {
 			player.radius = Math.sqrt((Math.pow(player.radius, 2) * Math.PI - Math.pow(radius, 2) * Math.PI) / Math.PI);
 			
 			if(!player.radius) { // In case radius gets NaN, which it does whenever the parent radius minus the child radius is below 0
-				player.radius = 0;
+				player.radius = 7;
 			}
 			
 			req_draw.push(["player", player.id]);
