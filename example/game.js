@@ -31,9 +31,9 @@ window.onerror = function(msg, url, line, column, error) {
 		console.log("Line: " + line + ", column: " + column);
 		console.log("Stack Trace:");
 		console.log(error.stack);
-	} else {
-		alert("[!] Error: " + msg + " in file " + url + "\n\nLine: " + line + ", column: " + column);
 	}
+	
+	alert("[!] Error: " + msg + " in file " + url + "\n\nLine: " + line + ", column: " + column);
 }
 
 Array.prototype.mapArr = function(callback) { // I use this instead of built-in .map to get better performance
