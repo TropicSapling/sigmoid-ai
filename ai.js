@@ -319,6 +319,8 @@ function AI(output_count, actions, info) {
 	
 	this.info = info;
 	
+	this.timeAlive = 0;
+	
 	this.exeAction = function(n, input, calls) {
 		if(!calls) {
 			calls = 1;
