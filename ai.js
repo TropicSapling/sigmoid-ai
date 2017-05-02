@@ -8,7 +8,9 @@ function randomBetween(min, max) {
 }
 
 function getInputById(input, i) {
-	return input[Math.abs(Math.floor(i))];
+	var input_item = input[i];
+	
+	return input_item ? input_item : 0;
 }
 
 function parseRandFunc(func, calls) {
