@@ -301,7 +301,7 @@ function updatePlayer(id) {
 		player.graphics_cleared = true;
 	}
 	
-	player.radius = Math.sqrt((Math.pow(player.radius, 2) * Math.PI - 4) / Math.PI);
+	player.radius = Math.sqrt((Math.pow(player.radius, 2) * Math.PI - 2) / Math.PI);
 	
 	player.eatFood();
 		
