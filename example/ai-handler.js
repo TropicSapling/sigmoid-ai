@@ -60,7 +60,9 @@ function genMutatedAI() {
 }
 
 function addBestAI(ai) {
-	// WIP
+	if(ai.timeAlive > best_AIs[bestAIs.length - 1].timeAlive) {
+		// WIP
+	}
 }
 
 function runAI(id) {
