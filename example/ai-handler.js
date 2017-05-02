@@ -1,4 +1,5 @@
 var AIs = [];
+var best_AIs = [];
 
 function JSONToArray(data) {
     var arr = [];
@@ -58,11 +59,17 @@ function genMutatedAI() {
 	// WIP
 }
 
+function addBestAI(ai) {
+	// WIP
+}
+
 function runAI(id) {
 	var ai = AIs[id];
 	var player = ai.info.player;
 	
 	if(player.radius < 10) {
+		addBestAI(AIs[id]);
+		
 		AIs.splice(id, 1);
 		
 		return 1;
