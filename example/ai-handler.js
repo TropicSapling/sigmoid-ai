@@ -38,8 +38,7 @@ function getInput(id) {
 	raw_input.push(6); // Push amount of properties each player has
 	raw_input.push(players);
 	
-//	return JSONToArray(raw_input);
-	return [1, 2, 3];
+	return JSONToArray(raw_input);
 }
 
 function genRandAI() {
