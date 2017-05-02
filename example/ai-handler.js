@@ -99,6 +99,10 @@ function genMutatedAI() {
 	ai.mutate();
 }
 
+function getRandActions() {
+	// WIP
+}
+
 function addBestAI(ai) {
 	var not_full = bestAIs.length < 128;
 	
