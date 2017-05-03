@@ -337,7 +337,7 @@ function AI(output_count, actions, mutation_chance, info) {
 	
 	this.exeAction = function(n, input, calls) {
 		if(!calls) {
-			calls = 1;
+			var calls = 1;
 		}
 		
 		try {
