@@ -287,7 +287,7 @@ function mutateAction(action, chance) {
 	return mutated_action;
 }
 
-function mutateActions(inputs, actions, chance) {
+function mutateActions(actions, chance) {
 	var mutated_actions = [];
 	
 	for(var action = 0; action < actions.length; action++) {
