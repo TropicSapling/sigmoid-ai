@@ -297,14 +297,22 @@ function mutateActions(actions, chance) {
 	return mutated_actions;
 }
 
-function regenAction(n, ai, input, calls) {
+function regenAction(n, ai, calls) {
+	if(!calls) {
+		var calls = 1;
+	}
+	
 	if(!ai.mutated || calls > 9) {
 		ai.actions[n] = genRandAction();
 	} else {
 		ai.actions[n] = mutateAction(ai.actions[n], 0.2);
 	}
 	
-	ai.actions_exe[n] = new Function("input", "i", "return " + ai.actions[n].join(" "));
+	try {
+		ai.actions_exe[n] = new Function("input", "i", "return " + ai.actions[n].join(" "));
+	} catch(e) {
+		regenAction(n, ai, calls + 1);
+	}
 }
 
 function AI(output_count, actions, mutation_chance, info) {
@@ -314,7 +322,11 @@ function AI(output_count, actions, mutation_chance, info) {
 	
 	this.actions_exe = [];
 	for(var i = 0; i < ai.actions.length; i++) {
-		ai.actions_exe.push(new Function("input", "i", "return " + ai.actions[i].join(" ")));
+		try {
+			ai.actions_exe.push(new Function("input", "i", "return " + ai.actions[i].join(" ")));
+		} catch(e) {
+			regenAction(i, ai);
+		}
 	}
 	
 	this.mutationChance = mutation_chance ? mutation_chance : randomBetween(10, 25) / 100;
@@ -333,7 +345,7 @@ function AI(output_count, actions, mutation_chance, info) {
 			var res = func(input, 0);
 			
 			if(isNaN(res)) {
-				regenAction(n, ai, input, calls);
+				regenAction(n, ai, calls);
 				
 				return ai.exeAction(n, input, calls + 1);
 			} else if(ai.actions[n].indexOf("i") != -1) {
@@ -346,7 +358,7 @@ function AI(output_count, actions, mutation_chance, info) {
 			
 			return res;
 		} catch(e) {
-			regenAction(n, ai, input, calls);
+			regenAction(n, ai, calls);
 			
 			return ai.exeAction(n, input, calls + 1);
 		}
