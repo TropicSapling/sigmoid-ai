@@ -303,13 +303,14 @@ function regenAction(n, ai, calls) {
 	}
 	
 	if(!ai.mutated || calls > 9) {
-		ai.actions[n] = genRandAction();
+		var action = genRandAction();
 	} else {
-		ai.actions[n] = mutateAction(ai.actions[n], 0.2);
+		var action = mutateAction(ai.actions[n], 0.2);
 	}
 	
 	try {
-		ai.actions_exe[n] = new Function("input", "i", "return " + ai.actions[n].join(" "));
+		ai.actions_exe[n] = new Function("input", "i", "return " + action.join(" "));
+		ai.actions[n] = action;
 	} catch(e) {
 		regenAction(n, ai, calls + 1);
 	}
@@ -365,7 +366,16 @@ function AI(output_count, actions, mutation_chance, info) {
 	}
 	
 	this.mutate = function(chance) {
-		mutateActions(ai.actions, chance);
+		var new_actions = mutateActions(ai.actions, chance);
+		
+		for(var i = 0; i < new_actions.length; i++) {
+			try {
+				ai.actions_exe.push(new Function("input", "i", "return " + new_actions[i].join(" ")));
+				ai.actions[i] = new_actions[i];
+			} catch(e) {
+				regenAction(i, ai);
+			}
+		}
 		
 		ai.mutated = true;
 	}
