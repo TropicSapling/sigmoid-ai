@@ -211,7 +211,7 @@ function mutateAction(action, chance) {
 				if(part < action.length - 1 && Math.floor(Math.random() * 3) == 1) {
 					console.log("DEL AT " + part + ": " + action[part] + " " + action[part + 1]);
 					action.splice(part, 2);
-					console.log("ACT: " + action);
+					console.log("ACT: " + action.join(" "));
 				} else {
 					var rand = Math.floor(Math.random() * (action.length - 1));
 					var tries = 0;
@@ -226,12 +226,12 @@ function mutateAction(action, chance) {
 						console.log("PASTE AT " + part + ": " + action[rand] + " " + action[rand + 1]);
 						action.splice(part, 0, action[rand]);
 						action.splice(part, 0, action[rand + 1]);
-						console.log("ACT: " + action);
+						console.log("ACT: " + action.join(" "));
 
 						if(Math.round(Math.random())) {
 							console.log("DEL ORG AT " + rand + ": " + action[rand] + " " + action[rand + 1]);
 							action.splice(rand, 2);
-							console.log("ACT: " + action);
+							console.log("ACT: " + action.join(" "));
 						}
 					} else {
 						part--;
@@ -282,7 +282,7 @@ function mutateAction(action, chance) {
 				}
 			}
 			
-			console.log("ACT: " + action);
+			console.log("ACT: " + action.join(" "));
 		} else {
 			mutated_action.push(action[part]);
 			console.log("NO ACT CHANGE");
