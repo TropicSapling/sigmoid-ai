@@ -227,6 +227,10 @@ function mutateAction(action, chance) {
 						
 						if(Math.round(Math.random())) {
 							action.splice(rand, 2);
+							
+							if(rand > part - 2 && rand < part + 2) {
+								part += rand - part - 2;
+							}
 						}
 					} else {
 						part--;
