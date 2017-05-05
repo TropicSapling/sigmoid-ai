@@ -211,7 +211,7 @@ function mutateAction(action, chance) {
 				if(part < action.length - 1 && Math.floor(Math.random() * 3) == 1) {
 					console.log("DEL AT " + part + ": " + action[part] + " " + action[part + 1]);
 					part += 1;
-					console.log("ACT: " + mutated_action.join(" "));
+					console.log("ACT AT " + part + ": " + mutated_action.join(" "));
 				} else {
 					var rand = Math.floor(Math.random() * (action.length - 1));
 					var tries = 0;
@@ -227,12 +227,12 @@ function mutateAction(action, chance) {
 						mutated_action.splice(part, 0, action[rand + 1]);
 						mutated_action.splice(part, 0, action[rand]);
 						part += 1;
-						console.log("ACT: " + mutated_action.join(" "));
+						console.log("ACT AT " + part + ": " + mutated_action.join(" "));
 
 						if(Math.round(Math.random())) {
 							console.log("DEL ORG AT " + rand + ": " + action[rand] + " " + action[rand + 1]);
 							action.splice(rand, 2);
-							console.log("ACT: " + mutated_action.join(" "));
+							console.log("ACT AT " + part + ": " + mutated_action.join(" "));
 							
 							if(rand > part - 2 && rand < part + 2) {
 								part += rand - part - 2;
@@ -243,7 +243,7 @@ function mutateAction(action, chance) {
 					}
 				}
 			} else {
-				console.log("EDIT");
+				console.log("EDIT AT " + part);
 				if(ops.indexOf(action[part]) != -1) {
 					var op_arr = getRandOp(action.length > 0 && action[action.length - 1] == "(", parentheses);
 					parentheses = op_arr[1];
@@ -287,7 +287,7 @@ function mutateAction(action, chance) {
 				}
 			}
 			
-			console.log("ACT: " + mutated_action.join(" "));
+			console.log("ACT AT " + part + ": " + mutated_action.join(" "));
 		} else {
 			mutated_action.push(action[part]);
 			console.log("NO ACT CHANGE");
