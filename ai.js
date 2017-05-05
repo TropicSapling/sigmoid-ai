@@ -221,8 +221,8 @@ function mutateAction(action, chance) {
 					}
 					
 					if(tries < 9) {
-						mutated_action.splice(part, 0, action[rand]);
 						mutated_action.splice(part, 0, action[rand + 1]);
+						mutated_action.splice(part, 0, action[rand]);
 						
 						if(Math.round(Math.random())) {
 							action.splice(rand, 2);
