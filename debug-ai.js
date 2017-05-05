@@ -210,7 +210,7 @@ function mutateAction(action, chance) {
 			if(Math.floor(Math.random() * 5) == 1) {
 				if(part < action.length - 1 && Math.floor(Math.random() * 3) == 1) {
 					console.log("DEL AT " + part + ": " + action[part] + " " + action[part + 1]);
-					part += 2;
+					part += 1;
 					console.log("ACT: " + mutated_action.join(" "));
 				} else {
 					var rand = Math.floor(Math.random() * (action.length - 1));
