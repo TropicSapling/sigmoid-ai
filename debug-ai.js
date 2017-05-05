@@ -226,6 +226,7 @@ function mutateAction(action, chance) {
 						console.log("PASTE AT " + part + ": " + action[rand] + " " + action[rand + 1]);
 						mutated_action.splice(part, 0, action[rand + 1]);
 						mutated_action.splice(part, 0, action[rand]);
+						part += 1;
 						console.log("ACT: " + mutated_action.join(" "));
 
 						if(Math.round(Math.random())) {
