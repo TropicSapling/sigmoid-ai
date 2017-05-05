@@ -233,6 +233,10 @@ function mutateAction(action, chance) {
 							console.log("DEL ORG AT " + rand + ": " + action[rand] + " " + action[rand + 1]);
 							action.splice(rand, 2);
 							console.log("ACT: " + mutated_action.join(" "));
+							
+							if(rand > part - 2 && rand < part + 2) {
+								part += rand - part - 2;
+							}
 						}
 					} else {
 						part--;
