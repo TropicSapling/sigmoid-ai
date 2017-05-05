@@ -229,7 +229,7 @@ function mutateAction(action, chance) {
 							action.splice(rand, 2);
 							
 							if(rand > part - 2 && rand < part + 2) {
-								part += rand - part - 2;
+								part += 1 - rand - part;
 							}
 						}
 					} else {
