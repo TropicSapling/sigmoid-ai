@@ -377,7 +377,7 @@ function AI(output_count, actions, mutation_chance, info) {
 		
 		for(var i = 0; i < new_actions.length; i++) {
 			try {
-				ai.actions_exe.push(new Function("input", "i", "return " + new_actions[i].join(" ")));
+				ai.actions_exe[i] = new Function("input", "i", "return " + new_actions[i].join(" "));
 				ai.actions[i] = new_actions[i];
 			} catch(e) {
 				regenAction(i, ai);
