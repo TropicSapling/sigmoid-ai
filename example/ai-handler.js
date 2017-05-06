@@ -144,7 +144,7 @@ function runAI(id) {
 	} else {
 		var input = getInput(player.id);
 		
-		player.changePos(input.length, divideWithinRange(ai.exeAction(0, input)), divideWithinRange(input.length, ai.exeAction(1, input)));
+		player.changePos(divideWithinRange(input.length, ai.exeAction(0, input)), divideWithinRange(input.length, ai.exeAction(1, input)));
 		
 		ai.timeAlive += 1;
 	}
