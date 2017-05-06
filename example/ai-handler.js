@@ -65,9 +65,11 @@ function divideWithinRange(c, n) {
 	var avg = n / c;
 	
 	if(avg < 0) {
-		return -1 - 1 / avg;
+		return -1 - 1 / (avg - 1);
+	} else if(avg > 0) {
+		return 1 - 1 / (avg + 1);
 	} else {
-		return 1 - 1 / avg;
+		return 0;
 	}
 }
 
