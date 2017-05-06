@@ -211,7 +211,7 @@ function mutateAction(action, chance) {
 		if(action[part - 1] != "(" && action[part] != "(" && action[part + 1] != "("  && action[part - 1] != ")" && action[part] != ")" && action[part + 1] != ")" && action[part] != "," && action[part + 1] != "," && Math.floor(Math.random() * (1 / chance)) == 0) {
 			if(Math.floor(Math.random() * 5) == 1) {
 				if(part < action.length - 1 && Math.floor(Math.random() * 3) == 1) {
-					part += 1;
+					part += 1; // Ignore next part, same as deleting 2 parts
 				} else {
 					var rand = Math.floor(Math.random() * (action.length - 1));
 					var tries = 0;
@@ -222,29 +222,29 @@ function mutateAction(action, chance) {
 						tries++;
 					}
 					
-					if(tries < 9) {
+					if(tries < 9) { // Copy & paste 2 parts
 						mutated_action.splice(part, 0, action[rand + 1]);
 						mutated_action.splice(part, 0, action[rand]);
 						part--;
 						
 						if(Math.round(Math.random())) {
-							action.splice(rand, 2);
+							action.splice(rand, 2); // Delete the originals of the 2 parts that were copied
 							
 							if(rand == part - 1) {
 								part--;
 							}
 						}
 					} else {
-						part--;
+						part--; // Try again
 					}
 				}
 			} else {
-				if(ops.indexOf(action[part]) != -1) {
+				if(ops.indexOf(action[part]) != -1) { // Change operator
 					var op_arr = getRandOp(action.length > 0 && action[action.length - 1] == "(", parentheses);
 					parentheses = op_arr[1];
 					
 					mutated_action.push(op_arr[0]);
-				} else if(constants.indexOf(action[part]) != -1 || constants.indexOf(Number(action[part])) != -1) {
+				} else if(constants.indexOf(action[part]) != -1 || constants.indexOf(Number(action[part])) != -1) { // Change constant
 					var constant = constants[Math.floor(Math.random() * constants.length)];
 					
 					if(constant == "(") {
@@ -258,7 +258,7 @@ function mutateAction(action, chance) {
 					}
 					
 					mutated_action.push(constant);
-				} else {
+				} else { // Change function
 					var pars;
 					for(var id = 0; id < functions.length; id++) {
 						var func_parsed = parseFunc(functions[id]);
@@ -282,7 +282,7 @@ function mutateAction(action, chance) {
 				}
 			}
 		} else {
-			mutated_action.push(action[part]);
+			mutated_action.push(action[part]); // Don't mutate this part
 		}
 	}
 	
