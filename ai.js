@@ -225,13 +225,13 @@ function mutateAction(action, chance) {
 					if(tries < 9) {
 						mutated_action.splice(part, 0, action[rand + 1]);
 						mutated_action.splice(part, 0, action[rand]);
-						part += 1;
+						part--;
 						
 						if(Math.round(Math.random())) {
 							action.splice(rand, 2);
 							
-							if(rand < part + 2) {
-								part -= 3;
+							if(rand == part - 1) {
+								part -= 1;
 							}
 						}
 					} else {
