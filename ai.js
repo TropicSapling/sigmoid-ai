@@ -248,7 +248,7 @@ function mutateAction(action, chance) {
 					var constant = constants[Math.floor(Math.random() * constants.length)];
 					
 					if(constant == "(") {
-						if(mutated_action.length > 0 && mutated_action[mutated_action.length - 1] == ")") {
+						if(part > action.length - 3 || (mutated_action.length > 0 && mutated_action[mutated_action.length - 1] == ")")) {
 							constant = constants_n[Math.floor(Math.random() * constants_n.length)];
 						} else {
 							parentheses++;
