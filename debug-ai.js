@@ -205,7 +205,7 @@ function mutateAction(action, chance) {
 	
 	var parentheses = 0;
 	
-	for(var part = 0; part < action.length; part++) {
+	for(var part = 0; part < action.length && part >= 0; part++) {
 		if(action[part - 1] != "(" && action[part] != "(" && action[part + 1] != "("  && action[part - 1] != ")" && action[part] != ")" && action[part + 1] != ")" && action[part] != "," && action[part + 1] != "," && Math.floor(Math.random() * (1 / chance)) == 0) {
 			if(Math.floor(Math.random() * 5) == 1) {
 				if(part < action.length - 1 && Math.floor(Math.random() * 3) == 1) {
@@ -237,7 +237,7 @@ function mutateAction(action, chance) {
 							if(rand == part - 1) {
 								part -= 3;
 							} else if(rand == part) {
-								part -= 2;
+								part -= 3;
 							} else if(rand == part + 1) {
 								part -= 2;
 							}
