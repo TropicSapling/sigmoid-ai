@@ -228,7 +228,7 @@ function mutateAction(action, chance) {
 						console.log("PASTE AT " + part + ": " + action[rand] + " " + action[rand + 1]);
 						mutated_action.splice(part, 0, action[rand + 1]);
 						mutated_action.splice(part, 0, action[rand]);
-						part += 1;
+						part -= 1;
 						console.log("ACT AT " + part + ": " + mutated_action.join(" "));
 
 						if(Math.round(Math.random())) {
@@ -236,8 +236,8 @@ function mutateAction(action, chance) {
 							action.splice(rand, 2);
 							console.log("ACT AT " + part + ": " + mutated_action.join(" "));
 							
-							if(rand < part + 2) {
-								part -= 3;
+							if(rand == part - 1) {
+								part -= 1;
 							}
 						}
 					} else {
