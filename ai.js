@@ -228,8 +228,12 @@ function mutateAction(action, chance) {
 						if(Math.round(Math.random())) {
 							action.splice(rand, 2);
 							
-							if(rand > part - 2 && rand < part + 2) {
-								part += 1 - rand - part; // NEEDS IMPROVMENT; is just rand - part when at different pos for example
+							if(rand == part - 1) {
+								part -= 3;
+							} else if(rand == part) {
+								part -= 2;
+							} else if(rand == part + 1) {
+								part -= 2;
 							}
 						}
 					} else {
