@@ -61,18 +61,6 @@ function sigmoid(number) {
 	return 1 / (1 + Math.pow(Math.E, 0 - number));
 }
 
-function divideWithinRange(c, n) {
-	var avg = n / c;
-	
-	if(avg < 0) {
-		return -1 - 1 / (avg - 1);
-	} else if(avg > 0) {
-		return 1 - 1 / (avg + 1);
-	} else {
-		return 0;
-	}
-}
-
 function getInput(id) {
 	var raw_input = [id, 6]; // Push player id and amount of properties each food has
 	raw_input.push(food);
@@ -144,7 +132,10 @@ function runAI(id) {
 	} else {
 		var input = getInput(player.id);
 		
-		player.changePos(divideWithinRange(input.length, ai.exeAction(0, input)), divideWithinRange(input.length, ai.exeAction(1, input)));
+		var x_change = sigmoid(ai.exeAction(0, input) / input.length);
+		var y_change = sigmoid(ai.exeAction(1, input) / input.length);
+		
+		player.changePos(x_change < 0.5 ? 0 - x_change * 2 : (x_change - 0.5) * 2, y_change < 0.5 ? 0 - y_change * 2 : (y_change - 0.5) * 2);
 		
 		ai.timeAlive += 1;
 	}
