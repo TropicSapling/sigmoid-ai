@@ -231,7 +231,7 @@ function mutateAction(action, chance) {
 							action.splice(rand, 2);
 							
 							if(rand == part - 1) {
-								part -= 1;
+								part--;
 							}
 						}
 					} else {
