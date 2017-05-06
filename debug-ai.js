@@ -201,6 +201,8 @@ function genRandActions(output_count) {
 }
 
 function mutateAction(action, chance) {
+	var action = action.slice(0); // Shallow copy
+	
 	var mutated_action = [];
 	
 	var parentheses = 0;
@@ -234,12 +236,8 @@ function mutateAction(action, chance) {
 							action.splice(rand, 2);
 							console.log("ACT AT " + part + ": " + mutated_action.join(" "));
 							
-							if(rand == part - 1) {
+							if(rand < part + 2) {
 								part -= 3;
-							} else if(rand == part) {
-								part -= 3;
-							} else if(rand == part + 1) {
-								part -= 2;
 							}
 						}
 					} else {
