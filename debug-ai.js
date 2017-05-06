@@ -234,8 +234,12 @@ function mutateAction(action, chance) {
 							action.splice(rand, 2);
 							console.log("ACT AT " + part + ": " + mutated_action.join(" "));
 							
-							if(rand > part - 2 && rand < part + 2) {
-								part += 1 - rand - part;
+							if(rand == part - 1) {
+								part -= 3;
+							} else if(rand == part) {
+								part -= 2;
+							} else if(rand == part + 1) {
+								part -= 2;
 							}
 						}
 					} else {
