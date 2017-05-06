@@ -61,11 +61,13 @@ function sigmoid(number) {
 	return 1 / (1 + Math.pow(Math.E, 0 - number));
 }
 
-function divideWithinRange(n) {
-	if(n < 0) {
-		return -1 - 1 / n;
+function divideWithinRange(c, n) {
+	var avg = n / c;
+	
+	if(avg < 0) {
+		return -1 - 1 / avg;
 	} else {
-		return 1 - 1 / n;
+		return 1 - 1 / avg;
 	}
 }
 
@@ -140,7 +142,7 @@ function runAI(id) {
 	} else {
 		var input = getInput(player.id);
 		
-		player.changePos(divideWithinRange(ai.exeAction(0, input)), divideWithinRange(ai.exeAction(1, input)));
+		player.changePos(input.length, divideWithinRange(ai.exeAction(0, input)), divideWithinRange(input.length, ai.exeAction(1, input)));
 		
 		ai.timeAlive += 1;
 	}
