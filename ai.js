@@ -231,7 +231,7 @@ function mutateAction(action, chance) {
 							if(rand == part - 1) {
 								part -= 3;
 							} else if(rand == part) {
-								part -= 3;
+								part -= 2;
 							} else if(rand == part + 1) {
 								part -= 2;
 							}
