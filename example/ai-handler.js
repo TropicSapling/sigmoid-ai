@@ -66,13 +66,13 @@ function getInput(id) {
 	var pos = players[id].pos;
 	
 	for(var i = 0; i < food.length; i++) {
-		if(Math.round(food[i].pos.x / 100) == Math.round(pos.x / 100) && Math.round(food[i].pos.y / 100) == Math.round(pos.y / 100)) {
+		if(Math.round(food[i].pos.x / 256) == Math.round(pos.x / 256) && Math.round(food[i].pos.y / 256) == Math.round(pos.y / 256)) {
 			raw_input.push(food[i]);
 		}
 	}
 	
 	for(var i = 0; i < players.length; i++) {
-		if(Math.round(players[i].pos.x / 100) == Math.round(pos.x / 100) && Math.round(players[i].pos.y / 100) == Math.round(pos.y / 100)) {
+		if(Math.round(players[i].pos.x / 256) == Math.round(pos.x / 256) && Math.round(players[i].pos.y / 256) == Math.round(pos.y / 256)) {
 			raw_input.push(food[i]);
 		}
 	}
