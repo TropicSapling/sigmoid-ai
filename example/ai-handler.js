@@ -62,11 +62,20 @@ function sigmoid(number) {
 }
 
 function getInput(id) {
-	var raw_input = [id, 6]; // Push player id and amount of properties each food has
-	raw_input.push(food);
+	var raw_input = [id]; // Push player id
+	var pos = players[id].pos;
 	
-	raw_input.push(6); // Push amount of properties each player has
-	raw_input.push(players);
+	for(var i = 0; i < food.length; i++) {
+		if(Math.round(food[i].pos.x / 100) == Math.round(pos.x / 100) && Math.round(food[i].pos.y / 100) == Math.round(pos.y / 100)) {
+			raw_input.push(food[i]);
+		}
+	}
+	
+	for(var i = 0; i < players.length; i++) {
+		if(Math.round(players[i].pos.x / 100) == Math.round(pos.x / 100) && Math.round(players[i].pos.y / 100) == Math.round(pos.y / 100)) {
+			raw_input.push(food[i]);
+		}
+	}
 	
 	return JSONToArray(raw_input);
 }
