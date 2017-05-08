@@ -132,7 +132,7 @@ function runAI(id) {
 	var ai = AIs[id];
 	var player = ai.info.player;
 	
-	if(player.radius < 10) {
+	if(!player || player.radius < 10) {
 		addBestAI(AIs[id]);
 		
 		AIs.splice(id, 1);
