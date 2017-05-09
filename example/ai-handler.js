@@ -83,7 +83,7 @@ function getInput(id) {
 function genRandAI() {
 	var p = new Player();
 	
-	AIs.push(new AI(2, undefined, undefined, {player: p}));
+	AIs.push(new AI(2, undefined, undefined, {player: p, timeAlive: 1}));
 }
 
 function genMutatedAI() {
