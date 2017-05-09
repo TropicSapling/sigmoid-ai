@@ -1,8 +1,10 @@
-var AIs = [];
+var ai = {};
 var best_AIs = [];
 
 var canvas = document.getElementById("runner-canvas");
 var ctx = canvas.getContext("2d");
+
+var last_input = [];
 
 var quickSort = (function () {
     function partition(array, left, right) {
@@ -64,6 +66,18 @@ function JSONToArray(data) {
     return arr;
 }
 
+function arraysEqual(a, b) {
+	if (a === b) return true;
+	if (a == null || b == null) return false;
+	if (a.length != b.length) return false;
+	
+	for (var i = 0; i < a.length; ++i) {
+		if (a[i] !== b[i]) return false;
+	}
+	
+	return true;
+}
+
 function sigmoid(number) {
 	return 1 / (1 + Math.pow(Math.E, 0 - number));
 }
@@ -80,10 +94,8 @@ function genRandAI() {
 
 function genMutatedAI() {
 	var par = JSON.parse(JSON.stringify(getPar())); // Deep clone
-	var pp = par.info.player;
 	
-	var p = new Player({r: randomBetween(pp.colour.r - Math.round(par.mutationChance * 16), pp.colour.r + Math.round(par.mutationChance * 16)), g: randomBetween(pp.colour.g - Math.round(par.mutationChance * 16), pp.colour.g + Math.round(par.mutationChance * 16)), b: randomBetween(pp.colour.b - Math.round(par.mutationChance * 16), pp.colour.b + Math.round(par.mutationChance * 16))});
-	var ai = new AI(2, par.actions, randomBetween(Math.round(par.mutationChance * 1000) - Math.round(par.mutationChance * 100), Math.round(par.mutationChance * 1000) + Math.round(par.mutationChance * 100)) / 1000, {player: p, timeAlive: 1});
+	var ai = new AI(2, par.actions, randomBetween(Math.round(par.mutationChance * 1000) - Math.round(par.mutationChance * 100), Math.round(par.mutationChance * 1000) + Math.round(par.mutationChance * 100)) / 1000, {timeAlive: 0});
 	
 	AIs.push(ai);
 	
@@ -120,42 +132,27 @@ function addBestAI(ai) {
 	}
 }
 
-function runAI(id) {
-	var ai = AIs[id];
-	var player = ai.info.player;
+function runAI() {
+	var input = getInput();
 	
-	if(!players[player.id] || player.radius < 10) {
-		addBestAI(AIs[id]);
+	if(arraysEqual(last_input, input)) {
+		addBestAI();
 		
-		AIs.splice(id, 1);
+		genRandAI();
 		
 		return 1;
 	} else {
-		var input = getInput(player.id);
+		var input = getInput();
 		
 		var x_change = sigmoid(ai.exeAction(0, input) / input.length);
 		var y_change = sigmoid(ai.exeAction(1, input) / input.length);
-		
-		player.changePos(x_change < 0.5 ? 0 - x_change * 2 : (x_change - 0.5) * 2, y_change < 0.5 ? 0 - y_change * 2 : (y_change - 0.5) * 2);
 		
 		ai.info.timeAlive += 1;
 	}
 }
 
 function runAIs() {
-	if(Math.floor(Math.random() * 1000) == 1) {
-		if(best_AIs.length < 1 || Math.floor(Math.random() * 10) == 1) {
-			genRandAI();
-		} else {
-			genMutatedAI();
-		}
-	}
-	
-	for(var i = 0; i < AIs.length; i++) {
-		if(runAI(i)) {
-			i--;
-		}
-	}
+	runAI();
 	
 	if(timeout) {
 		setTimeout(runAIs, 10);
