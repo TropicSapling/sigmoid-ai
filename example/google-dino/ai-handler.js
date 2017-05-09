@@ -1,6 +1,9 @@
 var AIs = [];
 var best_AIs = [];
 
+var canvas = document.getElementById("runner-canvas");
+var ctx = canvas.getContext("2d");
+
 var quickSort = (function () {
     function partition(array, left, right) {
         var cmp = array[right - 1].info.timeAlive,
@@ -53,7 +56,7 @@ function sigmoid(number) {
 }
 
 function getInput(id) {
-	// WIP
+	return JSONToArray(ctx.getImageData(0, 0, canvas.width, canvas.height));
 }
 
 function genRandAI() {
