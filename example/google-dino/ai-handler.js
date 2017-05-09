@@ -37,8 +37,15 @@ var quickSort = (function () {
     };
 }());
 
-function JSONToArray(json) {
-	// WIP
+function JSONToArray(data) {
+    var arr = [];
+	
+    for (var key in data) {
+        var value = data[key];
+		// WIP
+    }
+	
+    return arr;
 }
 
 function sigmoid(number) {
