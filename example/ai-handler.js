@@ -138,7 +138,7 @@ function runAI(id) {
 		AIs.splice(id, 1);
 		
 		return 1;
-	} else if(ai.actions[0].indexOf("i") == -1 || ai.actions[0].indexOf("input") == -1 || ai.actions[1].indexOf("i") == -1 || ai.actions[1].indexOf("input") == -1) {
+	} else if(ai.actions[0].indexOf("i") == -1 && ai.actions[0].indexOf("input") == -1 && ai.actions[1].indexOf("i") == -1 && ai.actions[1].indexOf("input") == -1) {
 		ai.mutate(ai.mutationChance);
 	} else {
 		var input = getInput(player.id);
