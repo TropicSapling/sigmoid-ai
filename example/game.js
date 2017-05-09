@@ -313,7 +313,9 @@ function runGame() {
 	}
 	
 	if(Math.floor(Math.random() * 500) == 1) {
-		food.push(new Food({x: Math.floor(Math.random() * game_size), y: Math.floor(Math.random() * game_size)}, randomBetween(6, 8), {r: randomBetween(25, 255), g: randomBetween(25, 255), b: randomBetween(25, 255)}));
+		var spawn_range = game_size - 32;
+		
+		food.push(new Food({x: Math.floor(Math.random() * spawn_range) + 16, y: Math.floor(Math.random() * spawn_range) + 16}, randomBetween(6, 8), {r: randomBetween(25, 255), g: randomBetween(25, 255), b: randomBetween(25, 255)}));
 		req_draw.push(["food", food.length - 1]);
 	}
 	
