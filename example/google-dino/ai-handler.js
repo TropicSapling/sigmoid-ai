@@ -37,6 +37,10 @@ var quickSort = (function () {
     };
 }());
 
+function JSONToArray(json) {
+	// WIP
+}
+
 function sigmoid(number) {
 	return 1 / (1 + Math.pow(Math.E, 0 - number));
 }
