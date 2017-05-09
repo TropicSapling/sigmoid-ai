@@ -355,8 +355,6 @@ function AI(output_count, actions, mutation_chance, info) {
 	
 	this.info = info;
 	
-	this.timeAlive = 0;
-	
 	this.exeAction = function(n, input, calls) {
 		if(!calls) {
 			var calls = 1;
