@@ -3,11 +3,11 @@ var best_AIs = [];
 
 var quickSort = (function () {
     function partition(array, left, right) {
-        var cmp = array[right - 1].timeAlive,
+        var cmp = array[right - 1].info.timeAlive,
             minEnd = left,
             maxEnd;
         for (maxEnd = left; maxEnd < right - 1; maxEnd += 1) {
-            if (array[maxEnd].timeAlive <= cmp) {
+            if (array[maxEnd].info.timeAlive <= cmp) {
                 swap(array, maxEnd, minEnd);
                 minEnd += 1;
             }
@@ -17,9 +17,9 @@ var quickSort = (function () {
     }
 
     function swap(array, i, j) {
-        var temp = array[i].timeAlive;
-        array[i].timeAlive = array[j].timeAlive;
-        array[j].timeAlive = temp;
+        var temp = array[i].info.timeAlive;
+        array[i].info.timeAlive = array[j].info.timeAlive;
+        array[j].info.timeAlive = temp;
         return array;
     }
 
@@ -91,7 +91,7 @@ function genMutatedAI() {
 	var pp = par.info.player;
 	
 	var p = new Player({r: randomBetween(pp.colour.r - Math.round(par.mutationChance * 16), pp.colour.r + Math.round(par.mutationChance * 16)), g: randomBetween(pp.colour.g - Math.round(par.mutationChance * 16), pp.colour.g + Math.round(par.mutationChance * 16)), b: randomBetween(pp.colour.b - Math.round(par.mutationChance * 16), pp.colour.b + Math.round(par.mutationChance * 16))});
-	var ai = new AI(2, par.actions, randomBetween(Math.round(par.mutationChance * 1000) - Math.round(par.mutationChance * 100), Math.round(par.mutationChance * 1000) + Math.round(par.mutationChance * 100)) / 1000, {player: p});
+	var ai = new AI(2, par.actions, randomBetween(Math.round(par.mutationChance * 1000) - Math.round(par.mutationChance * 100), Math.round(par.mutationChance * 1000) + Math.round(par.mutationChance * 100)) / 1000, {player: p, timeAlive: 1});
 	
 	AIs.push(ai);
 	
@@ -102,8 +102,8 @@ function getPar() {
 	var total_time_alive = 0;
 	var par_chance = [];
 	for(var i = 0; i < best_AIs.length; i++) {
-		par_chance.push([total_time_alive, total_time_alive + best_AIs[i].timeAlive]);
-		total_time_alive += best_AIs[i].timeAlive;
+		par_chance.push([total_time_alive, total_time_alive + best_AIs[i].info.timeAlive]);
+		total_time_alive += best_AIs[i].info.timeAlive;
 	}
 	
 	var randNumber = Math.floor(Math.random() * total_time_alive);
@@ -117,7 +117,7 @@ function getPar() {
 function addBestAI(ai) {
 	var not_full = best_AIs.length < 128;
 	
-	if(not_full || ai.timeAlive > best_AIs[0].timeAlive) {
+	if(not_full || ai.info.timeAlive > best_AIs[0].info.timeAlive) {
 		if(not_full) {
 			best_AIs.push(ai);
 		} else {
@@ -148,7 +148,7 @@ function runAI(id) {
 		
 		player.changePos(x_change < 0.5 ? 0 - x_change * 2 : (x_change - 0.5) * 2, y_change < 0.5 ? 0 - y_change * 2 : (y_change - 0.5) * 2);
 		
-		ai.timeAlive += 1;
+		ai.info.timeAlive += 1;
 	}
 }
 
