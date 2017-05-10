@@ -142,8 +142,8 @@ function runAI() {
 	} else {
 		var input = getInput();
 		
-		var x_change = sigmoid(ai.exeAction(0, input) / input.length);
-		var y_change = sigmoid(ai.exeAction(1, input) / input.length);
+		var jump = Math.round(sigmoid(ai.exeAction(0, input) / input.length));
+		var crawl = Math.round(sigmoid(ai.exeAction(1, input) / input.length));
 		
 		ai.info.timeAlive += 1;
 	}
