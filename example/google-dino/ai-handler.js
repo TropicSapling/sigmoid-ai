@@ -7,7 +7,7 @@ var ctx = canvas.getContext("2d");
 var last_input = [];
 
 function simulateKeyPress(character) {
-  jQuery.event.trigger({ type : 'keypress', which : character });
+  $('.runner-canvas').trigger({ type : 'keypress', which : character });
 }
 
 var quickSort = (function () {
@@ -161,6 +161,4 @@ function runAI() {
 	}
 }
 
-$(function() {
-	setInterval(runAI, 50);
-});
+setInterval(runAI, 50);
