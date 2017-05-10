@@ -137,8 +137,6 @@ function runAI() {
 		runner.restart();
 		
 		genRandAI();
-		
-		return 1;
 	} else {
 		var input = getInput();
 		
