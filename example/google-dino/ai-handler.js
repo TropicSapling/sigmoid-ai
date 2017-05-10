@@ -1,7 +1,7 @@
 var ai = {};
 var best_AIs = [];
 
-var canvas = document.getElementByClassName("runner-canvas")[0];
+var canvas = document.getElementsByClassName("runner-canvas")[0];
 var ctx = canvas.getContext("2d");
 
 var last_input = [];
