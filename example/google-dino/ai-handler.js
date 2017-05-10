@@ -147,10 +147,14 @@ function runAI() {
 		
 		if(jump) {
 			runner.tRex.prototype.startJump(runner.speed);
+		} else {
+			runner.tRex.prototype.endJump();
 		}
 		
 		if(duck) {
 			runner.tRex.prototype.setDuck(true);
+		} else {
+			runner.tRex.prototype.setDuck(false);
 		}
 		
 		ai.info.timeAlive += 1;
