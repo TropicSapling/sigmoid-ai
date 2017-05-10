@@ -1,4 +1,4 @@
-var ai = genRandAI();
+var ai = {};
 var best_AIs = [];
 
 var canvas = document.getElementsByClassName("runner-canvas")[0];
@@ -161,4 +161,5 @@ function runAI() {
 	}
 }
 
+genRandAI();
 setInterval(runAI, 50);
