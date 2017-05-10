@@ -150,7 +150,7 @@ function runAI() {
 		}
 		
 		if(duck) {
-			runner.tRex.prototype.setDuck(runner.ducking);
+			runner.tRex.prototype.setDuck(true);
 		}
 		
 		ai.info.timeAlive += 1;
