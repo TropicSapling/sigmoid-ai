@@ -138,7 +138,7 @@ function runAI($) {
 	if(arraysEqual(last_input, input)) {
 		addBestAI();
 		
-		simulateKeyPress($, 38);
+		runner.restart();
 		
 		genRandAI();
 		
