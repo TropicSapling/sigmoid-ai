@@ -140,7 +140,7 @@ function runAI() {
 	if(arraysEqual(last_input, input)) {
 		addBestAI();
 		
-		$('.runner-canvas').click();
+		simulateKeyPress(38);
 		
 		genRandAI();
 		
