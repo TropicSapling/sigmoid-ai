@@ -140,6 +140,8 @@ function runAI() {
 	if(arraysEqual(last_input, input)) {
 		addBestAI();
 		
+		$('.runner-canvas').click();
+		
 		genRandAI();
 		
 		return 1;
