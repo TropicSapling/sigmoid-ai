@@ -89,15 +89,13 @@ function getInput(id) {
 function genRandAI() {
 	var p = new Player();
 	
-	AIs.push(new AI(2, undefined, undefined, {player: p, timeAlive: 1}));
+	ai = new AI(2, undefined, undefined, {timeAlive: 0});
 }
 
 function genMutatedAI() {
 	var par = JSON.parse(JSON.stringify(getPar())); // Deep clone
 	
-	var ai = new AI(2, par.actions, randomBetween(Math.round(par.mutationChance * 1000) - Math.round(par.mutationChance * 100), Math.round(par.mutationChance * 1000) + Math.round(par.mutationChance * 100)) / 1000, {timeAlive: 0});
-	
-	AIs.push(ai);
+	ai = new AI(2, par.actions, randomBetween(Math.round(par.mutationChance * 1000) - Math.round(par.mutationChance * 100), Math.round(par.mutationChance * 1000) + Math.round(par.mutationChance * 100)) / 1000, {timeAlive: 0});
 	
 	ai.mutate(par.mutationChance);
 }
