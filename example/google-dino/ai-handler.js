@@ -6,6 +6,10 @@ var ctx = canvas.getContext("2d");
 
 var last_input = [];
 
+function simulateKeyPress(character) {
+  jQuery.event.trigger({ type : 'keypress', which : character });
+}
+
 var quickSort = (function () {
     function partition(array, left, right) {
         var cmp = array[right - 1].info.timeAlive,
@@ -144,6 +148,14 @@ function runAI() {
 		
 		var jump = Math.round(sigmoid(ai.exeAction(0, input) / input.length));
 		var crawl = Math.round(sigmoid(ai.exeAction(1, input) / input.length));
+		
+		if(jump) {
+			simulateKeyPress(38);
+		}
+		
+		if(crawl) {
+			simulateKeyPress(40);
+		}
 		
 		ai.info.timeAlive += 1;
 	}
