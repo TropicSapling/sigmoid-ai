@@ -149,16 +149,6 @@ function runAI() {
 	}
 }
 
-function runAIs() {
-	runAI();
-	
-	if(timeout) {
-		setTimeout(runAIs, 10);
-	} else {
-		setZeroTimeout(runAIs);
-	}
-}
-
 $(function() {
-	setTimeout(runAIs, 1000);
+	setInterval(runAI, 50);
 });
