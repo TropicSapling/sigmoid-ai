@@ -146,7 +146,7 @@ function runAI() {
 		var duck = Math.round(sigmoid(ai.exeAction(1, input) / input.length));
 		
 		if(jump) {
-			runner.tRex.prototype.startJump(runner.speed);
+			runner.tRex.prototype.startJump(runner.currentSpeed);
 		} else {
 			runner.tRex.prototype.endJump();
 		}
