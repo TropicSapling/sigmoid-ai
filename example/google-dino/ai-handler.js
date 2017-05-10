@@ -6,7 +6,7 @@ var ctx = canvas.getContext("2d");
 
 var last_input = [];
 
-function simulateKeyPress(character) {
+function simulateKeyPress($, character) {
   $('.runner-canvas').trigger({ type : 'keypress', which : character });
 }
 
@@ -138,7 +138,7 @@ function runAI($) {
 	if(arraysEqual(last_input, input)) {
 		addBestAI();
 		
-		simulateKeyPress(38);
+		simulateKeyPress($, 38);
 		
 		genRandAI();
 		
@@ -150,11 +150,11 @@ function runAI($) {
 		var crawl = Math.round(sigmoid(ai.exeAction(1, input) / input.length));
 		
 		if(jump) {
-			simulateKeyPress(38);
+			simulateKeyPress($, 38);
 		}
 		
 		if(crawl) {
-			simulateKeyPress(40);
+			simulateKeyPress($, 40);
 		}
 		
 		ai.info.timeAlive += 1;
