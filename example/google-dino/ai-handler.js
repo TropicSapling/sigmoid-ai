@@ -1,4 +1,4 @@
-var ai = {};
+var ai = genRandAI();
 var best_AIs = [];
 
 var canvas = document.getElementsByClassName("runner-canvas")[0];
@@ -91,8 +91,6 @@ function getInput(id) {
 }
 
 function genRandAI() {
-	var p = new Player();
-	
 	ai = new AI(2, undefined, undefined, {timeAlive: 0});
 }
 
