@@ -83,7 +83,7 @@ function getInput(id) {
 function genRandAI() {
 	var p = new Player();
 	
-	AIs.push(new AI(2, undefined, undefined, {player: p, timeAlive: 1}));
+	AIs.push(new AI(2, undefined, undefined, {player: p, timeAlive: 0}));
 }
 
 function genMutatedAI() {
@@ -91,7 +91,7 @@ function genMutatedAI() {
 	var pp = par.info.player;
 	
 	var p = new Player({r: randomBetween(pp.colour.r - Math.round(par.mutationChance * 16), pp.colour.r + Math.round(par.mutationChance * 16)), g: randomBetween(pp.colour.g - Math.round(par.mutationChance * 16), pp.colour.g + Math.round(par.mutationChance * 16)), b: randomBetween(pp.colour.b - Math.round(par.mutationChance * 16), pp.colour.b + Math.round(par.mutationChance * 16))});
-	var ai = new AI(2, par.actions, randomBetween(Math.round(par.mutationChance * 1000) - Math.round(par.mutationChance * 100), Math.round(par.mutationChance * 1000) + Math.round(par.mutationChance * 100)) / 1000, {player: p, timeAlive: 1});
+	var ai = new AI(2, par.actions, randomBetween(Math.round(par.mutationChance * 1000) - Math.round(par.mutationChance * 100), Math.round(par.mutationChance * 1000) + Math.round(par.mutationChance * 100)) / 1000, {player: p, timeAlive: 0});
 	
 	AIs.push(ai);
 	
