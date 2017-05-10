@@ -132,7 +132,7 @@ function addBestAI(ai) {
 	}
 }
 
-function runAI() {
+function runAI($) {
 	var input = getInput();
 	
 	if(arraysEqual(last_input, input)) {
@@ -162,4 +162,4 @@ function runAI() {
 }
 
 genRandAI();
-setInterval(runAI, 50);
+setInterval(runAI, 50, $);
