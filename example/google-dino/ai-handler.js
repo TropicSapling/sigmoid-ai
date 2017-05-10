@@ -6,10 +6,6 @@ var ctx = canvas.getContext("2d");
 
 var last_input = [];
 
-function simulateKeyPress($, character) {
-  $('.runner-canvas').trigger({ type : 'keypress', which : character });
-}
-
 var quickSort = (function () {
     function partition(array, left, right) {
         var cmp = array[right - 1].info.timeAlive,
@@ -132,7 +128,7 @@ function addBestAI(ai) {
 	}
 }
 
-function runAI($) {
+function runAI() {
 	var input = getInput();
 	
 	if(arraysEqual(last_input, input)) {
@@ -147,14 +143,14 @@ function runAI($) {
 		var input = getInput();
 		
 		var jump = Math.round(sigmoid(ai.exeAction(0, input) / input.length));
-		var crawl = Math.round(sigmoid(ai.exeAction(1, input) / input.length));
+		var duck = Math.round(sigmoid(ai.exeAction(1, input) / input.length));
 		
 		if(jump) {
-			simulateKeyPress($, 38);
+			runner.tRex.prototype.startJump(runner.speed);
 		}
 		
-		if(crawl) {
-			simulateKeyPress($, 40);
+		if(duck) {
+			runner.tRex.prototype.setDuck(runner.ducking);
 		}
 		
 		ai.info.timeAlive += 1;
@@ -162,4 +158,4 @@ function runAI($) {
 }
 
 genRandAI();
-setInterval(runAI, 50, $);
+setInterval(runAI, 50);
