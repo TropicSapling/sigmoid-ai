@@ -124,7 +124,11 @@ function runAI() {
 		
 		runner.restart();
 		
-		genMutatedAI();
+		if(Math.floor(Math.random() * 10) == 1) {
+			genRandAI();
+		} else {
+			genMutatedAI();
+		}
 	} else {
 		var jump = Math.round(sigmoid(ai.exeAction(0, input) / input.length));
 		var duck = Math.round(sigmoid(ai.exeAction(1, input) / input.length));
