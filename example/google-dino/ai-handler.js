@@ -126,8 +126,6 @@ function runAI() {
 		
 		genMutatedAI();
 	} else {
-		var input = getInput();
-		
 		var jump = Math.round(sigmoid(ai.exeAction(0, input) / input.length));
 		var duck = Math.round(sigmoid(ai.exeAction(1, input) / input.length));
 		
