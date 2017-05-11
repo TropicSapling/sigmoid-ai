@@ -8,11 +8,11 @@ var last_input = [];
 
 var quickSort = (function () {
     function partition(array, left, right) {
-        var cmp = array[right - 1].info.timeAlive,
+        var cmp = array[right - 1].info.score,
             minEnd = left,
             maxEnd;
         for (maxEnd = left; maxEnd < right - 1; maxEnd += 1) {
-            if (array[maxEnd].info.timeAlive <= cmp) {
+            if (array[maxEnd].info.score <= cmp) {
                 swap(array, maxEnd, minEnd);
                 minEnd += 1;
             }
@@ -22,9 +22,9 @@ var quickSort = (function () {
     }
 
     function swap(array, i, j) {
-        var temp = array[i].info.timeAlive;
-        array[i].info.timeAlive = array[j].info.timeAlive;
-        array[j].info.timeAlive = temp;
+        var temp = array[i].info.score;
+        array[i].info.score = array[j].info.score;
+        array[j].info.score = temp;
         return array;
     }
 
@@ -75,13 +75,13 @@ function getInput(id) {
 }
 
 function genRandAI() {
-	ai = new AI(2, undefined, undefined, {timeAlive: 0});
+	ai = new AI(2, undefined, undefined, {score: 0});
 }
 
 function genMutatedAI() {
 	var par = JSON.parse(JSON.stringify(getPar())); // Deep clone
 	
-	ai = new AI(2, par.actions, randomBetween(Math.round(par.mutationChance * 1000) - Math.round(par.mutationChance * 100), Math.round(par.mutationChance * 1000) + Math.round(par.mutationChance * 100)) / 1000, {timeAlive: 0});
+	ai = new AI(2, par.actions, randomBetween(Math.round(par.mutationChance * 1000) - Math.round(par.mutationChance * 100), Math.round(par.mutationChance * 1000) + Math.round(par.mutationChance * 100)) / 1000, {score: 0});
 	
 	ai.mutate(par.mutationChance);
 }
@@ -90,8 +90,8 @@ function getPar() {
 	var total_time_alive = 0;
 	var par_chance = [];
 	for(var i = 0; i < best_AIs.length; i++) {
-		par_chance.push([total_time_alive, total_time_alive + best_AIs[i].info.timeAlive]);
-		total_time_alive += best_AIs[i].info.timeAlive;
+		par_chance.push([total_time_alive, total_time_alive + best_AIs[i].info.score]);
+		total_time_alive += best_AIs[i].info.score;
 	}
 	
 	var randNumber = Math.floor(Math.random() * total_time_alive);
@@ -105,7 +105,7 @@ function getPar() {
 function addBestAI() {
 	var not_full = best_AIs.length < 128;
 	
-	if(not_full || ai.info.timeAlive > best_AIs[0].info.timeAlive) {
+	if(not_full || ai.info.score > best_AIs[0].info.score) {
 		if(not_full) {
 			best_AIs.push(ai);
 		} else {
@@ -120,6 +120,8 @@ function runAI() {
 	var input = getInput();
 	
 	if(runner.crashed) {
+		ai.info.score = runner.distanceRan;
+		
 		addBestAI();
 		
 		runner.restart();
@@ -151,13 +153,12 @@ function runAI() {
 		} else if(dino.ducking) {
 			dino.setDuck(false);
 		}
-		
-		ai.info.timeAlive += 1;
 	}
 }
 
 var runner = new Runner();
-runner.config.SPEED = 13;
+runner.config.MAX_SPEED = 15;
+runner.config.SPEED = 15;
 
 genRandAI();
 setInterval(runAI, 1000 / 60);
