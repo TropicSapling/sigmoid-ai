@@ -133,17 +133,20 @@ function runAI() {
 		
 		var dino = runner.tRex;
 		
-		if(jump && !dino.jumping) {
-			dino.setDuck(false);
+		if(jump && !dino.jumping && !dino.ducking) {
+			runner.playSound(runner.soundFx.BUTTON_PRESS);
 			dino.startJump(runner.currentSpeed);
 		} else if(!jump && dino.jumping) {
 			dino.endJump();
 		}
 		
-		if(duck && !dino.ducking) {
-			dino.endJump();
-			dino.setDuck(true);
-		} else if(!duck && dino.ducking) {
+		if(duck) {
+			if(dino.jumping) {
+				dino.setSpeedDrop();
+			} else if(!dino.ducking) {
+				dino.setDuck(true);
+			}
+		} else if(dino.ducking) {
 			dino.setDuck(false);
 		}
 		
