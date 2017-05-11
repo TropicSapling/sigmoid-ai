@@ -131,18 +131,20 @@ function runAI() {
 		var jump = Math.round(sigmoid(ai.exeAction(0, input) / input.length));
 		var duck = Math.round(sigmoid(ai.exeAction(1, input) / input.length));
 		
-		if(jump) {
-			runner.tRex.setDuck(false);
-			runner.tRex.startJump(runner.currentSpeed);
-		} else {
-			runner.tRex.endJump();
+		var dino = runner.tRex;
+		
+		if(jump && !dino.jumping) {
+			dino.setDuck(false);
+			dino.startJump(runner.currentSpeed);
+		} else if(!jump && dino.jumping) {
+			dino.endJump();
 		}
 		
-		if(duck) {
-			runner.tRex.endJump();
-			runner.tRex.setDuck(true);
-		} else {
-			runner.tRex.setDuck(false);
+		if(duck && !dino.ducking) {
+			dino.endJump();
+			dino.setDuck(true);
+		} else if(!duck && dino.ducking) {
+			dino.setDuck(false);
 		}
 		
 		ai.info.timeAlive += 1;
