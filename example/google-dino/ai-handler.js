@@ -123,7 +123,7 @@ function runAI() {
 		addBestAI();
 		
 		runner.restart();
-		runner.currentSpeed = 50;
+		runner.currentSpeed = 20;
 		
 		genRandAI();
 	} else {
@@ -149,7 +149,7 @@ function runAI() {
 }
 
 var runner = new Runner();
-runner.currentSpeed = 50;
+runner.currentSpeed = 20;
 
 genRandAI();
 setInterval(runAI, 1000 / 60);
