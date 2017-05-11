@@ -66,18 +66,6 @@ function JSONToArray(data) {
     return arr;
 }
 
-function arraysEqual(a, b) {
-	if (a === b) return true;
-	if (a == null || b == null) return false;
-	if (a.length != b.length) return false;
-	
-	for (var i = 0; i < a.length; ++i) {
-		if (a[i] !== b[i]) return false;
-	}
-	
-	return true;
-}
-
 function sigmoid(number) {
 	return 1 / (1 + Math.pow(Math.E, 0 - number));
 }
@@ -131,7 +119,7 @@ function addBestAI(ai) {
 function runAI() {
 	var input = getInput();
 	
-	if(arraysEqual(last_input, input)) {
+	if(runner.crashed()) {
 		addBestAI();
 		
 		runner.restart();
