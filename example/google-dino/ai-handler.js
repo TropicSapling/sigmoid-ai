@@ -124,7 +124,7 @@ function runAI() {
 		
 		runner.restart();
 		
-		genRandAI();
+		genMutatedAI();
 	} else {
 		var input = getInput();
 		
