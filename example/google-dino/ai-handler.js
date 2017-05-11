@@ -132,12 +132,14 @@ function runAI() {
 		var duck = Math.round(sigmoid(ai.exeAction(1, input) / input.length));
 		
 		if(jump) {
+			runner.tRex.setDuck(false);
 			runner.tRex.startJump(runner.currentSpeed);
 		} else {
 			runner.tRex.endJump();
 		}
 		
 		if(duck) {
+			runner.tRex.endJump();
 			runner.tRex.setDuck(true);
 		} else {
 			runner.tRex.setDuck(false);
