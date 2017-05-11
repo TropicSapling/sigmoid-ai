@@ -119,7 +119,7 @@ function addBestAI(ai) {
 function runAI() {
 	var input = getInput();
 	
-	if(runner.crashed()) {
+	if(runner.crashed) {
 		addBestAI();
 		
 		runner.restart();
