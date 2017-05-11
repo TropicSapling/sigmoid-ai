@@ -102,7 +102,7 @@ function getPar() {
 	}
 }
 
-function addBestAI(ai) {
+function addBestAI() {
 	var not_full = best_AIs.length < 128;
 	
 	if(not_full || ai.info.timeAlive > best_AIs[0].info.timeAlive) {
