@@ -144,15 +144,15 @@ function runAI() {
 		var duck = Math.round(sigmoid(ai.exeAction(1, input) / input.length));
 		
 		if(jump) {
-			runner.tRex.prototype.startJump(runner.currentSpeed);
+			runner.tRex.startJump(runner.currentSpeed);
 		} else {
-			runner.tRex.prototype.endJump();
+			runner.tRex.endJump();
 		}
 		
 		if(duck) {
-			runner.tRex.prototype.setDuck(true);
+			runner.tRex.setDuck(true);
 		} else {
-			runner.tRex.prototype.setDuck(false);
+			runner.tRex.setDuck(false);
 		}
 		
 		ai.info.timeAlive += 1;
