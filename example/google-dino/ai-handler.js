@@ -159,5 +159,7 @@ function runAI() {
 	}
 }
 
+var runner = new Runner();
+
 genRandAI();
 setInterval(runAI, 50);
