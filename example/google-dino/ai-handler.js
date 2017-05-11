@@ -150,4 +150,4 @@ function runAI() {
 var runner = new Runner();
 
 genRandAI();
-setInterval(runAI, 50);
+setInterval(runAI, 1000 / 60);
