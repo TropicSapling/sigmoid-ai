@@ -103,18 +103,33 @@ function getPar() {
 	}
 }
 
+function getRandomBadAI() {
+	var total_spectrum = 0;
+	var ai_chance = [];
+	for(var i = 0; i < best_AIs.length; i++) {
+		var chance_spectrum = best_AIs[best_AIs.length - 1].info.timeAlive - best_AIs[i].info.timeAlive;
+		ai_chance.push([total_spectrum, total_spectrum + chance_spectrum]);
+		total_spectrum += chance_spectrum;
+	}
+	
+	var randNumber = Math.floor(Math.random() * total_spectrum);
+	for(var i = 0; i < ai_chance.length; i++) {
+		if(randNumber >= ai_chance[i][0] && randNumber < ai_chance[i][1]) {
+			return best_AIs[i];
+		}
+	}
+}
+
 function addBestAI() {
 	var not_full = best_AIs.length < 256;
 	
-	if(not_full || ai.info.score > best_AIs[0].info.score) {
-		if(not_full) {
-			best_AIs.push(ai);
-		} else {
-			best_AIs[0] = ai;
-		}
-		
-		quickSort(best_AIs);
+	if(not_full) {
+		best_AIs.push(ai);
+	} else {
+		best_AIs[getRandomBadAI()] = ai;
 	}
+	
+	quickSort(best_AIs);
 }
 
 function runAI() {
