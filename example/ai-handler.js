@@ -88,6 +88,7 @@ function genRandAI() {
 
 function genMutatedAI() {
 	var par = JSON.parse(JSON.stringify(getPar())); // Deep clone
+	var par2 = JSON.parse(JSON.stringify(getPar())); // Deep clone
 	var pp = par.info.player;
 	
 	var p = new Player({r: randomBetween(pp.colour.r - Math.round(par.mutationChance * 16), pp.colour.r + Math.round(par.mutationChance * 16)), g: randomBetween(pp.colour.g - Math.round(par.mutationChance * 16), pp.colour.g + Math.round(par.mutationChance * 16)), b: randomBetween(pp.colour.b - Math.round(par.mutationChance * 16), pp.colour.b + Math.round(par.mutationChance * 16))});
@@ -95,7 +96,7 @@ function genMutatedAI() {
 	
 	AIs.push(ai);
 	
-	ai.mutate(par.mutationChance);
+	ai.mutate(par.mutationChance, par2.actions);
 }
 
 function getPar() {
