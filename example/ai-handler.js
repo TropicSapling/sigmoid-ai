@@ -100,18 +100,35 @@ function genMutatedAI() {
 }
 
 function getPar() {
-	return best_AIs[Math.floor(Math.random() * best_AIs.length)];
-}
-
-function getRandomBadAI(i) {
-	if(!i) {
-		var i = best_AIs.length - 1;
+	var total_time_alive = 0;
+	var par_chance = [];
+	for(var i = 0; i < best_AIs.length; i++) {
+		par_chance.push([total_time_alive, total_time_alive + best_AIs[i].info.timeAlive]);
+		total_time_alive += best_AIs[i].info.timeAlive;
 	}
 	
-	if(Math.floor(Math.random() * (i + 1)) == 0) {
-		return i;
-	} else {
-		return getRandomBadAI(i - 1);
+	var randNumber = Math.floor(Math.random() * total_time_alive);
+	for(var i = 0; i < par_chance.length; i++) {
+		if(randNumber >= par_chance[i][0] && randNumber < par_chance[i][1]) {
+			return best_AIs[i];
+		}
+	}
+}
+
+function getRandomBadAI() {
+	var total_spectrum = 0;
+	var ai_chance = [];
+	for(var i = 0; i < best_AIs.length; i++) {
+		var chance_spectrum = best_AIs[best_AIs.length - 1].info.timeAlive - best_AIs[i].info.timeAlive;
+		ai_chance.push([total_spectrum, total_spectrum + chance_spectrum]);
+		total_spectrum += chance_spectrum;
+	}
+	
+	var randNumber = Math.floor(Math.random() * total_spectrum);
+	for(var i = 0; i < ai_chance.length; i++) {
+		if(randNumber >= ai_chance[i][0] && randNumber < ai_chance[i][1]) {
+			return i;
+		}
 	}
 }
 
