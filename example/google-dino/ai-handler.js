@@ -80,10 +80,11 @@ function genRandAI() {
 
 function genMutatedAI() {
 	var par = JSON.parse(JSON.stringify(getPar())); // Deep clone
+	var par2 = JSON.parse(JSON.stringify(getPar())); // Deep clone
 	
 	ai = new AI(2, par.actions, randomBetween(Math.round(par.mutationChance * 1000) - Math.round(par.mutationChance * 100), Math.round(par.mutationChance * 1000) + Math.round(par.mutationChance * 100)) / 1000, {score: 0});
 	
-	ai.mutate(par.mutationChance);
+	ai.mutate(par.mutationChance, par2.actions);
 }
 
 function getPar() {
