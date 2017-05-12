@@ -204,12 +204,18 @@ function genRandActions(output_count) {
 	return outputs;
 }
 
-function mutateAction(actions, chance, combine_actions) {
+function mutateAction(action, chance, actionsToCombine) {
+	var combine_actions = actionsToCombine ? true : false;
+	
+	var action = action.slice(0); // Shallow copy
+	
 	if(combine_actions) {
-		var actions = actions.slice(0); // Shallow copy
-		var action = actions[0];
-	} else {
-		var action = actions.slice(0); // Shallow copy
+		var actionsToCombine = actionsToCombine.slice(0); // Shallow copy
+		var actions = [action];
+		
+		for(var i = 0; i < actionsToCombine.length; i++) {
+			actions.push(actionsToCombine[i]);
+		}
 	}
 	
 	var mutated_action = [];
@@ -312,17 +318,8 @@ function mutateAction(actions, chance, combine_actions) {
 function mutateActions(actions, chance, actionsToCombine) {
 	var mutated_actions = [];
 	
-	var combine = actionsToCombine ? true : false;
-	if(combine) {
-		var actions = [actions];
-		
-		for(var i = 0; i < actionsToCombine.length; i++) {
-			actions.push(actionsToCombine[i]);
-		}
-	}
-	
 	for(var action = 0; action < actions.length; action++) {
-		mutated_actions.push(mutateAction(actions[action], chance, combine));
+		mutated_actions.push(mutateAction(actions[action], chance, actionsToCombine));
 	}
 	
 	return mutated_actions;
