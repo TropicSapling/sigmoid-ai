@@ -133,17 +133,13 @@ function getRandomBadAI() {
 }
 
 function addBestAI(ai) {
-	var not_full = best_AIs.length < 256;
-	
-	if(not_full || ai.info.timeAlive > best_AIs[0].info.timeAlive) {
-		if(not_full) {
-			best_AIs.push(ai);
-		} else {
-			best_AIs[getRandomBadAI()] = ai;
-		}
-		
-		quickSort(best_AIs);
+	if(best_AIs.length < 256) {
+		best_AIs.push(ai);
+	} else {
+		best_AIs[getRandomBadAI()] = ai;
 	}
+	
+	quickSort(best_AIs);
 }
 
 function runAI(id) {
