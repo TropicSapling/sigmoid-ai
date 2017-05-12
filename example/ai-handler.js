@@ -139,7 +139,7 @@ function addBestAI(ai) {
 		best_AIs[getRandomBadAI()] = ai;
 		
 		if(!loggingResults) {
-			logging_results = true;
+			loggingResults = true;
 			
 			logResults();
 		}
