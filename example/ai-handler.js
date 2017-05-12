@@ -137,6 +137,12 @@ function addBestAI(ai) {
 		best_AIs.push(ai);
 	} else {
 		best_AIs[getRandomBadAI()] = ai;
+		
+		if(!loggingResults) {
+			logging_results = true;
+			
+			logResults();
+		}
 	}
 	
 	quickSort(best_AIs);
@@ -189,3 +195,27 @@ function runAIs() {
 $(function() {
 	setTimeout(runAIs, 1000);
 });
+
+var loggingResults = false;
+
+function logResults() {
+	var total = 0;
+	for(var i = 0; i < best_AIs.length; i++) {
+		total += best_AIs[i].info.timeAlive;
+	}
+	
+	var org_worst = best_AIs[0].info.timeAlive;
+	var org_avg = total / best_AIs.length;
+	var org_best = best_AIs[best_AIs.length - 1].info.timeAlive;
+	
+	setInterval(function() {
+		total = 0;
+		for(var i = 0; i < best_AIs.length; i++) {
+			total += best_AIs[i].info.timeAlive;
+    	}
+		
+		console.log("Worst improvement: " + ((best_AIs[0].info.timeAlive / org_worst) - 1) * 100 + "%");
+		console.log("Average improvement: " + (((total / best_AIs.length) / org_avg) - 1) * 100 + "%");
+		console.log("Best improvement: " + ((best_AIs[best_AIs.length - 1].info.timeAlive / org_best) - 1) * 100 + "%");
+	}, 100000);
+}
