@@ -133,7 +133,7 @@ function getRandomBadAI() {
 }
 
 function addBestAI(ai) {
-	if(best_AIs.length < 256) {
+	if(best_AIs.length < 1024) {
 		best_AIs.push(ai);
 	} else {
 		best_AIs[getRandomBadAI()] = ai;
@@ -166,7 +166,7 @@ function runAI(id) {
 
 function runAIs() {
 	if(Math.floor(Math.random() * 1000) == 1) {
-		if(best_AIs.length < 128 || Math.floor(Math.random() * 5) == 1) {
+		if(best_AIs.length < 256 || Math.floor(Math.random() * 5) == 1) {
 			genRandAI();
 		} else {
 			genMutatedAI();
