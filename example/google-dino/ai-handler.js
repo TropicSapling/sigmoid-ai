@@ -115,7 +115,7 @@ function getRandomBadAI() {
 	var randNumber = Math.floor(Math.random() * total_spectrum);
 	for(var i = 0; i < ai_chance.length; i++) {
 		if(randNumber >= ai_chance[i][0] && randNumber < ai_chance[i][1]) {
-			return best_AIs[i];
+			return i;
 		}
 	}
 }
