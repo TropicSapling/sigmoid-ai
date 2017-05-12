@@ -104,7 +104,7 @@ function getPar() {
 }
 
 function addBestAI() {
-	var not_full = best_AIs.length < 128;
+	var not_full = best_AIs.length < 256;
 	
 	if(not_full || ai.info.score > best_AIs[0].info.score) {
 		if(not_full) {
@@ -127,7 +127,7 @@ function runAI() {
 		
 		runner.restart();
 		
-		if(Math.floor(Math.random() * 10) == 1) {
+		if(best_AIs.length < 128 || Math.floor(Math.random() * 5) == 1) {
 			genRandAI();
 		} else {
 			genMutatedAI();
