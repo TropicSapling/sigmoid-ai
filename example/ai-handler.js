@@ -114,14 +114,18 @@ function getPar() {
 	}
 }
 
+function getRandomBadAI() {
+	return 0; // WIP; will be changed
+}
+
 function addBestAI(ai) {
-	var not_full = best_AIs.length < 128;
+	var not_full = best_AIs.length < 256;
 	
 	if(not_full || ai.info.timeAlive > best_AIs[0].info.timeAlive) {
 		if(not_full) {
 			best_AIs.push(ai);
 		} else {
-			best_AIs[0] = ai;
+			best_AIs[getRandomBadAI()] = ai;
 		}
 		
 		quickSort(best_AIs);
@@ -152,7 +156,7 @@ function runAI(id) {
 
 function runAIs() {
 	if(Math.floor(Math.random() * 1000) == 1) {
-		if(best_AIs.length < 1 || Math.floor(Math.random() * 10) == 1) {
+		if(best_AIs.length < 128 || Math.floor(Math.random() * 5) == 1) {
 			genRandAI();
 		} else {
 			genMutatedAI();
