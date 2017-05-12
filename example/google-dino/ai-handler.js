@@ -121,9 +121,7 @@ function getRandomBadAI() {
 }
 
 function addBestAI() {
-	var not_full = best_AIs.length < 256;
-	
-	if(not_full) {
+	if(best_AIs.length < 256) {
 		best_AIs.push(ai);
 	} else {
 		best_AIs[getRandomBadAI()] = ai;
