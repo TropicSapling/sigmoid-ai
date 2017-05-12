@@ -204,8 +204,13 @@ function genRandActions(output_count) {
 	return outputs;
 }
 
-function mutateAction(action, chance) {
-	var action = action.slice(0); // Shallow copy
+function mutateAction(actions, chance, combine_actions) {
+	if(combine_actions) {
+		var actions = actions.slice(0); // Shallow copy
+		var action = actions[0];
+	} else {
+		var action = actions.slice(0); // Shallow copy
+	}
 	
 	var mutated_action = [];
 	
@@ -217,24 +222,30 @@ function mutateAction(action, chance) {
 				if(part < action.length - 1 && Math.floor(Math.random() * 3) == 1) {
 					part += 1; // Ignore next part, same as deleting 2 parts
 				} else {
-					var rand = Math.floor(Math.random() * (action.length - 1));
+					if(combine_actions) {
+						var rand_action = actions[Math.floor(Math.random() * actions.length)];
+					} else {
+						var rand_action = action;
+					}
+					
+					var rand = Math.floor(Math.random() * (rand_action.length - 1));
 					var tries = 0;
 					
-					while(tries < 9 && (action[rand - 1] == "(" || action[rand] == "(" || action[rand + 1] == "(" || action[rand - 1] == ")" || action[rand] == ")" || action[rand + 1] == ")" || ops.indexOf(action[part]) != ops.indexOf(action[rand]) || constants.indexOf(action[part]) != constants.indexOf(action[rand]) || functions.indexOf(action[part]) != functions.indexOf(action[rand]))) {
-						rand = Math.floor(Math.random() * (action.length - 1));
+					while(tries < 9 && (rand_action[rand - 1] == "(" || rand_action[rand] == "(" || rand_action[rand + 1] == "(" || rand_action[rand - 1] == ")" || rand_action[rand] == ")" || rand_action[rand + 1] == ")" || ops.indexOf(action[part]) != ops.indexOf(rand_action[rand]) || constants.indexOf(action[part]) != constants.indexOf(rand_action[rand]) || functions.indexOf(action[part]) != functions.indexOf(rand_action[rand]))) {
+						rand = Math.floor(Math.random() * (rand_action.length - 1));
 						
 						tries++;
 					}
 					
 					if(tries < 9) { // Copy & paste 2 parts
-						mutated_action.splice(part, 0, action[rand + 1]);
-						mutated_action.splice(part, 0, action[rand]);
+						mutated_action.push(rand_action[rand]);
+						mutated_action.push(rand_action[rand + 1]);
 						part--;
 						
 						if(Math.round(Math.random())) {
-							action.splice(rand, 2); // Delete the originals of the 2 parts that were copied
+							rand_action.splice(rand, 2); // Delete the originals of the 2 parts that were copied
 							
-							if(rand == part - 1) {
+							if(rand_action === action && rand == part - 1) {
 								part--;
 							}
 						}
@@ -298,11 +309,20 @@ function mutateAction(action, chance) {
 	return mutated_action;
 }
 
-function mutateActions(actions, chance) {
+function mutateActions(actions, chance, actionsToCombine) {
 	var mutated_actions = [];
 	
+	var combine = actionsToCombine ? true : false;
+	if(combine) {
+		var actions = [actions];
+		
+		for(var i = 0; i < actionsToCombine.length; i++) {
+			actions.push(actionsToCombine[i]);
+		}
+	}
+	
 	for(var action = 0; action < actions.length; action++) {
-		mutated_actions.push(mutateAction(actions[action], chance));
+		mutated_actions.push(mutateAction(actions[action], chance, combine));
 	}
 	
 	return mutated_actions;
@@ -374,8 +394,8 @@ function AI(output_count, actions, mutation_chance, info) {
 		}
 	}
 	
-	this.mutate = function(chance) {
-		var new_actions = mutateActions(ai.actions, chance);
+	this.mutate = function(chance, actions) {
+		var new_actions = mutateActions(ai.actions, chance, actions);
 		
 		for(var i = 0; i < new_actions.length; i++) {
 			try {
